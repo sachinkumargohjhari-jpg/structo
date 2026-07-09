@@ -1,0 +1,2465 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structo | Professional Engineering & Material Estimator</title>
+    <meta name="description" content="A professional-grade civil engineering calculator for concrete, steel weight, brick masonry, earthwork, beam analysis, and unit conversions.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="app-sidebar">
+            <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>Structo</h1>
+                    <p>Engineering Suite</p>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <li class="nav-item active" data-tab="dashboard">
+                    <button>
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+                        Dashboard
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="concrete">
+                    <button>
+                        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        Concrete Estimator
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="water-cement">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                        W/C Mix Design
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="steel">
+                    <button>
+                        <svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="2" y1="14" x2="22" y2="14"></line><line x1="2" y1="8" x2="22" y2="8"></line></svg>
+                        Steel Weight
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="bbs">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18M7 6v12M17 6v12"></path></svg>
+                        BBS Schedule
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="bricks">
+                    <button>
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+                        Masonry & Finishing
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="earthwork">
+                    <button>
+                        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        Earthwork & Site Prep
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="converter">
+                    <button>
+                        <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+                        Unit Converter
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="beam">
+                    <button>
+                        <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+                        Beam Analysis
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="checklist">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        Site Checklists
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="boq-report">
+                    <button>
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        BOQ Summary
+                    </button>
+                </li>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle-btn" id="theme-toggle-btn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <span>Toggle Light Mode</span>
+                </button>
+                <button class="theme-toggle-btn btn-secondary" id="help-modal-trigger">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span>Formulas & Help</span>
+                </button>
+            </div>
+        </aside>
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-title">
+                    <div class="header-title-main">
+                        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        </button>
+                        <button class="back-btn" id="header-back-btn" aria-label="Back to Dashboard" style="display: none;">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                        <h2 id="current-tab-title">Dashboard</h2>
+                    </div>
+                    <p id="current-tab-desc">All-in-one suite of smart tools for civil calculations</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="search-container">
+                        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" class="search-input" id="search-calculators" placeholder="Search tools...">
+                    </div>
+                    <button class="report-badge-btn" id="header-report-btn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        <span>BOQ</span>
+                        <span class="report-badge-count" id="boq-count">0</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Tab -->
+            <section class="tab-content active" id="dashboard">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card" data-card-tab="concrete">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Concrete Estimator</h3>
+                            <p>Estimate concrete volume, cement bags, sand, aggregate, and water for slabs, columns, beams, or footing shapes.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="water-cement">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>W/C & Mix Design</h3>
+                            <p>Calculate target strength, max code-limit water-cement ratio, adjusted water, and cement requirements per IS 456 & 10262.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="steel">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="3"></line><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Steel Weight & Cost</h3>
+                            <p>Calculate total reinforcing steel (rebar) weight, spacing grids, standard bar numbers, and total cost.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="bbs">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18M7 6v12M17 6v12"></path></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Bar Bending Schedule (BBS)</h3>
+                            <p>Generate structural rebar tables, calculate steel cutting lengths, and view diameter weight breakdowns.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Schedule &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="bricks">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="3" y1="12" x2="21" y2="12"></line></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Masonry & Finishing</h3>
+                            <p>Estimate brick counts, plastering cement/sand, and floor/skirting tile counts with custom mortar bedding details.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="earthwork">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Earthwork & Site Prep</h3>
+                            <p>Calculate excavation pit/trench volumes, compaction shrinkage, and plinth area sand/soil backfilling.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="converter">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Unit Converter</h3>
+                            <p>Convert metrics like length, area, volume, mass, force, stress, and density using standard civil conversions.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="beam">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Beam Load Analysis</h3>
+                            <p>Perform shear force, bending moment, and elastic deflection analysis on simply supported or cantilever beams.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="checklist">
+                        <div class="dashboard-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Site Checklists</h3>
+                            <p>Ensure quality & safety before, during, and after slab casting with interactive step-by-step field verification checklists.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Checklists &rarr;
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Concrete Estimator Tab -->
+            <section class="tab-content" id="concrete">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                                Structural Configuration
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Structure Shape & Type</label>
+                            <select class="form-control" id="concrete-type">
+                                <option value="slab" selected>Slab (Rectangular)</option>
+                                <option value="beam">Beam (Rectangular)</option>
+                                <option value="column-rect">Column (Rectangular)</option>
+                                <option value="column-circ">Column (Circular)</option>
+                                <option value="footing-rect">Footing (Rectangular)</option>
+                                <option value="footing-trap">Footing (Trapezoidal / Sloped)</option>
+                            </select>
+                        </div>
+
+                        <!-- Standard Dimension Group (Slab, Beam, Rect Column, Rect Footing) -->
+                        <div class="form-group-row" id="concrete-dim-standard-row">
+                            <div class="form-group">
+                                <label id="concrete-dim1-label">Length</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-length" value="10" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label id="concrete-dim2-label">Width</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-width" value="5" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label id="concrete-dim3-label">Thickness</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-thickness" value="0.15" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Circular Column Dimension Group -->
+                        <div class="form-group-row" id="concrete-dim-circular-row" style="display: none;">
+                            <div class="form-group">
+                                <label>Diameter</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-circ-dia" value="0.45" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Height</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-circ-height" value="3.5" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trapezoidal Footing Dimension Group -->
+                        <div id="concrete-dim-trapezoidal-group" style="display: none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Base Length (L₁)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="concrete-trap-l1" value="2.0" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Base Width (W₁)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="concrete-trap-w1" value="2.0" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Top Column Length (L₂)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="concrete-trap-l2" value="0.4" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Top Column Width (W₂)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="concrete-trap-w2" value="0.4" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Base Depth (h₁)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="concrete-trap-h1" value="0.3" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sloped Depth (h₂)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="concrete-trap-h2" value="0.4" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Concrete Type</label>
+                                <select class="form-control" id="concrete-class-type">
+                                    <option value="pcc" selected>Plain Cement Concrete (PCC)</option>
+                                    <option value="rcc">Reinforced Cement Concrete (RCC)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Concrete Mix Grade</label>
+                                <select class="form-control" id="concrete-mix-grade">
+                                    <option value="M5">M5 (1 : 5 : 10)</option>
+                                    <option value="M7.5">M7.5 (1 : 4 : 8)</option>
+                                    <option value="M10">M10 (1 : 3 : 6)</option>
+                                    <option value="M15">M15 (1 : 2 : 4)</option>
+                                    <option value="M20" selected>M20 (1 : 1.5 : 3)</option>
+                                    <option value="M25">M25 (1 : 1 : 2)</option>
+                                    <option value="M30">M30 (1 : 0.75 : 1.5)</option>
+                                    <option value="custom">Custom Mix Ratio</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Water-Cement (W/C) Ratio</label>
+                                <input type="number" class="form-control" id="concrete-wc-ratio" value="0.50" min="0.30" max="0.80" step="0.01">
+                            </div>
+                        </div>
+
+                        <!-- Custom ratio input fields, shown only if custom mix is selected -->
+                        <div class="form-group-row" id="concrete-custom-ratio-row" style="display: none;">
+                            <div class="form-group">
+                                <label>Cement ratio part</label>
+                                <input type="number" class="form-control" id="custom-cement" value="1" step="any" min="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Sand ratio part</label>
+                                <input type="number" class="form-control" id="custom-sand" value="1.5" step="any" min="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Aggregate ratio part</label>
+                                <input type="number" class="form-control" id="custom-aggregate" value="3" step="any" min="0.01">
+                            </div>
+                        </div>
+
+                        <!-- RCC Steel Estimation fields, shown only if RCC type is selected -->
+                        <div class="form-group-row" id="concrete-rcc-steel-row" style="display: none;">
+                            <div class="form-group">
+                                <label>Rebar Ratio (Steel % of Concrete Vol)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-steel-percent" value="1.0" min="0.1" max="10.0" step="0.1">
+                                    <span class="unit-label">%</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Rebar Cost Rate</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-steel-rate" value="65" min="0">
+                                    <span class="unit-label">₹/kg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Wastage Allowance</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-wastage" value="5" min="0" max="100">
+                                    <span class="unit-label">%</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Cost per Cement Bag</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="concrete-cement-cost" value="450" min="0">
+                                    <span class="unit-label">₹</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="concrete-input-helper-container" style="margin-top: 1.5rem; border: 1px solid var(--panel-border); border-radius: var(--border-radius-sm); padding: 0.5rem; background: rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; min-height: 120px;">
+                            <!-- Dynamically populated SVG -->
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-concrete">Calculate Quantities</button>
+                            <button class="btn btn-secondary btn-accent-sec" id="btn-add-concrete-report">Add to BOQ</button>
+                        </div>
+
+                        <div class="mix-ratios-legend">
+                            <table>
+                                <tr>
+                                    <th>Grade</th>
+                                    <th>Ratio (C:S:A)</th>
+                                    <th>Typical Use</th>
+                                </tr>
+                                <tr>
+                                    <td>M15</td>
+                                    <td>1 : 2 : 4</td>
+                                    <td>PCC, Flooring, Pathways</td>
+                                </tr>
+                                <tr>
+                                    <td>M20</td>
+                                    <td>1 : 1.5 : 3</td>
+                                    <td>Standard RCC Slab, Beams, Columns</td>
+                                </tr>
+                                <tr>
+                                    <td>M25</td>
+                                    <td>1 : 1 : 2</td>
+                                    <td>Heavy load structures, Foundation footings</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Calculation Summary</div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="result-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Net Concrete Volume</div>
+                                    <div class="result-value" id="concrete-res-volume">7.50<span class="result-unit">m³</span></div>
+                                    <div class="result-secondary-value" id="concrete-res-volume-ft">~ 264.86 cft (Dry Vol: 11.55 m³)</div>
+                                </div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Cement Bags Needed</div>
+                                        <div class="result-value" id="concrete-res-cement">62<span class="result-unit">Bags</span></div>
+                                        <div class="result-secondary-value" id="concrete-res-cement-kg">~ 3,100 kg</div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Fine Sand</div>
+                                        <div class="result-value" id="concrete-res-sand">130<span class="result-unit">cft</span></div>
+                                        <div class="result-secondary-value" id="concrete-res-sand-ton">~ 3.68 m³ / 5.8 Tons</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Coarse Aggregate</div>
+                                        <div class="result-value" id="concrete-res-aggregate">260<span class="result-unit">cft</span></div>
+                                        <div class="result-secondary-value" id="concrete-res-agg-ton">~ 7.36 m³ / 11.8 Tons</div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Water Required</div>
+                                        <div class="result-value" id="concrete-res-water">1,550<span class="result-unit">Liters</span></div>
+                                        <div class="result-secondary-value" id="concrete-res-cost">Est. Cost: ₹27,900</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RCC Steel Rebar Estimation Results -->
+                            <div class="result-card" id="concrete-rcc-results" style="display: none; background: var(--accent-secondary-glow); border-color: var(--accent-secondary); margin-top: 1rem;">
+                                <div class="result-icon" style="color: var(--accent-secondary); background: rgba(16, 185, 129, 0.15);">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="20" y2="3"></line><line x1="14" y1="21" x2="20" y2="15"></line><line x1="4" y1="9" x2="10" y2="3"></line></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title" style="color: var(--accent-secondary);">Estimated Rebar Weight & Cost</div>
+                                    <div class="result-value" id="concrete-res-steel-val">0.00 <span class="result-unit">kg</span></div>
+                                    <div class="result-secondary-value" id="concrete-res-steel-cost">~ 0.00 Tons (Cost: ₹0)</div>
+                                </div>
+                            </div>
+
+                            <div class="visualizer-container">
+                                <div class="visualizer-title">
+                                    <span>3D Geometric Model</span>
+                                    <span id="concrete-visualizer-badge" style="color:var(--accent);">Slab</span>
+                                </div>
+                                <svg class="visual-canvas" id="concrete-svg"></svg>
+                            </div>
+
+                            <div class="formula-reference">
+                                <button class="formula-toggle" data-formula-id="concrete-formula">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    View Formula & Estimation Steps
+                                </button>
+                                <div class="formula-body" id="concrete-formula">
+                                    1. <strong>Wet Volume (V_wet):</strong> L × W × H (or Circular shape: $\pi R^2 H$, or Trapezoidal footing frustum formula)<br>
+                                    2. <strong>Wastage volume added:</strong> $V_{wet\_total} = V_{wet} \times (1 + \text{Wastage}\% / 100)$<br>
+                                    3. <strong>Dry Volume Factor:</strong> Concrete shrinks when water is added. Multiplied by <strong>1.54</strong> to get Dry Volume ($V_{dry} = V_{wet\_total} \times 1.54$).<br>
+                                    4. <strong>Cement volume:</strong> $V_{cement} = V_{dry} \times \text{Cement ratio} / \text{Sum of ratios}$<br>
+                                    5. <strong>Cement Bags:</strong> $V_{cement} / 0.03472$ m³ per bag (50kg per bag density = 1440 kg/m³)<br>
+                                    6. <strong>Fine Sand & Aggregate:</strong> dry volume allocated by parts and converted to CFT (1 m³ = 35.3147 cft)<br>
+                                    7. <strong>Water quantity:</strong> Cement weight (kg) × Water-Cement ratio.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Water-Cement & Mix Design Calculator Tab -->
+            <section class="tab-content" id="water-cement">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                                W/C & Mix Design Parameters
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Target Concrete Grade</label>
+                                <select class="form-control" id="wc-concrete-grade">
+                                    <option value="M15">M15 (15 MPa)</option>
+                                    <option value="M20" selected>M20 (20 MPa)</option>
+                                    <option value="M25">M25 (25 MPa)</option>
+                                    <option value="M30">M30 (30 MPa)</option>
+                                    <option value="M35">M35 (35 MPa)</option>
+                                    <option value="M40">M40 (40 MPa)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Concrete Type</label>
+                                <select class="form-control" id="wc-concrete-type">
+                                    <option value="rcc" selected>Reinforced Concrete (RCC)</option>
+                                    <option value="pcc">Plain Concrete (PCC)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Environmental Exposure (IS 456)</label>
+                                <select class="form-control" id="wc-exposure">
+                                    <option value="mild">Mild (protected)</option>
+                                    <option value="moderate" selected>Moderate (sheltered/rain)</option>
+                                    <option value="severe">Severe (coastal/submerged)</option>
+                                    <option value="verysevere">Very Severe (salt spray/groundwater)</option>
+                                    <option value="extreme">Extreme (tidal zone)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Max Nominal Aggregate Size</label>
+                                <select class="form-control" id="wc-aggregate-size">
+                                    <option value="10">10 mm</option>
+                                    <option value="20" selected>20 mm</option>
+                                    <option value="40">40 mm</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Target Workability (Slump)</label>
+                                <select class="form-control" id="wc-slump">
+                                    <option value="50">25 - 50 mm (Low)</option>
+                                    <option value="75" selected>50 - 75 mm (Medium)</option>
+                                    <option value="100">75 - 100 mm (High)</option>
+                                    <option value="150">100 - 150 mm (Pumpable)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Shape of Aggregate</label>
+                                <select class="form-control" id="wc-aggregate-shape">
+                                    <option value="angular" selected>Angular (Crushed Stone)</option>
+                                    <option value="subangular">Sub-angular</option>
+                                    <option value="gravel">Gravel (Crushed particles)</option>
+                                    <option value="rounded">Rounded Gravel</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Chemical Admixtures</label>
+                                <select class="form-control" id="wc-admixture">
+                                    <option value="none" selected>None (Standard Mix)</option>
+                                    <option value="plasticizer">Plasticizer (8% water red.)</option>
+                                    <option value="superplasticizer">Superplasticizer (25% water red.)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Concrete Volume for Job</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="wc-job-volume" value="1.0" min="0.1" step="0.1">
+                                    <span class="unit-label">m³</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group" style="grid-column: span 2;">
+                                <label>Design Water-Cement Ratio Override (Auto-calculated if blank)</label>
+                                <input type="number" class="form-control" id="wc-ratio-override" placeholder="Leave blank for auto-design" min="0.25" max="0.80" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-wc-calc">Calculate Mix</button>
+                            <button class="btn btn-secondary" id="btn-wc-reset">Reset Parameters</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Mix Design Results</div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Target Strength (f'ck)</div>
+                                        <div class="result-value" id="wc-res-target-strength">27.6 <span class="result-unit">N/mm²</span></div>
+                                        <div class="result-secondary-value" id="wc-res-fck-base">Standard: fck + 1.65 S</div>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Design W/C Ratio</div>
+                                        <div class="result-value" id="wc-res-wc-ratio">0.50</div>
+                                        <div class="result-secondary-value" id="wc-res-wc-code">Code Max: 0.50 (IS 456)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Water per Cubic Meter</div>
+                                        <div class="result-value" id="wc-res-water-m3">191.6 <span class="result-unit">Liters</span></div>
+                                        <div class="result-secondary-value" id="wc-res-water-adj">Adjusted for slump & shape</div>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Cement per Cubic Meter</div>
+                                        <div class="result-value" id="wc-res-cement-m3">383 <span class="result-unit">kg</span></div>
+                                        <div class="result-secondary-value" id="wc-res-cement-code">Code Min: 300 kg/m³</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="result-card" style="background: var(--accent-glow); border-color: var(--accent); margin-top: 1rem;">
+                                <div class="result-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--accent);">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Total Job Materials Required</div>
+                                    <div class="result-value" id="wc-res-job-summary">Cement: 8 Bags | Water: 192 L</div>
+                                    <div class="result-secondary-value" id="wc-res-job-sand-agg">Sand: ~0.4 m³ | Coarse Agg: ~0.8 m³</div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions" style="margin-top: 1.5rem;">
+                                <button class="btn btn-accent-sec" id="btn-wc-add-boq">Add Mix Design to BOQ</button>
+                            </div>
+
+                            <div class="formula-reference">
+                                <button class="formula-toggle" data-formula-id="wc-formula">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    View Mix Design Steps (IS 456 & 10262)
+                                </button>
+                                <div class="formula-body" id="wc-formula">
+                                    1. <strong>Target Mean Strength ($f'_{ck}$):</strong> $f'_{ck} = f_{ck} + 1.65 \times S$ (where $S$ is Standard Deviation: M15=3.5, M20-25=4.0, M30-40=5.0).<br>
+                                    2. <strong>W/C Ratio:</strong> Taken from IS 456 Table 5 based on exposure conditions (RCC moderate max is 0.50, PCC is 0.60). We select the minimum of target strength W/C or code durability W/C.<br>
+                                    3. <strong>Base Water Content:</strong> Based on nominal maximum aggregate size (10mm = 208L, 20mm = 186L, 40mm = 165L) for 25-50mm slump.<br>
+                                    4. <strong>Water Adjustments:</strong> Add 3% water for every +25mm slump. Adjust for shape (sub-angular: -10L, rounded gravel: -20L). Apply admixture reductions (plasticizer: -8%, superplasticizer: -25%).<br>
+                                    5. <strong>Cement Content:</strong> $\text{Cement} = \text{Water} / \text{Selected W/C}$. If calculated cement is below IS 456 Table 5 minimums, the code minimum is applied.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Steel Rebar Estimator Tab -->
+            <section class="tab-content" id="steel">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="2" y1="14" x2="22" y2="14"></line></svg>
+                                Rebar Specification
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Calculation Method</label>
+                            <div class="button-group-selector">
+                                <input type="radio" name="steel-calc-mode" id="steel-mode-simple" value="simple" checked>
+                                <label for="steel-mode-simple">Total Length</label>
+
+                                <input type="radio" name="steel-calc-mode" id="steel-mode-grid" value="grid">
+                                <label for="steel-mode-grid">Slab Reinforcement Grid</label>
+
+                                <input type="radio" name="steel-calc-mode" id="steel-mode-lapping" value="lapping">
+                                <label for="steel-mode-lapping">Lapping & L_d</label>
+                            </div>
+                        </div>
+
+                        <!-- Lapping & Development Length Inputs -->
+                        <div id="steel-lapping-inputs" style="display: none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Bar Diameter (Φ)</label>
+                                    <select class="form-control" id="lapping-dia">
+                                        <option value="6">6 mm</option>
+                                        <option value="8">8 mm</option>
+                                        <option value="10">10 mm</option>
+                                        <option value="12" selected>12 mm</option>
+                                        <option value="16">16 mm</option>
+                                        <option value="20">20 mm</option>
+                                        <option value="25">25 mm</option>
+                                        <option value="32">32 mm</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Concrete Grade</label>
+                                    <select class="form-control" id="lapping-concrete">
+                                        <option value="M15">M15</option>
+                                        <option value="M20" selected>M20</option>
+                                        <option value="M25">M25</option>
+                                        <option value="M30">M30</option>
+                                        <option value="M35">M35</option>
+                                        <option value="M40">M40 or richer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Steel Grade (Rebar Type)</label>
+                                    <select class="form-control" id="lapping-steel">
+                                        <option value="Fe250">Fe250 (Mild Plain Steel)</option>
+                                        <option value="Fe415">Fe415 (Deformed HYSD)</option>
+                                        <option value="Fe500" selected>Fe500 (Deformed HYSD)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Lapping Zone (Location)</label>
+                                    <select class="form-control" id="lapping-zone">
+                                        <option value="tension-flexure" selected>Tension Zone (Flexural Tension)</option>
+                                        <option value="tension-direct">Tension Zone (Direct Tension)</option>
+                                        <option value="compression">Compression Zone</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Number of Joints / Laps</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="lapping-joints-count" value="1" min="1">
+                                        <span class="unit-label">pcs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Simple Length Input -->
+                        <div id="steel-simple-inputs">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Rebar Diameter</label>
+                                    <select class="form-control" id="steel-diameter">
+                                        <option value="6">6 mm (Stirrups / Ties)</option>
+                                        <option value="8">8 mm (Slab Distribution)</option>
+                                        <option value="10" selected>10 mm (Slab Main)</option>
+                                        <option value="12">12 mm (Slab/Beams)</option>
+                                        <option value="16">16 mm (Beams/Columns)</option>
+                                        <option value="20">20 mm (Heavy Columns)</option>
+                                        <option value="25">25 mm (Footings/Bridges)</option>
+                                        <option value="32">32 mm</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Total Combined Length</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="steel-length" value="100" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grid/Slab Input -->
+                        <div id="steel-grid-inputs" style="display: none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Slab Length (L)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="steel-grid-len" value="5" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Slab Width (W)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="steel-grid-wid" value="4" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Clear Cover</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="steel-grid-cover" value="20" min="0">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Main Reinforcement Dia</label>
+                                    <select class="form-control" id="steel-grid-main-dia">
+                                        <option value="8">8 mm</option>
+                                        <option value="10" selected>10 mm</option>
+                                        <option value="12">12 mm</option>
+                                        <option value="16">16 mm</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Main Bar Spacing (c/c)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="steel-grid-main-spacing" value="150" min="50">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Distribution Rebar Dia</label>
+                                    <select class="form-control" id="steel-grid-dist-dia">
+                                        <option value="6">6 mm</option>
+                                        <option value="8" selected>8 mm</option>
+                                        <option value="10">10 mm</option>
+                                        <option value="12">12 mm</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Distribution Spacing (c/c)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="steel-grid-dist-spacing" value="180" min="50">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="flex-direction: row; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor:pointer;">
+                                    <input type="checkbox" id="steel-hooks" checked style="width: 18px; height: 18px;">
+                                    Add 180° Hooks at Ends (+18d per bar)
+                                </label>
+                            </div>
+
+                            <div class="form-group" style="flex-direction: row; gap: 1rem; align-items: center;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor:pointer;">
+                                    <input type="checkbox" id="steel-cranks" checked style="width: 18px; height: 18px;">
+                                    Add 45° Tension Cranks (+0.42d per crank)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Steel Cost Rate</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="steel-rate" value="65" min="0">
+                                    <span class="unit-label">₹/kg</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Overlap & Wastage</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="steel-overlap" value="10" min="0">
+                                    <span class="unit-label">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="steel-input-helper-container" style="margin-top: 1.5rem; border: 1px solid var(--panel-border); border-radius: var(--border-radius-sm); padding: 0.5rem; background: rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; min-height: 120px;">
+                            <!-- Dynamically populated SVG -->
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-steel">Calculate Weight</button>
+                            <button class="btn btn-secondary btn-accent-sec" id="btn-add-steel-report">Add to BOQ</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Rebar Estimation Output</div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="result-icon" style="background:var(--accent-tertiary-glow); color:var(--accent-tertiary);">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Total Rebar Weight</div>
+                                    <div class="result-value" id="steel-res-weight">67.87<span class="result-unit">kg</span></div>
+                                    <div class="result-secondary-value" id="steel-res-weight-ton">~ 0.068 Metric Tons</div>
+                                </div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Standard 12m Bars</div>
+                                        <div class="result-value" id="steel-res-bars">9.2<span class="result-unit">pcs</span></div>
+                                        <div class="result-secondary-value" id="steel-res-unit-weight">Unit Weight: 0.617 kg/m</div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Total Budget Price</div>
+                                        <div class="result-value" id="steel-res-cost">₹4,412</div>
+                                        <div class="result-secondary-value">Excluding delivery charges</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="visualizer-container">
+                                <div class="visualizer-title">
+                                    <span>Rebar Reinforcement Grid Layout</span>
+                                    <span style="color:var(--accent-tertiary);">TOP VIEW</span>
+                                </div>
+                                <svg class="visual-canvas" id="steel-svg"></svg>
+                            </div>
+
+                            <div class="formula-reference">
+                                <button class="formula-toggle" data-formula-id="steel-formula">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    View Formula & Calculation steps
+                                </button>
+                                <div class="formula-body" id="steel-formula">
+                                    1. <strong>Unit Weight of Rebar (kg/m):</strong> $W = \frac{D^2}{162.162}$ kg/m (where D is bar diameter in mm).<br>
+                                    2. <strong>Clear Cover Correction:</strong> Effective length of rebar is adjusted by subtracting clear cover from both ends.<br>
+                                    3. <strong>Hooks Addition:</strong> If 180° hooks are specified, standard hook length equal to $9 \times \text{Dia}$ is added to both sides (+18d total).<br>
+                                    4. <strong>Tension Cranks Addition:</strong> Standard 45° bend-up cranks add $0.42 \times d$ per bent-up bar, where $d$ is effective depth ($d = \text{Slab Thickness} - 2\text{Cover} - \text{Dia}$).<br>
+                                    5. <strong>Bar counts:</strong> computed as $\text{Ceil}(\text{Span} / \text{Spacing}) + 1$.<br>
+                                    6. <strong>Development Length (IS 456 L_d):</strong> $L_d = \frac{\Phi \cdot \sigma_s}{4 \tau_{bd}}$ where $\sigma_s = 0.87 \cdot f_y$. $\tau_{bd}$ is bond stress, increased by 60% for deformed bars (Fe415/Fe500) and 25% for compression.<br>
+                                    7. <strong>Lapping Rules:</strong> Flexural Tension = $\max(L_d, 30\Phi)$, Direct Tension = $\max(2 L_d, 30\Phi)$, Compression = $\max(L_d, 24\Phi)$.
+                                </div>
+                            </div>
+
+                            <div id="clear-cover-ref-card" class="glass-panel" style="margin-top: 1.5rem; display: none; padding: 1rem;">
+                                <div class="panel-header" style="margin-bottom: 0.75rem; border-bottom: none; padding: 0;">
+                                    <div class="panel-title" style="font-size: 0.95rem; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading); color:var(--accent-tertiary);">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                                        IS 456 Clear Cover Reference Table
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.8rem; overflow-x: auto;">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                        <thead>
+                                            <tr style="border-bottom: 1px solid var(--panel-border); color: var(--text-secondary);">
+                                                <th style="padding: 6px 4px;">Structural Member</th>
+                                                <th style="padding: 6px 4px; text-align: right;">Min Clear Cover</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                                <td style="padding: 6px 4px;">Slabs / Staircases</td>
+                                                <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--accent-tertiary);">20 mm</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                                <td style="padding: 6px 4px;">Beams (Main Rebar)</td>
+                                                <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--accent-tertiary);">25 mm</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                                <td style="padding: 6px 4px;">Columns (Dimension > 250mm)</td>
+                                                <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--accent-tertiary);">40 mm</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                                <td style="padding: 6px 4px;">Columns (Dimension ≤ 250mm, Bar ≤ 12mm)</td>
+                                                <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--accent-tertiary);">30 mm</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                                <td style="padding: 6px 4px;">Footing / Foundations</td>
+                                                <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--accent-tertiary);">50 mm</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                                <td style="padding: 6px 4px;">Retaining Walls (Earth face)</td>
+                                                <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--accent-tertiary);">50 mm</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bar Bending Schedule (BBS) Tab -->
+            <section class="tab-content" id="bbs">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                Add Rebar Item to Schedule
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Member Name / ID</label>
+                                <input type="text" class="form-control" id="bbs-member" value="Beam B1" placeholder="e.g. Beam B1, Column C1">
+                            </div>
+                            <div class="form-group">
+                                <label>Bar Mark / Description</label>
+                                <input type="text" class="form-control" id="bbs-mark" value="Main Bottom Bars" placeholder="e.g. Main Steel, Stirrups">
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Bar Diameter (mm)</label>
+                                <select class="form-control" id="bbs-dia">
+                                    <option value="8">8 mm</option>
+                                    <option value="10">10 mm</option>
+                                    <option value="12" selected>12 mm</option>
+                                    <option value="16">16 mm</option>
+                                    <option value="20">20 mm</option>
+                                    <option value="25">25 mm</option>
+                                    <option value="32">32 mm</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Bar Shape Type</label>
+                                <select class="form-control" id="bbs-shape-type">
+                                    <option value="straight" selected>Straight Bar</option>
+                                    <option value="bend-l">L-Bend Bar</option>
+                                    <option value="cranked">Bent-up / Cranked Bar</option>
+                                    <option value="stirrup-rect">Rectangular Stirrup / Tie</option>
+                                    <option value="stirrup-circ">Circular Stirrup</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Shape Inputs -->
+                        <!-- 1. Straight Inputs -->
+                        <div id="bbs-shape-straight-inputs">
+                            <div class="form-group">
+                                <label>Straight Length (L)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="bbs-len-straight" value="4.5" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group" style="flex-direction: row; gap: 1rem; align-items: center; margin-top:0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor:pointer;">
+                                    <input type="checkbox" id="bbs-straight-hooks" style="width: 18px; height: 18px;">
+                                    Include 180° Hooks (+18d)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 2. L-Bend Inputs -->
+                        <div id="bbs-shape-l-inputs" style="display:none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Horizontal Length (A)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-len-l-a" value="3.5" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vertical Leg Height (B)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-len-l-b" value="0.5" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="font-size:0.75rem; color:var(--text-muted);">Calculated with 90° bend deduction (-2d)</div>
+                        </div>
+
+                        <!-- 3. Cranked Inputs -->
+                        <div id="bbs-shape-cranked-inputs" style="display:none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Clear Span Length (L)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-len-crank-l" value="5.0" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Slab/Beam Height (H)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-len-crank-h" value="0.15" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Clear Cover</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-len-crank-cover" value="20" min="0">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="flex-direction: row; gap: 1rem; align-items: center;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor:pointer;">
+                                    <input type="checkbox" id="bbs-crank-double" checked style="width: 18px; height: 18px;">
+                                    Double Bent-up Crank (alternate sides)
+                                </label>
+                            </div>
+                            <div class="form-group" style="font-size:0.75rem; color:var(--text-muted);">Calculated with 45° crank offset addition (+0.42 * h_eff) and hooks (+18d)</div>
+                        </div>
+
+                        <!-- 4. Rect Stirrup Inputs -->
+                        <div id="bbs-shape-stirrup-rect-inputs" style="display:none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Member Width (B)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-stirrup-b" value="0.3" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Member Depth (D)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-stirrup-d" value="0.45" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Clear Cover</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-stirrup-cover" value="25" min="0">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="font-size:0.75rem; color:var(--text-muted);">Cutting Length = 2 * (B - 2*Cover) + 2 * (D - 2*Cover) + 24 * d (standard 135° hook schedule)</div>
+                        </div>
+
+                        <!-- 5. Circular Stirrup Inputs -->
+                        <div id="bbs-shape-stirrup-circ-inputs" style="display:none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Column Diameter (D)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-stirrup-circ-dia" value="0.45" step="any" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Clear Cover</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="bbs-stirrup-circ-cover" value="40" min="0">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="font-size:0.75rem; color:var(--text-muted);">Cutting Length = π * (D - 2*Cover - d) + 24 * d</div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Number of Members</label>
+                                <input type="number" class="form-control" id="bbs-num-members" value="1" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Number of Bars per Member</label>
+                                <input type="number" class="form-control" id="bbs-num-bars" value="4" min="1">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-add-bbs-item">Add Bar to Schedule</button>
+                            <button class="btn btn-secondary" id="btn-reset-bbs-form">Reset Inputs</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Bar Geometry Sketch</div>
+                            </div>
+                            <div class="visualizer-container" style="height: 180px;">
+                                <svg class="visual-canvas" id="bbs-shape-svg" style="height:100%;"></svg>
+                            </div>
+                            
+                            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.15); border-radius: var(--border-radius-sm); font-size: 0.85rem;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                                    <span>Single Bar Cutting Length:</span>
+                                    <strong id="bbs-calc-cutting-len">0.00 m</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                                    <span>Total Bars Count:</span>
+                                    <strong id="bbs-calc-total-count">0</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                                    <span>Total Length:</span>
+                                    <strong id="bbs-calc-total-length">0.00 m</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span>Total Weight:</span>
+                                    <strong id="bbs-calc-total-weight" style="color:var(--accent-tertiary);">0.00 kg</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BBS Table Summary Grid -->
+                <div class="glass-panel" style="margin-top: 1.5rem;">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            Bar Bending Schedule (BBS) Sheets
+                        </div>
+                        <div class="panel-header-actions">
+                            <button class="btn btn-secondary" id="btn-clear-bbs">Clear Schedule</button>
+                            <button class="btn btn-secondary" id="btn-export-bbs-csv">Export to CSV</button>
+                            <button class="btn btn-accent-sec" id="btn-add-bbs-boq">Add Steel Total to BOQ</button>
+                        </div>
+                    </div>
+
+                    <div class="boq-table-container" style="display:block; overflow-x:auto;">
+                        <table class="boq-table" id="bbs-table">
+                            <thead>
+                                <tr>
+                                    <th>Mark</th>
+                                    <th>Member</th>
+                                    <th>Description</th>
+                                    <th>Shape</th>
+                                    <th>Dia (mm)</th>
+                                    <th>No. of Members</th>
+                                    <th>No. of Bars</th>
+                                    <th>Total Bars</th>
+                                    <th>Cutting L (m)</th>
+                                    <th>Total L (m)</th>
+                                    <th>Weight (kg)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bbs-table-body">
+                                <!-- JS populated rows -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Diameter Wise Rebar Summary Table -->
+                    <div style="margin-top:2rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:1.5rem;">
+                        <h3 style="font-family:var(--font-heading); margin-bottom: 1rem; color:var(--accent-tertiary);">Diameter-wise Steel Weight Summary</h3>
+                        <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem;" id="bbs-dia-summary-cards">
+                            <!-- Populated dynamically: 8mm, 10mm, 12mm, etc. -->
+                        </div>
+                        <div style="margin-top: 1.5rem; background:rgba(6, 182, 212, 0.1); padding: 1.25rem; border-radius: var(--border-radius-md); display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <span style="font-size:0.85rem; color:var(--text-secondary);">GRAND TOTAL STEEL WEIGHT</span>
+                                <h2 style="font-family:var(--font-heading); font-size:1.75rem; color:var(--text-primary);" id="bbs-grand-weight">0.00 kg</h2>
+                            </div>
+                            <div>
+                                <span style="font-size:0.85rem; color:var(--text-secondary);">GRAND TOTAL STEEL BUDGET COST</span>
+                                <h2 style="font-family:var(--font-heading); font-size:1.75rem; color:var(--accent-tertiary);" id="bbs-grand-cost">₹0</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Brick & Mortar Estimator Tab -->
+            <!-- Brick & Mortar Estimator Tab -->
+            <section class="tab-content" id="bricks">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                                Masonry & Finishing Config
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Calculation Category</label>
+                            <div class="button-group-selector" style="margin-bottom: 1.25rem;">
+                                <input type="radio" name="masonry-subtab" id="masonry-subtab-brickwork" value="brickwork" checked>
+                                <label for="masonry-subtab-brickwork">Brickwork</label>
+
+                                <input type="radio" name="masonry-subtab" id="masonry-subtab-plastering" value="plastering">
+                                <label for="masonry-subtab-plastering">Plastering</label>
+
+                                <input type="radio" name="masonry-subtab" id="masonry-subtab-flooring" value="flooring">
+                                <label for="masonry-subtab-flooring">Flooring & Tiles</label>
+                            </div>
+                        </div>
+
+                        <!-- 1. Brickwork Inputs -->
+                        <div id="masonry-brickwork-inputs">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Wall Length</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="brick-wall-len" value="5" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Wall Height</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="brick-wall-height" value="3" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Wall Thickness</label>
+                                    <select class="form-control" id="brick-wall-thick">
+                                        <option value="0.115">115 mm (4.5" Single Brick Wall)</option>
+                                        <option value="0.230" selected>230 mm (9" Double Brick Wall)</option>
+                                        <option value="0.345">345 mm (13.5" Triple Brick Wall)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Brick Class & Size</label>
+                                    <select class="form-control" id="brick-size-type">
+                                        <option value="standard" selected>Indian Modular (190x90x90 mm)</option>
+                                        <option value="traditional">Traditional (229x112x70 mm)</option>
+                                        <option value="flyash">Fly Ash Brick (230x110x75 mm)</option>
+                                        <option value="custom">Custom Dimensions</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Custom Brick Dimensions -->
+                            <div class="form-group-row" id="brick-custom-size-row" style="display: none;">
+                                <div class="form-group">
+                                    <label>Brick Length (mm)</label>
+                                    <input type="number" class="form-control" id="custom-brick-l" value="190" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Brick Width (mm)</label>
+                                    <input type="number" class="form-control" id="custom-brick-w" value="90" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Brick Height (mm)</label>
+                                    <input type="number" class="form-control" id="custom-brick-h" value="90" min="1">
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Mortar Ratio (Cement : Sand)</label>
+                                    <select class="form-control" id="brick-mortar-ratio">
+                                        <option value="3">1 : 3</option>
+                                        <option value="4">1 : 4</option>
+                                        <option value="5">1 : 5</option>
+                                        <option value="6" selected>1 : 6</option>
+                                        <option value="8">1 : 8</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mortar Joint Thickness</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="brick-mortar-joint" value="10" min="0" max="30">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Deductions -->
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Number of Doors</label>
+                                    <input type="number" class="form-control" id="brick-doors-num" value="0" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Door Size (W x H)</label>
+                                    <div class="input-with-unit" style="display:flex; gap: 0.25rem;">
+                                        <input type="number" class="form-control" id="brick-door-w" value="1.0" step="any" placeholder="Width">
+                                        <input type="number" class="form-control" id="brick-door-h" value="2.1" step="any" placeholder="Height">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Number of Windows</label>
+                                    <input type="number" class="form-control" id="brick-windows-num" value="0" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Window Size (W x H)</label>
+                                    <div class="input-with-unit" style="display:flex; gap: 0.25rem;">
+                                        <input type="number" class="form-control" id="brick-window-w" value="1.2" step="any" placeholder="Width">
+                                        <input type="number" class="form-control" id="brick-window-h" value="1.2" step="any" placeholder="Height">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Custom Deduction Vol</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="brick-custom-deduction" value="0" step="any" min="0">
+                                        <span class="unit-label">m³</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Wastage Allowance</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="brick-wastage" value="5" min="0" max="100">
+                                        <span class="unit-label">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Plastering Inputs -->
+                        <div id="masonry-plastering-inputs" style="display: none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Wall / Ceiling Length</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plaster-wall-len" value="5" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Wall / Ceiling Height</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plaster-wall-height" value="3" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Plaster Thickness</label>
+                                    <select class="form-control" id="plaster-thickness">
+                                        <option value="12">12 mm (Internal wall smooth plaster)</option>
+                                        <option value="15" selected>15 mm (Ceiling / uneven internal wall)</option>
+                                        <option value="20">20 mm (External wall sand-faced plaster)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Plaster Mix Ratio</label>
+                                    <select class="form-control" id="plaster-mix-ratio">
+                                        <option value="3">1 : 3 (Ceilings / Waterproofing)</option>
+                                        <option value="4" selected>1 : 4 (External walls / High strength)</option>
+                                        <option value="5">1 : 5 (General internal walls)</option>
+                                        <option value="6">1 : 6 (Low load walls)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Wastage & Unevenness</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plaster-wastage" value="20" min="0" max="100">
+                                        <span class="unit-label">%</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cement Cost per Bag</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plaster-cement-cost" value="450" min="0">
+                                        <span class="unit-label">₹</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sand Cost per CFT</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plaster-sand-cost" value="60" min="0">
+                                        <span class="unit-label">₹</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Flooring & Tiles Inputs -->
+                        <div id="masonry-flooring-inputs" style="display: none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Room Length</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="flooring-room-len" value="4" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Room Width</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="flooring-room-wid" value="4" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Tile Dimension Size</label>
+                                    <select class="form-control" id="flooring-tile-size">
+                                        <option value="600x600" selected>600 x 600 mm (Standard floor)</option>
+                                        <option value="300x300">300 x 300 mm (Bathroom / Terraces)</option>
+                                        <option value="800x800">800 x 800 mm (Large Vitrified)</option>
+                                        <option value="custom">Custom Size</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Grout Joint Width</label>
+                                    <select class="form-control" id="flooring-grout-width">
+                                        <option value="0" selected>0 mm (Jointless/Paper joint)</option>
+                                        <option value="2">2 mm Spacer</option>
+                                        <option value="3">3 mm Spacer</option>
+                                        <option value="5">5 mm Spacer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group-row" id="flooring-custom-tile-row" style="display: none;">
+                                <div class="form-group">
+                                    <label>Tile Length (mm)</label>
+                                    <input type="number" class="form-control" id="flooring-custom-tile-len" value="600" min="10">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tile Width (mm)</label>
+                                    <input type="number" class="form-control" id="flooring-custom-tile-wid" value="600" min="10">
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Skirting Height</label>
+                                    <select class="form-control" id="flooring-skirting-height">
+                                        <option value="100" selected>100 mm (4 inches)</option>
+                                        <option value="150">150 mm (6 inches)</option>
+                                        <option value="0">No Skirting</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bedding Mortar Thickness</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="flooring-bed-thick" value="40" min="10" max="150">
+                                        <span class="unit-label">mm</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bedding Mix Ratio</label>
+                                    <select class="form-control" id="flooring-bed-ratio">
+                                        <option value="4">1 : 4</option>
+                                        <option value="5" selected>1 : 5</option>
+                                        <option value="6">1 : 6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Tile Cost / sq.m</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="flooring-tile-cost" value="600" min="0">
+                                        <span class="unit-label">₹</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Wastage Allowance</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="flooring-wastage" value="10" min="0" max="100">
+                                        <span class="unit-label">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Cement Cost / Bag</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="flooring-cement-cost" value="450" min="0">
+                                        <span class="unit-label">₹</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sand Cost / CFT</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="flooring-sand-cost" value="60" min="0">
+                                        <span class="unit-label">₹</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Masonry form visual helper -->
+                        <div id="masonry-input-helper-container" style="margin-top: 1.5rem; border: 1px solid var(--panel-border); border-radius: var(--border-radius-sm); padding: 0.5rem; background: rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; min-height: 120px;">
+                            <!-- Dynamically populated SVG -->
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-bricks">Estimate Materials</button>
+                            <button class="btn btn-secondary btn-accent-sec" id="btn-add-brick-report">Add to BOQ</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Masonry Quantities</div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="result-icon" style="background:rgba(239, 68, 68, 0.15); color:#ef4444;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="9" width="18" height="12" rx="2"></rect><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Bricks Required</div>
+                                    <div class="result-value" id="brick-res-bricks">1,725<span class="result-unit">pcs</span></div>
+                                    <div class="result-secondary-value" id="brick-res-wall-vol">Net Wall Volume: 3.45 m³ (incl. wastage)</div>
+                                </div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Cement Bags (Mortar)</div>
+                                        <div class="result-value" id="brick-res-cement">6.8<span class="result-unit">Bags</span></div>
+                                        <div class="result-secondary-value">Dry Mortar Vol: ~1.03 m³</div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Mortar Sand</div>
+                                        <div class="result-value" id="brick-res-sand">52.4<span class="result-unit">cft</span></div>
+                                        <div class="result-secondary-value">~ 1.48 m³ / 2.3 Tons</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="visualizer-container">
+                                <div class="visualizer-title">
+                                    <span>English Bond Wall Elevation Layout</span>
+                                    <span style="color:#ef4444;">SCHEMATIC</span>
+                                </div>
+                                <svg class="visual-canvas" id="bricks-svg"></svg>
+                            </div>
+
+                            <div class="formula-reference">
+                                <button class="formula-toggle" data-formula-id="brick-formula">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    View Formula & Estimation Steps
+                                </button>
+                                <div class="formula-body" id="brick-formula">
+                                    1. <strong>Net Wall Volume:</strong> $[(L \times H) - (N_{doors} \times A_{door}) - (N_{windows} \times A_{window})] \times \text{Thickness} - V_{custom\_deduction}$.<br>
+                                    2. <strong>Brick Dimensions with Mortar Joint:</strong> $L' = L+j,\ W' = W+j,\ H' = H+j$ where $j$ is the mortar joint (typically 10mm).<br>
+                                    3. <strong>Bricks Count (without wastage):</strong> $N = \text{Net Wall Volume} / (L' \times W' \times H')$.<br>
+                                    4. <strong>Mortar Volume (Wet):</strong> Net Wall Volume - $(N \times L \times W \times H \text{ actual brick sizes})$.<br>
+                                    5. <strong>Dry Mortar Volume:</strong> Wet Mortar Volume × <strong>1.33</strong> (accounts for dry ingredients compaction shrinkage).<br>
+                                    6. <strong>Cement & Sand Allocation:</strong> based on selected ratio parts. Cement density is 1440 kg/m³. 1 bag = 50 kg.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Excavation Tab -->
+            <section class="tab-content" id="earthwork">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                Earthwork Configuration
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Calculation Mode</label>
+                            <div class="button-group-selector" style="margin-bottom: 1.25rem;">
+                                <input type="radio" name="earthwork-mode" id="earthwork-mode-pit" value="pit" checked>
+                                <label for="earthwork-mode-pit">Pit Excavation</label>
+
+                                <input type="radio" name="earthwork-mode" id="earthwork-mode-trench" value="trench">
+                                <label for="earthwork-mode-trench">Trench Excavation</label>
+
+                                <input type="radio" name="earthwork-mode" id="earthwork-mode-plinth" value="plinth">
+                                <label for="earthwork-mode-plinth">Plinth Sand/Soil Filling</label>
+                            </div>
+                        </div>
+
+                        <!-- 1. Pit Excavation Inputs -->
+                        <div id="earthwork-pit-inputs">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Bottom Span Length (L)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="exc-length" value="6" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bottom Span Width (W)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="exc-width" value="3" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Excavation Depth (D)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="exc-depth" value="2" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Side Slope (Horizontal : Vertical)</label>
+                                    <select class="form-control" id="exc-slope">
+                                        <option value="0">0:1 (Vertical Cuts - No Slope)</option>
+                                        <option value="0.5" selected>0.5:1 (Hard Gravelly Clay Soil)</option>
+                                        <option value="1">1:1 (Medium Cohesive Loam Soil)</option>
+                                        <option value="1.5">1.5:1 (Loose Sandy Soil)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Soil Swell Factor</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="exc-swell" value="15" min="0" max="100">
+                                        <span class="unit-label">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Backfill structural deductions -->
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Footing/PCC Concrete Vol</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="exc-footing-vol" value="3.5" step="any" min="0">
+                                        <span class="unit-label">m³</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Column Pedestal Vol (below GL)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="exc-column-vol" value="0.8" step="any" min="0">
+                                        <span class="unit-label">m³</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Compaction Shrinkage</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="exc-compaction" value="20" min="0" max="100">
+                                        <span class="unit-label">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Trench Excavation Inputs -->
+                        <div id="earthwork-trench-inputs" style="display: none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Trench Total Length</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="trench-length" value="25" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Trench Bottom Width</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="trench-width" value="0.9" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Trench Depth</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="trench-depth" value="1.2" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Trench Side Slope (H:V)</label>
+                                    <select class="form-control" id="trench-slope">
+                                        <option value="0" selected>0:1 (Vertical Cuts - Shored)</option>
+                                        <option value="0.25">0.25:1 (Firm Soils)</option>
+                                        <option value="0.5">0.5:1 (Medium Soils)</option>
+                                        <option value="1">1:1 (Loose Soils)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Soil Swell Factor</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="trench-swell" value="15" min="0" max="100">
+                                        <span class="unit-label">%</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Excavation Rate</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="trench-rate" value="150" min="0">
+                                        <span class="unit-label">₹/m³</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Plinth Sand/Soil Filling Inputs -->
+                        <div id="earthwork-plinth-inputs" style="display: none;">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Plinth Area Length</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plinth-length" value="10" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Plinth Area Width</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plinth-width" value="8" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Filling Depth / Height</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plinth-depth" value="0.6" min="0">
+                                        <span class="unit-label">m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label>Compaction Dry Shrinkage Factor</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plinth-compaction" value="30" min="0" max="100">
+                                        <span class="unit-label">%</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sand/Soil Cost per Brass (100 cft)</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" class="form-control" id="plinth-sand-rate" value="2500" min="0">
+                                        <span class="unit-label">₹</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earthwork form visual helper -->
+                        <div id="earthwork-input-helper-container" style="margin-top: 1.5rem; border: 1px solid var(--panel-border); border-radius: var(--border-radius-sm); padding: 0.5rem; background: rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; min-height: 120px;">
+                            <!-- Dynamically populated SVG -->
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-excavation">Calculate Earthwork</button>
+                            <button class="btn btn-secondary btn-accent-sec" id="btn-add-exc-report">Add to BOQ</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Soil Excavation Output</div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="result-icon" style="background:rgba(245, 158, 11, 0.15); color:#f59e0b;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">In-Situ Excavation Volume</div>
+                                    <div class="result-value" id="exc-res-volume">52.00<span class="result-unit">m³</span></div>
+                                    <div class="result-secondary-value" id="exc-res-loose-vol">Loose Transport Volume (Swell): ~ 59.8 m³</div>
+                                </div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Top Opening Span</div>
+                                        <div class="result-value" id="exc-res-top-dims">8.0m x 5.0m</div>
+                                        <div class="result-secondary-value">Excavation footprint at ground level</div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Soil Backfilling Volume</div>
+                                        <div class="result-value" id="exc-res-backfill">47.70<span class="result-unit">m³</span></div>
+                                        <div class="result-secondary-value" id="exc-res-trips">Requires ~10 truck loads (5m³ each)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="visualizer-container">
+                                <div class="visualizer-title">
+                                    <span>Trapezoidal Excavation Section Profile</span>
+                                    <span style="color:#f59e0b;">CROSS-SECTION</span>
+                                </div>
+                                <svg class="visual-canvas" id="exc-svg"></svg>
+                            </div>
+
+                            <div class="formula-reference">
+                                <button class="formula-toggle" data-formula-id="exc-formula">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    View Formula & Estimation Steps
+                                </button>
+                                <div class="formula-body" id="exc-formula">
+                                    1. <strong>Slope offset factor (S):</strong> Side horizontal extension = $S \times \text{Depth}$ on each side.<br>
+                                    2. <strong>Top opening dimensions:</strong> $L_{top} = L_{bottom} + 2SD$ and $W_{top} = W_{bottom} + 2SD$.<br>
+                                    3. <strong>Prismoidal Formula for Volume:</strong> $V = \frac{D}{6} \cdot (A_{bottom} + A_{top} + 4A_{mid})$ where $A_{mid}$ is cross sectional area at mid height.<br>
+                                    4. <strong>Backfilling Volume:</strong> calculated as $(\text{Excavation Volume} - \text{Footing Concrete Volume} - \text{Column Volume}) \times (1 + \text{Compaction shrinkage}\% / 100)$.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Civil Unit Converter Tab -->
+            <section class="tab-content" id="converter">
+                <div class="calculator-grid" style="grid-template-columns: 1fr;">
+                    <div class="glass-panel" style="max-width: 800px; margin: 0 auto; width: 100%;">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line></svg>
+                                Civil Engineering Unit Converter
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="max-width: 300px;">
+                            <label>Conversion Category</label>
+                            <select class="form-control" id="conv-category">
+                                <option value="length" selected>Length</option>
+                                <option value="area">Area</option>
+                                <option value="volume">Volume</option>
+                                <option value="weight">Mass / Weight</option>
+                                <option value="stress">Force & Stress / Pressure</option>
+                                <option value="density">Density</option>
+                            </select>
+                        </div>
+
+                        <div class="converter-grid">
+                            <div class="form-group">
+                                <label>Convert From</label>
+                                <div class="input-with-unit" style="margin-bottom: 0.5rem;">
+                                    <input type="number" class="form-control" id="conv-from-val" value="1" step="any" min="0">
+                                </div>
+                                <select class="form-control" id="conv-from-unit">
+                                    <!-- Options populated by Javascript -->
+                                </select>
+                            </div>
+
+                            <button class="swap-btn" id="btn-swap-units" title="Swap Units">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                            </button>
+
+                            <div class="form-group">
+                                <label>Convert To</label>
+                                <div class="input-with-unit" style="margin-bottom: 0.5rem;">
+                                    <input type="text" class="form-control" id="conv-to-val" readonly style="background:rgba(255,255,255,0.05); font-weight:700;">
+                                </div>
+                                <select class="form-control" id="conv-to-unit">
+                                    <!-- Options populated by Javascript -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem; background:rgba(0,0,0,0.15); padding: 1.5rem; border-radius: var(--border-radius-md);">
+                            <h4 style="font-family:var(--font-heading); margin-bottom: 0.75rem;">Useful Civil Engineering Physical Densities:</h4>
+                            <ul style="font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); padding-left: 1.25rem;">
+                                <li>Reinforced Concrete (RCC) Density: <strong>2500 kg/m³</strong> (25 kN/m³)</li>
+                                <li>Structural Steel Density: <strong>7850 kg/m³</strong></li>
+                                <li>Portland Cement Density (Loose): <strong>1440 kg/m³</strong></li>
+                                <li>Dry Coarse Aggregate Density: <strong>1500 - 1600 kg/m³</strong></li>
+                                <li>Dry Sand Bulk Density: <strong>1600 kg/m³</strong></li>
+                                <li>1 MPa = 1 N/mm² = 10.197 kg/cm² = 145.038 psi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Beam Analyzer Tab -->
+            <section class="tab-content" id="beam">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line></svg>
+                                Beam Configuration & Load Conditions
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Boundary / Support Conditions</label>
+                            <select class="form-control" id="beam-support-type">
+                                <option value="simply" selected>Simply Supported (Pin-Roller)</option>
+                                <option value="cantilever">Cantilever (Fixed-Free)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Span Length (L)</label>
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control" id="beam-span" value="6" min="0.5" step="any">
+                                <span class="unit-label">m</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Load Distribution Type</label>
+                            <div class="button-group-selector">
+                                <input type="radio" name="beam-load-type" id="b-load-point" value="point" checked>
+                                <label for="b-load-point">Point Load (P)</label>
+
+                                <input type="radio" name="beam-load-type" id="b-load-udl" value="udl">
+                                <label for="b-load-udl">Uniform Load (w)</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label id="beam-load-label">Point Load Value (P)</label>
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control" id="beam-load-val" value="20" min="0" step="any">
+                                <span class="unit-label" id="beam-load-unit">kN</span>
+                            </div>
+                        </div>
+
+                        <!-- Point Load placement offset along span, shown only if load is Point Load and Support is Simply Supported -->
+                        <div class="form-group" id="beam-load-offset-row">
+                            <label>Load Position (Distance 'a' from Left Support)</label>
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control" id="beam-load-offset" value="3" min="0" step="any">
+                                <span class="unit-label">m</span>
+                            </div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Must be less than or equal to span length.</span>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Modulus of Elasticity (E)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="beam-e" value="200" min="10" step="any">
+                                    <span class="unit-label">GPa</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Moment of Inertia (I)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="beam-i" value="150" min="1" step="any">
+                                    <span class="unit-label">x10⁶ mm⁴</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-beam">Analyze Structural Load</button>
+                            <button class="btn btn-secondary btn-accent-sec" id="btn-add-beam-report">Add to BOQ</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Internal Forces & Deflection</div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="result-icon" style="background:rgba(6, 182, 212, 0.15); color:var(--accent);">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Max Bending Moment (M_max)</div>
+                                    <div class="result-value" id="beam-res-moment">30.00<span class="result-unit">kNm</span></div>
+                                    <div class="result-secondary-value" id="beam-res-moment-pos">Occurs at point of loading</div>
+                                </div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Max Shear Force (V_max)</div>
+                                        <div class="result-value" id="beam-res-shear">10.00<span class="result-unit">kN</span></div>
+                                        <div class="result-secondary-value" id="beam-res-reactions">Reactions: R_A = 10kN, R_B = 10kN</div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card">
+                                    <div class="result-info">
+                                        <div class="result-title">Max Deflection (δ_max)</div>
+                                        <div class="result-value" id="beam-res-deflection">6.00<span class="result-unit">mm</span></div>
+                                        <div class="result-secondary-value" id="beam-res-def-limit">Allowable limit (L/325): 18.5 mm</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="visualizer-container">
+                                <div class="visualizer-title">
+                                    <span>Shear (SFD) & Bending Moment (BMD) Diagram</span>
+                                    <span style="color:var(--accent);" id="beam-visual-label">Simply Supported</span>
+                                </div>
+                                <svg class="visual-canvas" id="beam-svg" style="height: 270px;"></svg>
+                            </div>
+
+                            <div class="formula-reference">
+                                <button class="formula-toggle" data-formula-id="beam-formula">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    View Structural Formulas
+                                </button>
+                                <div class="formula-body" id="beam-formula">
+                                    <strong>1. Simply Supported with Point Load (offset 'a' from left, 'b' from right):</strong><br>
+                                    - Reactions: $R_A = \frac{P \cdot b}{L},\ R_B = \frac{P \cdot a}{L}$<br>
+                                    - Max Bending Moment: $M_{max} = \frac{P \cdot a \cdot b}{L}$ (at loading point)<br>
+                                    - Max deflection: calculated using Macualay's Method or Singularity functions.<br>
+                                    <strong>2. Simply Supported with UDL (w):</strong><br>
+                                    - Reactions: $R_A = R_B = \frac{w \cdot L}{2}$<br>
+                                    - Max Bending Moment: $M_{max} = \frac{w \cdot L^2}{8}$ (at center)<br>
+                                    - Max Deflection: $\delta_{max} = \frac{5 \cdot w \cdot L^4}{384 \cdot E \cdot I}$<br>
+                                    <strong>3. Cantilever with End Point Load (P):</strong><br>
+                                    - Max Bending Moment: $M_{max} = P \cdot L$ (at fixed end)<br>
+                                    - Max Deflection: $\delta_{max} = \frac{P \cdot L^3}{3 \cdot E \cdot I}$ (at free end).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Site Checklist Tab -->
+            <section class="tab-content" id="checklist">
+                <!-- Checklist Header & Progress Panel -->
+                <div class="glass-panel" style="margin-bottom: 2rem;">
+                    <div class="checklist-header-summary" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+                        <div style="flex: 1; min-width: 250px;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; margin: 0;">Slab Casting Field Quality Checklist</h3>
+                                <span class="readiness-badge" id="checklist-readiness-badge" style="padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; background: var(--danger); color: white; display: inline-flex; align-items: center; gap: 0.25rem;">
+                                    🔴 Not Ready
+                                </span>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0 0 1rem 0;">Ensure execution accuracy per IS 456 standards before pouring concrete.</p>
+                            <div class="progress-container" style="background: rgba(255,255,255,0.05); border-radius: 9999px; height: 12px; width: 100%; overflow: hidden; position: relative;">
+                                <div class="progress-bar" id="checklist-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%); transition: width 0.3s ease;"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; font-weight: 600;">
+                                <span id="checklist-progress-text">0% Completed</span>
+                                <span id="checklist-count-text">0 / 0 Checks Passed</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; align-self: flex-end;">
+                            <button class="btn btn-secondary" id="btn-reset-checklist">
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                                Reset State
+                            </button>
+                            <button class="btn btn-accent-sec" id="btn-print-checklist">
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                Print Checklist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checklist Phases Grid -->
+                <div class="checklist-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;">
+                    <div class="glass-panel checklist-phase-card" data-phase="shuttering">
+                        <div class="panel-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div class="panel-title" style="font-size: 1.05rem; color: var(--accent);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+                                1. Formwork & Shuttering
+                            </div>
+                            <span class="phase-count-badge" id="count-shuttering" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.15rem 0.4rem; border-radius: 6px;">0/0</span>
+                        </div>
+                        <div class="checklist-items-container" id="container-shuttering" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="add-custom-item-row" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                            <input type="text" class="form-control" id="add-shuttering-input" placeholder="Add custom shuttering check..." style="font-size: 0.8rem; padding: 0.5rem 0.75rem;">
+                            <button class="btn btn-secondary" id="btn-add-shuttering" style="padding: 0.5rem 0.75rem; border-radius: var(--border-radius-sm); font-size: 0.8rem; font-weight: 600;">+</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel checklist-phase-card" data-phase="reinforcement">
+                        <div class="panel-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div class="panel-title" style="font-size: 1.05rem; color: var(--accent-secondary);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="2" y1="14" x2="22" y2="14"></line></svg>
+                                2. Reinforcement & Cover
+                            </div>
+                            <span class="phase-count-badge" id="count-reinforcement" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.15rem 0.4rem; border-radius: 6px;">0/0</span>
+                        </div>
+                        <div class="checklist-items-container" id="container-reinforcement" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="add-custom-item-row" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                            <input type="text" class="form-control" id="add-reinforcement-input" placeholder="Add custom steel check..." style="font-size: 0.8rem; padding: 0.5rem 0.75rem;">
+                            <button class="btn btn-secondary" id="btn-add-reinforcement" style="padding: 0.5rem 0.75rem; border-radius: var(--border-radius-sm); font-size: 0.8rem; font-weight: 600;">+</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel checklist-phase-card" data-phase="mep">
+                        <div class="panel-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div class="panel-title" style="font-size: 1.05rem; color: var(--accent-tertiary);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline></svg>
+                                3. MEP Conduits & Sleeves
+                            </div>
+                            <span class="phase-count-badge" id="count-mep" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.15rem 0.4rem; border-radius: 6px;">0/0</span>
+                        </div>
+                        <div class="checklist-items-container" id="container-mep" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="add-custom-item-row" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                            <input type="text" class="form-control" id="add-mep-input" placeholder="Add custom MEP check..." style="font-size: 0.8rem; padding: 0.5rem 0.75rem;">
+                            <button class="btn btn-secondary" id="btn-add-mep" style="padding: 0.5rem 0.75rem; border-radius: var(--border-radius-sm); font-size: 0.8rem; font-weight: 600;">+</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel checklist-phase-card" data-phase="prep">
+                        <div class="panel-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div class="panel-title" style="font-size: 1.05rem; color: #a855f7;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                4. Pre-Pouring Setup
+                            </div>
+                            <span class="phase-count-badge" id="count-prep" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.15rem 0.4rem; border-radius: 6px;">0/0</span>
+                        </div>
+                        <div class="checklist-items-container" id="container-prep" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="add-custom-item-row" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                            <input type="text" class="form-control" id="add-prep-input" placeholder="Add custom setup check..." style="font-size: 0.8rem; padding: 0.5rem 0.75rem;">
+                            <button class="btn btn-secondary" id="btn-add-prep" style="padding: 0.5rem 0.75rem; border-radius: var(--border-radius-sm); font-size: 0.8rem; font-weight: 600;">+</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel checklist-phase-card" data-phase="pouring">
+                        <div class="panel-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div class="panel-title" style="font-size: 1.05rem; color: #ec4899;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                                5. During Pouring Control
+                            </div>
+                            <span class="phase-count-badge" id="count-pouring" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.15rem 0.4rem; border-radius: 6px;">0/0</span>
+                        </div>
+                        <div class="checklist-items-container" id="container-pouring" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="add-custom-item-row" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                            <input type="text" class="form-control" id="add-pouring-input" placeholder="Add custom pour check..." style="font-size: 0.8rem; padding: 0.5rem 0.75rem;">
+                            <button class="btn btn-secondary" id="btn-add-pouring" style="padding: 0.5rem 0.75rem; border-radius: var(--border-radius-sm); font-size: 0.8rem; font-weight: 600;">+</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel checklist-phase-card" data-phase="post">
+                        <div class="panel-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div class="panel-title" style="font-size: 1.05rem; color: #3b82f6;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                6. Post-Pouring & Curing
+                            </div>
+                            <span class="phase-count-badge" id="count-post" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.15rem 0.4rem; border-radius: 6px;">0/0</span>
+                        </div>
+                        <div class="checklist-items-container" id="container-post" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="add-custom-item-row" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                            <input type="text" class="form-control" id="add-post-input" placeholder="Add custom curing check..." style="font-size: 0.8rem; padding: 0.5rem 0.75rem;">
+                            <button class="btn btn-secondary" id="btn-add-post" style="padding: 0.5rem 0.75rem; border-radius: var(--border-radius-sm); font-size: 0.8rem; font-weight: 600;">+</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BOQ Summary / Report builder Tab -->
+            <section class="tab-content" id="boq-report">
+                <div class="glass-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            Bill of Quantities (BOQ) & Estimate Summary
+                        </div>
+                        <div class="panel-header-actions">
+                            <button class="btn btn-secondary" id="btn-clear-report">Clear All Items</button>
+                            <button class="btn btn-secondary" id="btn-export-boq-csv">Export to CSV</button>
+                            <button class="btn btn-accent-sec" id="btn-print-report">Print Estimate / PDF</button>
+                        </div>
+                    </div>
+
+                    <div id="boq-table-wrapper">
+                        <div class="empty-state" id="boq-empty-state">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                            <p>No estimates have been added to the BOQ yet. Calculate values inside specific modules and click "Add to BOQ".</p>
+                        </div>
+                        
+                        <div class="boq-table-container" id="boq-container" style="display: none;">
+                            <table class="boq-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Item Description</th>
+                                        <th>Dimensions / Specifications</th>
+                                        <th>Quantities & Material Breakup</th>
+                                        <th>Estimated Cost / Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="boq-table-body">
+                                    <!-- JS populated rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Help Modal Overlay -->
+    <div class="modal-overlay" id="help-modal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="help-modal-close">&times;</button>
+            <div class="modal-title">Civil Engineering Quick Reference Manual</div>
+            <div class="modal-body">
+                <h4>1. Concrete Mix Design (IS 456 Guidelines):</h4>
+                <p>Proportion ratios of cement, fine aggregate (sand), and coarse aggregate by dry volume:</p>
+                <ul>
+                    <li><strong>M5 (1:5:10):</strong> Lean concrete, foundations base PCC.</li>
+                    <li><strong>M10 (1:3:6):</strong> Plain Concrete (PCC), leveling course.</li>
+                    <li><strong>M15 (1:2:4):</strong> Floor beds, shallow foundations.</li>
+                    <li><strong>M20 (1:1.5:3):</strong> RCC Slabs, beams, standard columns.</li>
+                    <li><strong>M25 (1:1:2):</strong> High-strength RCC columns, footings, water retention tanks.</li>
+                </ul>
+
+                <h4>2. Rebar Unit Weights & Standards:</h4>
+                <p>Theoretical weight of steel rebar is calculated by formula: <code>Weight (kg/m) = Dia² / 162.2</code></p>
+                <ul>
+                    <li><strong>8 mm Rebar:</strong> ~ 0.395 kg/m (Stirrups & Slab distribution bars)</li>
+                    <li><strong>10 mm Rebar:</strong> ~ 0.617 kg/m (Slab main bars)</li>
+                    <li><strong>12 mm Rebar:</strong> ~ 0.888 kg/m (Standard residential slab/beams)</li>
+                    <li><strong>16 mm Rebar:</strong> ~ 1.578 kg/m (Structural columns & beams)</li>
+                    <li><strong>20 mm Rebar:</strong> ~ 2.466 kg/m (Heavy column reinforcements)</li>
+                </ul>
+
+                <h4>3. Brick Masonry Standards:</h4>
+                <p>Standard masonry principles assume:</p>
+                <ul>
+                    <li>Modular Indian brick size: <strong>190 x 90 x 90 mm</strong>. With mortar: <strong>200 x 100 x 100 mm</strong>.</li>
+                    <li>Traditional brick size: <strong>229 x 112 x 70 mm (9" x 4.5" x 3")</strong>.</li>
+                    <li>1 m³ of brickwork needs approximately <strong>500 modular bricks</strong>.</li>
+                    <li>Mortar volume occupies approximately <strong>25% to 30%</strong> of the gross masonry volume.</li>
+                </ul>
+
+                <h4>4. Earthwork Slope Allowances (Safety Guidelines):</h4>
+                <p>To prevent soil collapse during excavation, the sides are sloped back:</p>
+                <ul>
+                    <li>Stable Rock: 0.25:1 to 0.5:1 (Horizontal : Vertical)</li>
+                    <li>Stiff Clay/Hard Soil: 0.5:1 to 0.75:1</li>
+                    <li>Average cohesive loam soil: 1:1 (45° angle)</li>
+                    <li>Dry Sandy/Loose soil: 1.5:1 to 2:1</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container for notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

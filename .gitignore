@@ -1,0 +1,8 @@
+calculator.zip
+*.deb
+git-bin/
+node_modules/
+.tmpmediaStorage/
+bin/
+test.txt
+setup_git.sh
