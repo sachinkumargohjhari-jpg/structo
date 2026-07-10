@@ -1,4 +1,4 @@
-// Civil Engineering Calculator - Core JavaScript Logic (English Suite)
+// Civil Engineering Calculator - Core JavaScript Logic (English Suite) - Fixed
 
 // Disable console logs in production environment
 if (typeof window !== 'undefined' && window.location && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && !window.location.hostname.includes('192.168.')) {
@@ -81,7 +81,7 @@ let siteChecklist = JSON.parse(localStorage.getItem('civil_calc_checklist')) || 
 
 // Tab Titles and Descriptions for header updates
 const tabInfo = {
-    dashboard: { title: 'Dashboard', desc: 'All-in-one suite of smart tools for civil calculations' },
+    dashboard: { title: 'Structo', desc: 'All-in-one suite of smart tools for civil calculations' },
     concrete: { title: 'Concrete Materials Estimator', desc: 'Estimate concrete volume, cement, sand, aggregates, and water quantities' },
     'water-cement': { title: 'Water-Cement Ratio & Mix Design', desc: 'Standard concrete mix design and water-cement requirements per IS 456 & IS 10262' },
     steel: { title: 'Steel Rebar Weight & Cost', desc: 'Calculate reinforcing steel weight, spacing grids, and cost estimates' },
@@ -418,6 +418,7 @@ function setupEventListeners() {
                     addCustomChecklistItem(phase);
                 }
             });
+        }
     });
 
     // Formula Toggles Event Listeners (removes need for inline event handlers)
@@ -2255,12 +2256,16 @@ function renderBOQTable() {
             <td>
                 <div class="boq-actions">
                     <span style="font-weight:700; margin-right: 1.5rem;">${sanitizeHTML(item.cost)}</span>
-                    <button class="action-icon-btn" onclick="deleteBOQItem(${index})" title="Remove item">
+                    <button class="action-icon-btn" title="Remove item">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                     </button>
                 </div>
             </td>
         `;
+        const deleteButton = row.querySelector('.action-icon-btn');
+        if (deleteButton) {
+            deleteButton.addEventListener('click', () => deleteBOQItem(index));
+        }
         tableBody.appendChild(row);
     });
 }
@@ -2696,11 +2701,15 @@ function renderBBSTable() {
             <td data-label="Total L">${item.totalLength.toFixed(2)} m</td>
             <td data-label="Weight" class="bbs-weight-td" style="color:var(--accent-tertiary); font-weight:700;">${item.totalWeight.toFixed(2)} kg</td>
             <td data-label="Action">
-                <button class="action-icon-btn" onclick="deleteBBSItem(${index})" title="Delete rebar">
+                <button class="action-icon-btn" title="Delete rebar">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                 </button>
             </td>
         `;
+        const deleteButton = row.querySelector('.action-icon-btn');
+        if (deleteButton) {
+            deleteButton.addEventListener('click', () => deleteBBSItem(index));
+        }
         tableBody.appendChild(row);
     });
 
