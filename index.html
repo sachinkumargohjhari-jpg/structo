@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Structo | Professional Engineering & Material Estimator</title>
     <meta name="description" content="A professional-grade civil engineering calculator for concrete, steel weight, brick masonry, earthwork, beam analysis, and unit conversions.">
+    <meta name="theme-color" content="#121212">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="apple-touch-icon" href="icon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -1317,6 +1321,8 @@
                         <div class="panel-header-actions">
                             <button class="btn btn-secondary" id="btn-clear-bbs">Clear Schedule</button>
                             <button class="btn btn-secondary" id="btn-export-bbs-csv">Export to CSV</button>
+                            <button class="btn btn-secondary" id="btn-export-bbs-xls">Download Excel</button>
+                            <button class="btn btn-accent-sec" id="btn-print-bbs">Print BBS / PDF</button>
                             <button class="btn btn-accent-sec" id="btn-add-bbs-boq">Add Steel Total to BOQ</button>
                         </div>
                     </div>
@@ -2378,6 +2384,7 @@
                         <div class="panel-header-actions">
                             <button class="btn btn-secondary" id="btn-clear-report">Clear All Items</button>
                             <button class="btn btn-secondary" id="btn-export-boq-csv">Export to CSV</button>
+                            <button class="btn btn-secondary" id="btn-export-boq-xls">Download Excel</button>
                             <button class="btn btn-accent-sec" id="btn-print-report">Print Estimate / PDF</button>
                         </div>
                     </div>
@@ -2461,5 +2468,6 @@
     <div class="toast-container" id="toast-container"></div>
 
     <script src="app.js"></script>
+    <script src="sw-register.js"></script>
 </body>
 </html>

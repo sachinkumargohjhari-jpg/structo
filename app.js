@@ -353,9 +353,11 @@ function setupEventListeners() {
         }
     });
 
-    // -- CSV Export Events --
+    // -- CSV & Excel Export Events --
     document.getElementById('btn-export-bbs-csv').addEventListener('click', exportBBSToCSV);
     document.getElementById('btn-export-boq-csv').addEventListener('click', exportBOQToCSV);
+    document.getElementById('btn-export-bbs-xls').addEventListener('click', exportBBSToExcel);
+    document.getElementById('btn-export-boq-xls').addEventListener('click', exportBOQToExcel);
 
     // -- Beam Events --
     document.getElementById('btn-calc-beam').addEventListener('click', calculateBeam);
@@ -395,9 +397,15 @@ function setupEventListeners() {
         }
     });
 
-    // Report Actions
+    // Report & Print Actions
     document.getElementById('btn-clear-report').addEventListener('click', clearBOQReport);
-    document.getElementById('btn-print-report').addEventListener('click', () => window.print());
+    document.getElementById('btn-print-report').addEventListener('click', () => {
+        const oldTitle = document.title;
+        document.title = "Structo_BOQ_Estimate_" + new Date().toISOString().slice(0, 10);
+        window.print();
+        document.title = oldTitle;
+    });
+    document.getElementById('btn-print-bbs').addEventListener('click', printBBS);
 
     // Site Checklist Actions
     document.getElementById('btn-reset-checklist').addEventListener('click', resetChecklist);
@@ -3028,6 +3036,157 @@ function exportBOQToCSV() {
     link.click();
     document.body.removeChild(link);
     showToast('BOQ Report exported to CSV successfully!');
+}
+
+function exportBOQToExcel() {
+    if (boqReport.length === 0) {
+        showToast('No BOQ items to export!', 'error');
+        return;
+    }
+    
+    let html = `
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            table { border-collapse: collapse; font-family: sans-serif; }
+            th { background-color: #f2f2f2; border: 1px solid #dddddd; padding: 8px; font-weight: bold; }
+            td { border: 1px solid #dddddd; padding: 8px; }
+            .header { font-size: 16px; font-weight: bold; padding: 10px 0; text-align: center; }
+        </style>
+    </head>
+    <body>
+        <div class="header">Structo Civil Estimator - Bill of Quantities (BOQ)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Item Description</th>
+                    <th>Dimensions / Specifications</th>
+                    <th>Quantities & Material Breakup</th>
+                    <th>Estimated Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    let serial = 1;
+    boqReport.forEach(item => {
+        html += `
+            <tr>
+                <td style="text-align:center;">${serial++}</td>
+                <td>${item.type}</td>
+                <td>${item.dims}</td>
+                <td>${item.details}</td>
+                <td>${item.cost}</td>
+            </tr>
+        `;
+    });
+    
+    html += `
+            </tbody>
+        </table>
+    </body>
+    </html>
+    `;
+    
+    const blob = new Blob(['\ufeff' + html], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `BOQ_Report_${new Date().toISOString().slice(0,10)}.xls`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('BOQ Report exported to Excel successfully!');
+}
+
+function exportBBSToExcel() {
+    if (bbsList.length === 0) {
+        showToast('No BBS items to export!', 'error');
+        return;
+    }
+    
+    let html = `
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            table { border-collapse: collapse; font-family: sans-serif; }
+            th { background-color: #f2f2f2; border: 1px solid #dddddd; padding: 8px; font-weight: bold; }
+            td { border: 1px solid #dddddd; padding: 8px; }
+            .header { font-size: 16px; font-weight: bold; padding: 10px 0; text-align: center; }
+        </style>
+    </head>
+    <body>
+        <div class="header">Structo Civil Estimator - Bar Bending Schedule (BBS)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Member</th>
+                    <th>Description</th>
+                    <th>Shape</th>
+                    <th>Diameter (mm)</th>
+                    <th>No. of Members</th>
+                    <th>No. of Bars</th>
+                    <th>Total Bars</th>
+                    <th>Cutting Length (m)</th>
+                    <th>Total Length (m)</th>
+                    <th>Weight (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    bbsList.forEach((item, index) => {
+        html += `
+            <tr>
+                <td style="text-align:center;">#${index + 1}</td>
+                <td>${item.member}</td>
+                <td>${item.mark}</td>
+                <td>${item.shape}</td>
+                <td style="text-align:center;">${item.dia}</td>
+                <td style="text-align:center;">${item.numMembers}</td>
+                <td style="text-align:center;">${item.numBars}</td>
+                <td style="text-align:center;">${item.totalBars}</td>
+                <td style="text-align:right;">${item.cuttingLen.toFixed(3)} m</td>
+                <td style="text-align:right;">${item.totalLength.toFixed(2)} m</td>
+                <td style="text-align:right; font-weight:bold;">${item.totalWeight.toFixed(2)} kg</td>
+            </tr>
+        `;
+    });
+    
+    html += `
+            </tbody>
+        </table>
+    </body>
+    </html>
+    `;
+    
+    const blob = new Blob(['\ufeff' + html], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `BBS_Schedule_${new Date().toISOString().slice(0,10)}.xls`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('BBS Schedule exported to Excel successfully!');
+}
+
+function printBBS() {
+    if (bbsList.length === 0) {
+        showToast('No BBS items to print!', 'error');
+        return;
+    }
+    const bbsTab = document.getElementById('bbs');
+    if (!bbsTab) return;
+    const oldTitle = document.title;
+    document.title = "Structo_Bar_Bending_Schedule_" + new Date().toISOString().slice(0, 10);
+    
+    bbsTab.classList.add('print-active');
+    window.print();
+    bbsTab.classList.remove('print-active');
+    document.title = oldTitle;
 }
 
 function drawConcreteInputHelper() {

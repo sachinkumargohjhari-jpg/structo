@@ -4,7 +4,7 @@
   "description": "Structo Engineering Suite Mobile App",
   "main": "app.js",
   "scripts": {
-    "build": "mkdir -p www && cp index.html styles.css www/ && npx javascript-obfuscator app.js --output www/app.js",
+    "build": "mkdir -p www && cp index.html styles.css manifest.json service-worker.js sw-register.js icon.svg www/ && npx javascript-obfuscator app.js --output www/app.js",
     "add-android": "npx cap add android",
     "sync": "npx cap sync",
     "build-apk": "cd android && ./gradlew assembleDebug"

@@ -1409,8 +1409,14 @@ select.form-control {
     }
     
     .tab-content#boq-report,
-    .tab-content#checklist.print-active {
+    .tab-content#checklist.print-active,
+    .tab-content#bbs.print-active {
         display: block !important;
+    }
+    
+    /* Hide input form grid on BBS print to show only the schedule sheet */
+    .tab-content#bbs.print-active > .calculator-grid {
+        display: none !important;
     }
     
     .glass-panel {
