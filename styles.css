@@ -1646,3 +1646,9 @@ select.form-control {
         grid-template-columns: 1fr !important;
     }
 }
+
+/* Prevent scroll bleed on mobile when sidebar is open */
+body.no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
+}

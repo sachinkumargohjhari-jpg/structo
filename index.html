@@ -606,8 +606,8 @@
                                     2. <strong>Wastage volume added:</strong> $V_{wet\_total} = V_{wet} \times (1 + \text{Wastage}\% / 100)$<br>
                                     3. <strong>Dry Volume Factor:</strong> Concrete shrinks when water is added. Multiplied by <strong>1.54</strong> to get Dry Volume ($V_{dry} = V_{wet\_total} \times 1.54$).<br>
                                     4. <strong>Cement volume:</strong> $V_{cement} = V_{dry} \times \text{Cement ratio} / \text{Sum of ratios}$<br>
-                                    5. <strong>Cement Bags:</strong> $V_{cement} / 0.03472$ m³ per bag (50kg per bag density = 1440 kg/m³)<br>
-                                    6. <strong>Fine Sand & Aggregate:</strong> dry volume allocated by parts and converted to CFT (1 m³ = 35.3147 cft)<br>
+                                    5. <strong>Cement Bags:</strong> $V_{cement} / 0.03472222$ m³ per bag (50kg per bag density = 1440 kg/m³)<br>
+                                    6. <strong>Fine Sand & Aggregate:</strong> dry volume allocated by parts and converted to CFT (1 m³ = 35.31466672 cft)<br>
                                     7. <strong>Water quantity:</strong> Cement weight (kg) × Water-Cement ratio.
                                 </div>
                             </div>
@@ -1060,7 +1060,7 @@
                                     View Formula & Calculation steps
                                 </button>
                                 <div class="formula-body" id="steel-formula">
-                                    1. <strong>Unit Weight of Rebar (kg/m):</strong> $W = \frac{D^2}{162.162}$ kg/m (where D is bar diameter in mm).<br>
+                                    1. <strong>Unit Weight of Rebar (kg/m):</strong> $W = \frac{D^2}{162}$ kg/m (where D is bar diameter in mm).<br>
                                     2. <strong>Clear Cover Correction:</strong> Effective length of rebar is adjusted by subtracting clear cover from both ends.<br>
                                     3. <strong>Hooks Addition:</strong> If 180° hooks are specified, standard hook length equal to $9 \times \text{Dia}$ is added to both sides (+18d total).<br>
                                     4. <strong>Tension Cranks Addition:</strong> Standard 45° bend-up cranks add $0.42 \times d$ per bent-up bar, where $d$ is effective depth ($d = \text{Slab Thickness} - 2\text{Cover} - \text{Dia}$).<br>
@@ -2514,7 +2514,7 @@
                 </ul>
 
                 <h4>2. Rebar Unit Weights & Standards:</h4>
-                <p>Theoretical weight of steel rebar is calculated by formula: <code>Weight (kg/m) = Dia² / 162.2</code></p>
+                <p>Theoretical weight of steel rebar is calculated by formula: <code>Weight (kg/m) = Dia² / 162</code></p>
                 <ul>
                     <li><strong>8 mm Rebar:</strong> ~ 0.395 kg/m (Stirrups & Slab distribution bars)</li>
                     <li><strong>10 mm Rebar:</strong> ~ 0.617 kg/m (Slab main bars)</li>

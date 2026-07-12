@@ -144,6 +144,7 @@ function setupEventListeners() {
         const overlay = document.getElementById('sidebar-overlay');
         if (sidebar) sidebar.classList.remove('open');
         if (overlay) overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
     }
 
     // Open Mobile Sidebar Helper
@@ -152,6 +153,7 @@ function setupEventListeners() {
         const overlay = document.getElementById('sidebar-overlay');
         if (sidebar) sidebar.classList.add('open');
         if (overlay) overlay.classList.add('active');
+        document.body.classList.add('no-scroll');
     }
 
     // Dashboard Quick Card Navigation
@@ -640,16 +642,18 @@ function calculateConcrete() {
     }
 
     let wetVolumeTotal = volume * (1 + wastage / 100);
-    // Concrete volume shrinkage factor is typically 1.54 to 1.57 (we use 1.54 standard)
+    // Concrete dry volume multiplier (1.54) accounts for volume reduction during wet mixing.
+    // Standard IS Code practice uses 1.54 to convert wet concrete volume to dry ingredients volume.
     let dryVolume = wetVolumeTotal * 1.54;
 
-    let cRatio = 1, sRatio = 1.5, aRatio = 3; // M20 default
+    // Nominal mix proportions by volume as per standard IS 456:2000 guidelines
+    let cRatio = 1, sRatio = 1.5, aRatio = 3; // M20 default (1 Cement : 1.5 Sand : 3 Aggregate)
     if (mixGrade === 'M5') { cRatio = 1; sRatio = 5; aRatio = 10; }
     else if (mixGrade === 'M7.5') { cRatio = 1; sRatio = 4; aRatio = 8; }
     else if (mixGrade === 'M10') { cRatio = 1; sRatio = 3; aRatio = 6; }
-    else if (mixGrade === 'M15') { cRatio = 1; sRatio = 2; aRatio = 4; }
-    else if (mixGrade === 'M20') { cRatio = 1; sRatio = 1.5; aRatio = 3; }
-    else if (mixGrade === 'M25') { cRatio = 1; sRatio = 1; aRatio = 2; }
+    else if (mixGrade === 'M15') { cRatio = 1; sRatio = 2; aRatio = 4; } // M15 nominal mix (1:2:4)
+    else if (mixGrade === 'M20') { cRatio = 1; sRatio = 1.5; aRatio = 3; } // M20 nominal mix (1:1.5:3)
+    else if (mixGrade === 'M25') { cRatio = 1; sRatio = 1; aRatio = 2; } // M25 nominal mix (1:1:2)
     else if (mixGrade === 'M30') { cRatio = 1; sRatio = 0.75; aRatio = 1.5; }
     else if (mixGrade === 'custom') {
         cRatio = parseFloat(document.getElementById('custom-cement').value) || 1;
@@ -686,17 +690,17 @@ function calculateConcrete() {
 
     const totalParts = cRatio + sRatio + aRatio;
 
-    // Cement Calculation (50kg bags). Density = 1440 kg/m3. 1 Bag volume = 0.0347 m3
+    // Cement Calculation (50kg bags). Density = 1440 kg/m3. 1 Bag volume = 50 / 1440 = 0.03472222 m3
     let cementVol = (dryVolume * cRatio) / totalParts;
-    let cementBags = Math.ceil(cementVol / 0.03472);
+    let cementBags = Math.ceil(cementVol / 0.03472222);
 
-    // Sand volume in cft (1 m3 = 35.3147 cft)
+    // Sand volume in cft (1 m3 = 35.31466672 cft)
     let sandVolM3 = (dryVolume * sRatio) / totalParts;
-    let sandVolCft = sandVolM3 * 35.3147;
+    let sandVolCft = sandVolM3 * 35.31466672;
 
-    // Coarse Aggregate volume in cft
+    // Coarse Aggregate volume in cft (1 m3 = 35.31466672 cft)
     let aggVolM3 = (dryVolume * aRatio) / totalParts;
-    let aggVolCft = aggVolM3 * 35.3147;
+    let aggVolCft = aggVolM3 * 35.31466672;
 
     // Water Required (W/C ratio * cement weight)
     let waterLiters = (cementBags * 50) * wcRatio;
@@ -721,7 +725,7 @@ function calculateConcrete() {
 
     // Update UI Results
     document.getElementById('concrete-res-volume').innerHTML = `${volume.toFixed(3)} <span class="result-unit">m³</span>`;
-    document.getElementById('concrete-res-volume-ft').innerText = `~ ${(volume * 35.3147).toFixed(1)} cft (Dry Vol: ${dryVolume.toFixed(2)} m³)`;
+    document.getElementById('concrete-res-volume-ft').innerText = `~ ${(volume * 35.31466672).toFixed(1)} cft (Dry Vol: ${dryVolume.toFixed(2)} m³)`;
     document.getElementById('concrete-res-cement').innerHTML = `${cementBags} <span class="result-unit">Bags</span>`;
     document.getElementById('concrete-res-cement-kg').innerText = `~ ${(cementBags * 50).toLocaleString()} kg`;
     document.getElementById('concrete-res-sand').innerHTML = `${Math.ceil(sandVolCft)} <span class="result-unit">cft</span>`;
@@ -945,8 +949,8 @@ function calculateSteel() {
         const dia = parseInt(document.getElementById('steel-diameter').value);
         const len = parseFloat(document.getElementById('steel-length').value) || 0;
 
-        // weight (kg/m) = D^2 / 162.162
-        const unitWeight = (dia * dia) / 162.162;
+        // weight (kg/m) = D^2 / 162 (Standard civil engineering approximation per IS 1786 nominal mass)
+        const unitWeight = (dia * dia) / 162;
         totalWeight = unitWeight * len * (1 + overlap / 100);
         barsCount = totalWeight / (unitWeight * 12);
         description = `${dia}mm Rebar, Total Length: ${len}m`;
@@ -987,18 +991,21 @@ function calculateSteel() {
         const numMainBars = Math.ceil(effLen / mainSpacingM) + 1;
         const mainBarLen = effWid + hookLengthMain + crankAddMain;
         const totalMainLen = numMainBars * mainBarLen;
-        const mainUnitWeight = (mainDia * mainDia) / 162.162;
+        // Standard divisor 162 is used for main rebar weight calculation (IS 1786)
+        const mainUnitWeight = (mainDia * mainDia) / 162;
         const mainWeight = totalMainLen * mainUnitWeight;
 
         // Distribution Bars (run along Length, spaced along Width)
         const numDistBars = Math.ceil(effWid / distSpacingM) + 1;
         const distBarLen = effLen + hookLengthDist;
         const totalDistLen = numDistBars * distBarLen;
-        const distUnitWeight = (distDia * distDia) / 162.162;
+        // Standard divisor 162 is used for distribution rebar weight calculation
+        const distUnitWeight = (distDia * distDia) / 162;
         const distWeight = totalDistLen * distUnitWeight;
 
         totalWeight = (mainWeight + distWeight) * (1 + overlap / 100);
-        barsCount = totalWeight / (((mainDia * mainDia) / 162.162) * 12); // expressed in equivalent main bar pieces
+        // expressed in equivalent main bar pieces using standard divisor 162
+        barsCount = totalWeight / (((mainDia * mainDia) / 162) * 12);
         description = `Grid Mesh: Main ${mainDia}mm@${mainSpacingMm}mm, Dist ${distDia}mm@${distSpacingMm}mm`;
         unitWeightText = `Main Bars: ${numMainBars} pcs, Dist Bars: ${numDistBars} pcs`;
 
@@ -1056,7 +1063,8 @@ function calculateSteel() {
 
         // Total lapping weight
         const totalLapLenM = (lapLength * jointsCount) / 1000;
-        const unitWeight = (dia * dia) / 162.162;
+        // Standard divisor 162 is used for lapping unit weight calculation (IS 1786)
+        const unitWeight = (dia * dia) / 162;
         totalWeight = unitWeight * totalLapLenM;
         barsCount = totalLapLenM / 12;
 
@@ -1347,9 +1355,9 @@ function calculateBricks() {
         // Cement & Sand parts
         const totalParts = 1 + mortarRatio;
         const cementVol = (dryMortarVol * 1) / totalParts;
-        const cementBags = Math.ceil(cementVol / 0.03472); // 1 bag = 50kg = 0.03472 m3
+        const cementBags = Math.ceil(cementVol / 0.03472222); // 1 bag = 50kg = 0.03472222 m3 (50 / 1440)
         const sandVolM3 = (dryMortarVol * mortarRatio) / totalParts;
-        const sandVolCft = sandVolM3 * 35.3147;
+        const sandVolCft = sandVolM3 * 35.31466672;
 
         // Display updates
         document.getElementById('brick-res-bricks-title').innerText = 'Bricks Required';
@@ -1377,9 +1385,9 @@ function calculateBricks() {
 
         const totalParts = 1 + ratio;
         const cementVol = dryVol / totalParts;
-        const cementBags = Math.ceil(cementVol / 0.03472);
+        const cementBags = Math.ceil(cementVol / 0.03472222); // 50 / 1440
         const sandVol = (dryVol * ratio) / totalParts;
-        const sandCft = sandVol * 35.3147;
+        const sandCft = sandVol * 35.31466672;
 
         document.getElementById('brick-res-bricks-title').innerText = 'Plaster Area';
         document.getElementById('brick-res-cement-title').innerText = 'Cement Bags (Plaster)';
@@ -1431,9 +1439,9 @@ function calculateBricks() {
 
         const totalParts = 1 + bedRatio;
         const cementVol = bedDryVol / totalParts;
-        const cementBags = Math.ceil(cementVol / 0.03472);
+        const cementBags = Math.ceil(cementVol / 0.03472222); // 50 / 1440
         const sandVol = (bedDryVol * bedRatio) / totalParts;
-        const sandCft = sandVol * 35.3147;
+        const sandCft = sandVol * 35.31466672;
 
         document.getElementById('brick-res-bricks-title').innerText = 'Tiles Required';
         document.getElementById('brick-res-cement-title').innerText = 'Cement Bags (Bedding)';
@@ -1731,8 +1739,8 @@ function calculateExcavation() {
         const compactedVol = length * width * depth;
         const looseVol = compactedVol * (1 + compaction / 100);
 
-        // 1 Brass = 100 cft = 2.83 m3
-        const brassCount = (looseVol * 35.3147) / 100;
+        // 1 Brass = 100 cft = 2.83 m3 (using high-precision conversion 35.31466672)
+        const brassCount = (looseVol * 35.31466672) / 100;
         const cost = brassCount * rate;
 
         // Update card titles
@@ -2354,27 +2362,27 @@ const unitDatabase = {
     length: {
         units: {
             m: { name: 'Meters (m)', factor: 1 },
-            ft: { name: 'Feet (ft)', factor: 3.28084 },
-            inch: { name: 'Inches (in)', factor: 39.3701 },
-            yard: { name: 'Yards (yd)', factor: 1.09361 },
+            ft: { name: 'Feet (ft)', factor: 3.280839895 },
+            inch: { name: 'Inches (in)', factor: 39.37007874 },
+            yard: { name: 'Yards (yd)', factor: 1.093613298 },
             mm: { name: 'Millimeters (mm)', factor: 1000 }
         }
     },
     area: {
         units: {
             sqm: { name: 'Square Meters (m²)', factor: 1 },
-            sqft: { name: 'Square Feet (ft²)', factor: 10.7639 },
-            acre: { name: 'Acres', factor: 0.000247105 },
+            sqft: { name: 'Square Feet (ft²)', factor: 10.76391042 },
+            acre: { name: 'Acres', factor: 0.0002471053815 },
             hectare: { name: 'Hectares', factor: 0.0001 },
-            bigha: { name: 'Bigha (Standard)', factor: 0.0003986 }
+            bigha: { name: 'Bigha (Standard)', factor: 0.0003953686 }
         }
     },
     volume: {
         units: {
             cum: { name: 'Cubic Meters (m³)', factor: 1 },
-            cft: { name: 'Cubic Feet (cft)', factor: 35.3147 },
+            cft: { name: 'Cubic Feet (cft)', factor: 35.31466672 },
             liters: { name: 'Liters (L)', factor: 1000 },
-            gallons: { name: 'US Gallons', factor: 264.172 }
+            gallons: { name: 'US Gallons', factor: 264.17205236 }
         }
     },
     weight: {
@@ -2382,22 +2390,22 @@ const unitDatabase = {
             kg: { name: 'Kilograms (kg)', factor: 1 },
             ton: { name: 'Metric Tons (t)', factor: 0.001 },
             quintal: { name: 'Quintals (q)', factor: 0.01 },
-            lbs: { name: 'Pounds (lbs)', factor: 2.20462 }
+            lbs: { name: 'Pounds (lbs)', factor: 2.20462262 }
         }
     },
     stress: {
         units: {
             mpa: { name: 'Megapascals (MPa)', factor: 1 },
             kpa: { name: 'Kilopascals (kPa)', factor: 1000 },
-            psi: { name: 'Pounds per Sq Inch (psi)', factor: 145.038 },
-            kgcm2: { name: 'kg/cm²', factor: 10.1972 },
+            psi: { name: 'Pounds per Sq Inch (psi)', factor: 145.03773773 },
+            kgcm2: { name: 'kg/cm²', factor: 10.19716213 },
             knm2: { name: 'kN/m²', factor: 1000 }
         }
     },
     density: {
         units: {
             kgm3: { name: 'kg/m³', factor: 1 },
-            lbft3: { name: 'lb/ft³', factor: 0.062428 }
+            lbft3: { name: 'lb/ft³', factor: 0.06242796 }
         }
     }
 };
@@ -2509,8 +2517,8 @@ function calculateLiveBBS() {
     const totalCount = numMembers * numBars;
     const totalLength = totalCount * cuttingLen;
 
-    // steel unit weight formula = D^2 / 162.162 kg/m
-    const unitWeight = (dia * dia) / 162.162;
+    // steel unit weight formula = D^2 / 162 kg/m (Standard IS Code rebar weight formula)
+    const unitWeight = (dia * dia) / 162;
     const totalWeight = totalLength * unitWeight;
 
     // Update UI Summary Panel
@@ -2654,7 +2662,8 @@ function addBBSItem() {
 
     const totalBars = numMembers * numBars;
     const totalLength = totalBars * cuttingLen;
-    const unitWeight = (dia * dia) / 162.162;
+    // Standard rebar nominal unit weight formula D^2 / 162
+    const unitWeight = (dia * dia) / 162;
     const totalWeight = totalLength * unitWeight;
 
     const item = {
@@ -2981,6 +2990,7 @@ function calculateWaterCement() {
     const jobWater = finalWater * jobVol;
 
     // Estimate Sand & Aggregates based on nominal mix proportions of the concrete grade
+    // Nominal mix proportions as per IS 456 guidelines
     let cRatio = 1, sRatio = 1.5, aRatio = 3; // default M20
     if (grade === 'M15') { cRatio = 1; sRatio = 2; aRatio = 4; }
     else if (grade === 'M20') { cRatio = 1; sRatio = 1.5; aRatio = 3; }
@@ -2989,11 +2999,15 @@ function calculateWaterCement() {
     else if (grade === 'M35') { cRatio = 1; sRatio = 0.6; aRatio = 1.2; }
     else if (grade === 'M40') { cRatio = 1; sRatio = 0.5; aRatio = 1.0; }
 
-    // Sand and Aggregate volumes
-    const jobSandM3 = (jobCementKg * sRatio) / 1600; // density of sand ~ 1600 kg/m3
-    const jobSandCft = jobSandM3 * 35.3147;
-    const jobAggM3 = (jobCementKg * aRatio) / 1600;  // density of aggregate ~ 1600 kg/m3
-    const jobAggCft = jobAggM3 * 35.3147;
+    // Sand and Aggregate volumes calculation.
+    // Nominal mix ratios are by volume. Bulk density of cement is 1440 kg/m³.
+    // Therefore, cement volume = cement mass / 1440.
+    // Fine Sand volume (m³) = cement volume * sand ratio.
+    // Coarse Aggregate volume (m³) = cement volume * aggregate ratio.
+    const jobSandM3 = (jobCementKg / 1440) * sRatio;
+    const jobSandCft = jobSandM3 * 35.31466672;
+    const jobAggM3 = (jobCementKg / 1440) * aRatio;
+    const jobAggCft = jobAggM3 * 35.31466672;
 
     // Update UI Elements
     document.getElementById('wc-res-target-strength').innerHTML = `${fckTarget.toFixed(1)} <span class="result-unit">N/mm²</span>`;
