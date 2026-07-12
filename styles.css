@@ -903,6 +903,28 @@ select.form-control {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card-icon.image-icon,
+.dashboard-card-icon:has(.card-img) {
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border-radius: 0;
+}
+
+.card-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-card:hover .card-img {
+    transform: scale(1.1) translateY(-3px);
 }
 
 .dashboard-card-icon svg {
