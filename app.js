@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBBS();
     calculateWaterCement();
     renderChecklist();
+    calculateCuringShutteringTime();
 });
 
 // Setup Initial App State
@@ -437,6 +438,13 @@ function setupEventListeners() {
         });
     });
 
+    // Curing & Shuttering Time Estimator events
+    const estInputs = ['est-element-type', 'est-cement-type', 'est-weather'];
+    estInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('change', calculateCuringShutteringTime);
+    });
+
     // Run input validations setup
     setupNumberInputValidation();
 }
@@ -647,6 +655,33 @@ function calculateConcrete() {
         cRatio = parseFloat(document.getElementById('custom-cement').value) || 1;
         sRatio = parseFloat(document.getElementById('custom-sand').value) || 1.5;
         aRatio = parseFloat(document.getElementById('custom-aggregate').value) || 3;
+    }
+
+    // Update active concrete results title and mix ratio details
+    const resultsTitleEl = document.getElementById('concrete-results-title');
+    const mixRatioEl = document.getElementById('concrete-res-mix-ratio');
+    const mixDescEl = document.getElementById('concrete-res-mix-desc');
+    const isRCC = document.getElementById('concrete-class-type').value === 'rcc';
+
+    if (resultsTitleEl) {
+        resultsTitleEl.innerText = isRCC ? 'RCC Calculation Summary' : 'PCC Calculation Summary';
+    }
+
+    if (mixRatioEl) {
+        mixRatioEl.innerText = `${cRatio} : ${sRatio} : ${aRatio}`;
+    }
+
+    if (mixDescEl) {
+        let descText = '';
+        if (mixGrade === 'M5') descText = 'Grade: M5 (Lean Concrete base)';
+        else if (mixGrade === 'M7.5') descText = 'Grade: M7.5 (Lean Concrete base)';
+        else if (mixGrade === 'M10') descText = 'Grade: M10 (PCC leveling/foundation)';
+        else if (mixGrade === 'M15') descText = 'Grade: M15 (PCC Flooring/shallow beds)';
+        else if (mixGrade === 'M20') descText = 'Grade: M20 (Standard Slab/Beams/Columns)';
+        else if (mixGrade === 'M25') descText = 'Grade: M25 (Standard High-Strength Structural RCC)';
+        else if (mixGrade === 'M30') descText = 'Grade: M30 (Severe exposure / High-Strength RCC)';
+        else if (mixGrade === 'custom') descText = 'Custom Mix Design';
+        mixDescEl.innerText = descText;
     }
 
     const totalParts = cRatio + sRatio + aRatio;
@@ -1317,6 +1352,12 @@ function calculateBricks() {
         const sandVolCft = sandVolM3 * 35.3147;
 
         // Display updates
+        document.getElementById('brick-res-bricks-title').innerText = 'Bricks Required';
+        document.getElementById('brick-res-cement-title').innerText = 'Cement Bags (Mortar)';
+        document.getElementById('brick-res-sand-title').innerText = 'Mortar Sand';
+        document.getElementById('brick-res-cement-desc').innerText = `Dry Mortar Vol: ~${dryMortarVol.toFixed(2)} m³`;
+        document.getElementById('brick-res-sand-desc').innerText = `~${sandVolM3.toFixed(2)} m³ / ${(sandVolM3 * 1.6).toFixed(1)} Tons`;
+
         document.getElementById('brick-res-bricks').innerHTML = `${bricksNeededTotal.toLocaleString()} <span class="result-unit">pcs</span>`;
         document.getElementById('brick-res-wall-vol').innerText = `Net Wall Volume: ${netWallVol.toFixed(3)} m³ (Gross: ${grossVol.toFixed(2)} m³)`;
         document.getElementById('brick-res-cement').innerHTML = `${cementBags} <span class="result-unit">Bags</span>`;
@@ -1339,6 +1380,12 @@ function calculateBricks() {
         const cementBags = Math.ceil(cementVol / 0.03472);
         const sandVol = (dryVol * ratio) / totalParts;
         const sandCft = sandVol * 35.3147;
+
+        document.getElementById('brick-res-bricks-title').innerText = 'Plaster Area';
+        document.getElementById('brick-res-cement-title').innerText = 'Cement Bags (Plaster)';
+        document.getElementById('brick-res-sand-title').innerText = 'Plaster Sand';
+        document.getElementById('brick-res-cement-desc').innerText = `Dry Plaster Vol: ~${dryVol.toFixed(2)} m³`;
+        document.getElementById('brick-res-sand-desc').innerText = `~${sandVol.toFixed(2)} m³ / ${(sandVol * 1.6).toFixed(1)} Tons`;
 
         document.getElementById('brick-res-bricks').innerHTML = `${area.toFixed(1)} <span class="result-unit">m²</span>`;
         document.getElementById('brick-res-wall-vol').innerText = `Plaster Thickness: ${thickness}mm | Wet Vol: ${wetVol.toFixed(3)} m³`;
@@ -1387,6 +1434,12 @@ function calculateBricks() {
         const cementBags = Math.ceil(cementVol / 0.03472);
         const sandVol = (bedDryVol * bedRatio) / totalParts;
         const sandCft = sandVol * 35.3147;
+
+        document.getElementById('brick-res-bricks-title').innerText = 'Tiles Required';
+        document.getElementById('brick-res-cement-title').innerText = 'Cement Bags (Bedding)';
+        document.getElementById('brick-res-sand-title').innerText = 'Bedding Sand';
+        document.getElementById('brick-res-cement-desc').innerText = `Dry Bedding Vol: ~${bedDryVol.toFixed(2)} m³`;
+        document.getElementById('brick-res-sand-desc').innerText = `~${sandVol.toFixed(2)} m³ / ${(sandVol * 1.6).toFixed(1)} Tons`;
 
         document.getElementById('brick-res-bricks').innerHTML = `${totalTiles} <span class="result-unit">pcs</span>`;
         document.getElementById('brick-res-wall-vol').innerText = `Floor: ${roomArea.toFixed(2)} m² | Skirting: ${skirtingArea.toFixed(2)} m²`;
@@ -3726,6 +3779,108 @@ function setupNumberInputValidation() {
             }
         });
     });
+}
+
+// Calculate Minimum Shuttering Stripping Time and Curing Duration per IS 456
+function calculateCuringShutteringTime() {
+    const elementType = document.getElementById('est-element-type').value;
+    const cementType = document.getElementById('est-cement-type').value;
+    const weather = document.getElementById('est-weather').value;
+
+    let strippingTime = '';
+    let strippingNote = '';
+    let curingTime = '';
+    let curingNote = '';
+
+    // Stripping time calculations based on IS 456 Clauses
+    if (elementType === 'wall-column-beam-side') {
+        if (weather === 'normal') {
+            strippingTime = '16 - 24 Hours';
+            strippingNote = 'For walls, columns, and vertical faces of beams (temp ≥ 15°C).';
+        } else {
+            strippingTime = '24 - 36 Hours';
+            strippingNote = 'Vertical formwork removal in cold/wet weather (temp < 15°C).';
+        }
+    } else if (elementType === 'slab-props-left') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '3 Days';
+            strippingNote = 'Slab soffit formwork (props left under slab).';
+        } else {
+            strippingTime = '4 - 5 Days';
+            strippingNote = 'Extended for blended cement or colder weather.';
+        }
+    } else if (elementType === 'beam-soffit-props-left') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '7 Days';
+            strippingNote = 'Beam soffit formwork (props left under beam).';
+        } else {
+            strippingTime = '10 Days';
+            strippingNote = 'Extended for blended cement or colder weather.';
+        }
+    } else if (elementType === 'slab-props-removal-under-4.5m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '7 Days';
+            strippingNote = 'Props left under slab can be removed since span ≤ 4.5m.';
+        } else {
+            strippingTime = '10 Days';
+            strippingNote = 'Extended for blended cement or colder weather (span ≤ 4.5m).';
+        }
+    } else if (elementType === 'slab-props-removal-over-4.5m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '14 Days';
+            strippingNote = 'Props left under slab can be removed since span > 4.5m.';
+        } else {
+            strippingTime = '14 - 18 Days';
+            strippingNote = 'Extended duration for blended cement or colder weather (span > 4.5m).';
+        }
+    } else if (elementType === 'beam-props-removal-under-6m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '14 Days';
+            strippingNote = 'Props under beams & arches can be removed since span ≤ 6m.';
+        } else {
+            strippingTime = '18 - 21 Days';
+            strippingNote = 'Extended for blended cement or colder weather (span ≤ 6m).';
+        }
+    } else if (elementType === 'beam-props-removal-over-6m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '21 Days';
+            strippingNote = 'Props under beams & arches can be removed since span > 6m.';
+        } else {
+            strippingTime = '21 - 28 Days';
+            strippingNote = 'Extended for blended cement or colder weather (span > 6m).';
+        }
+    }
+
+    // Curing duration calculations based on IS 456 Clause 13.5
+    if (cementType === 'opc') {
+        if (weather === 'normal') {
+            curingTime = '7 Days';
+            curingNote = 'Minimum curing period for OPC under normal weather conditions.';
+        } else {
+            curingTime = '10 Days';
+            curingNote = 'Extended curing for OPC under hot/dry weather or severe exposure.';
+        }
+    } else {
+        // Blended/PPC cement
+        if (weather === 'normal') {
+            curingTime = '10 Days';
+            curingNote = 'Minimum curing period for PPC/blended cements under normal conditions.';
+        } else {
+            curingTime = '14 Days';
+            curingNote = 'Extended curing for PPC/blended cements under hot/dry or severe exposure.';
+        }
+    }
+
+    // Update UI elements
+    const shutteringRes = document.getElementById('shuttering-time-res');
+    const shutteringNoteEl = document.getElementById('shuttering-time-note');
+    const curingRes = document.getElementById('curing-time-res');
+    const curingNoteEl = document.getElementById('curing-time-note');
+
+    if (shutteringRes) shutteringRes.innerText = strippingTime;
+    if (shutteringNoteEl) shutteringNoteEl.innerText = strippingNote;
+    if (curingRes) curingRes.innerText = curingTime;
+    if (curingNoteEl) curingNoteEl.innerText = curingNote;
 }
 
 
