@@ -29,6 +29,10 @@
     --border-radius-lg: 16px;
     --border-radius-md: 12px;
     --border-radius-sm: 8px;
+    
+    /* CTA card links color - professional bright orange for dark mode */
+    --card-cta-color: #ff6b35;
+    --card-cta-hover-color: #ff8552;
 }
 
 [data-theme="light"] {
@@ -51,6 +55,10 @@
     --input-bg: rgba(255, 255, 255, 0.85);
     --input-border: rgba(0, 0, 0, 0.1);
     --input-focus-border: #d4af37;
+    
+    /* CTA card links color - professional dark orange for light mode */
+    --card-cta-color: #ea580c;
+    --card-cta-hover-color: #c2410c;
 }
 
 * {
@@ -916,12 +924,18 @@ select.form-control {
 
 .dashboard-card-footer {
     margin-top: auto;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--card-cta-color);
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.dashboard-card:hover .dashboard-card-footer {
+    color: var(--card-cta-hover-color);
+    transform: translateX(4px);
 }
 
 /* Units Converter Styles */
