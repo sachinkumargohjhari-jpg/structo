@@ -13,7 +13,72 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
+    <!-- Login Screen -->
+    <div id="login-container" class="login-screen-wrapper">
+        <div class="login-glass-card">
+            <div class="login-brand">
+                <div class="login-logo-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <div class="login-logo-text">
+                    <h1>Structo</h1>
+                    <p>Engineering Suite</p>
+                </div>
+            </div>
+            
+            <div class="login-content">
+                <h2>Welcome to Structo</h2>
+                <p class="login-subtitle">Professional Civil Calculations & Estimates</p>
+                
+                <div class="login-features">
+                    <div class="login-feature-item">
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Material Estimations (Concrete, Bricks, Steel)</span>
+                    </div>
+                    <div class="login-feature-item">
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Beam Analysis & Mix Design Specs</span>
+                    </div>
+                    <div class="login-feature-item">
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Site Checklists & BOQ Reports</span>
+                    </div>
+                </div>
+
+                <div class="login-action-container">
+                    <button id="btn-google-login" class="btn-google">
+                        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22c-.87-2.6-5.29-4.53-6.16-4.53z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        <span>Sign in with Google</span>
+                    </button>
+                    
+                    <button id="btn-guest-login" class="btn-guest">
+                        Continue as Guest
+                    </button>
+                </div>
+            </div>
+            
+            <div class="login-footer">
+                <p>&copy; 2026 Structo Suite. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container" style="display: none;">
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="app-sidebar">
             <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close menu">
@@ -87,6 +152,36 @@
                         Beam Analysis
                     </button>
                 </li>
+                <li class="nav-item" data-tab="shuttering">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+                        Formwork Calc
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="concrete-guides">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+                        Concrete Mix Guide
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="surveying">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/></svg>
+                        Surveying Level
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="water-tank">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+                        Water Tank Calc
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="curing-guide">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        Stripping & Curing
+                    </button>
+                </li>
                 <li class="nav-item" data-tab="checklist">
                     <button>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
@@ -109,6 +204,14 @@
                 <button class="theme-toggle-btn btn-secondary" id="help-modal-trigger">
                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                     <span>Formulas & Help</span>
+                </button>
+                <button class="theme-toggle-btn btn-secondary btn-logout" id="btn-logout-trigger">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Logout</span>
                 </button>
             </div>
         </aside>
@@ -250,6 +353,71 @@
                         </div>
                         <div class="dashboard-card-footer">
                             Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="shuttering">
+                        <div class="dashboard-card-icon image-icon">
+                            <img src="./checklist.png" class="card-img" alt="Formwork & Shuttering">
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Formwork & Shuttering</h3>
+                            <p>Calculate total surface area and cost of formwork/shuttering needed for slabs, beams, columns, or footings.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="concrete-guides">
+                        <div class="dashboard-card-icon image-icon">
+                            <img src="./concrete.png" class="card-img" alt="Concrete Mix Guide">
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Concrete Mix Guide</h3>
+                            <p>Reference table detailing nominal/design concrete grades, standard mix ratios, and specific application standards.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Guide &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="surveying">
+                        <div class="dashboard-card-icon image-icon">
+                            <img src="./earth.png" class="card-img" alt="Surveying Level">
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Surveying Level (HI)</h3>
+                            <p>Calculate Height of Instrument (HI) and Reduced Levels (RL) from backsight, intermediate sight, and foresight readings.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="water-tank">
+                        <div class="dashboard-card-icon image-icon">
+                            <img src="./water.png" class="card-img" alt="Water Tank Capacity">
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Water Tank Capacity</h3>
+                            <p>Calculate cubic volume and capacity in Liters for rectangular or circular overhead/underground water tanks.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Calculator &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="curing-guide">
+                        <div class="dashboard-card-icon image-icon">
+                            <img src="./checklist.png" class="card-img" alt="Stripping & Curing Guide">
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Stripping & Curing Guide</h3>
+                            <p>Check minimum curing times and formwork removal times according to IS 456 standards for structural members.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Guide &rarr;
                         </div>
                     </div>
 
@@ -2257,6 +2425,564 @@
                 </div>
             </section>
 
+            <!-- Formwork & Shuttering Calculator Tab -->
+            <section class="tab-content" id="shuttering">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+                                Formwork Parameters
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Structural Member Type</label>
+                            <select class="form-control" id="shuttering-member-type">
+                                <option value="slab" selected>Slab (Soffit & Edges)</option>
+                                <option value="beam">Beam (Bottom & Sides)</option>
+                                <option value="column">Column (4 Sides)</option>
+                                <option value="footing">Footing (4 Sides)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label id="shuttering-len-label">Member Length</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="shuttering-length" value="10" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group" id="shuttering-wid-group">
+                                <label id="shuttering-wid-label">Member Width</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="shuttering-width" value="5" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label id="shuttering-height-label">Height / Thickness</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="shuttering-height" value="0.15" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Number of Members</label>
+                                <input type="number" class="form-control" id="shuttering-qty" value="1" step="1" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Estimated Shuttering Rate</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="shuttering-rate" value="350" step="any" min="0">
+                                    <span class="unit-label">₹/m²</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-shuttering">Calculate Area</button>
+                            <button class="btn btn-secondary btn-accent-sec" id="btn-add-shuttering-report">Add to BOQ</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Formwork Estimation Summary</div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="result-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Total Surface Area Required</div>
+                                    <div class="result-value" id="shuttering-res-area">54.50<span class="result-unit">m²</span></div>
+                                    <div class="result-secondary-value" id="shuttering-res-area-sqft">~ 586.63 sq.ft (Per member: 54.50 m²)</div>
+                                </div>
+                            </div>
+
+                            <div class="result-card" style="background: var(--accent-glow); border-color: var(--accent);">
+                                <div class="result-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Total Formwork Cost</div>
+                                    <div class="result-value" id="shuttering-res-cost">₹19,075</div>
+                                    <div class="result-secondary-value" id="shuttering-res-rate-info">Based on rate: ₹350 per m²</div>
+                                </div>
+                            </div>
+
+                            <div class="formula-reference">
+                                <button class="formula-toggle" data-formula-id="shuttering-formula">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    View Formwork Calculation Formulas
+                                </button>
+                                <div class="formula-body" id="shuttering-formula">
+                                    1. <strong>Slab Shuttering Area:</strong> (Length × Width) + 2 × (Length + Width) × Thickness. (Includes the bottom soffit and side edges)<br>
+                                    2. <strong>Beam Shuttering Area:</strong> (Length × Width) + 2 × Length × Height. (Includes the bottom soffit and two vertical sides)<br>
+                                    3. <strong>Column Shuttering Area:</strong> 2 × Height × (Length + Width). (Covers all 4 vertical sides)<br>
+                                    4. <strong>Footing Shuttering Area:</strong> 2 × Depth × (Length + Width). (Covers all 4 vertical sides)<br>
+                                    5. <strong>Total Area:</strong> Area per Member × Number of Members.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Concrete Grades & Standards Guide Tab -->
+            <section class="tab-content" id="concrete-guides">
+                <div class="calculator-grid" style="grid-template-columns: 1.4fr 1fr;">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+                                Concrete Grades & Mix Specifications (IS 456:2000)
+                            </div>
+                        </div>
+
+                        <div class="search-container" style="margin-bottom: 1.5rem; width: 100%;">
+                            <svg class="search-icon" viewBox="0 0 24 24" style="left: 15px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" class="search-input" id="search-concrete-guides" placeholder="Search grades (e.g. M20, road, pavement, column)..." style="width: 100%; border-radius: var(--border-radius-sm); padding-left: 2.75rem;">
+                        </div>
+
+                        <div style="overflow-x: auto;">
+                            <table class="boq-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th>Grade</th>
+                                        <th>Mix Type</th>
+                                        <th>Ratio (C : S : A)</th>
+                                        <th>Comp. Strength</th>
+                                        <th>Primary Application</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="concrete-guides-table-body">
+                                    <tr data-search="m5 nominal 1:5:10 lean concrete base mud matting">
+                                        <td><strong>M5</strong></td>
+                                        <td>Nominal</td>
+                                        <td>1 : 5 : 10</td>
+                                        <td>5 N/mm²</td>
+                                        <td>Lean concrete base, mud matting</td>
+                                    </tr>
+                                    <tr data-search="m7.5 nominal 1:4:8 foundation sub-base mass concrete">
+                                        <td><strong>M7.5</strong></td>
+                                        <td>Nominal</td>
+                                        <td>1 : 4 : 8</td>
+                                        <td>7.5 N/mm²</td>
+                                        <td>Foundation sub-base, mass concrete</td>
+                                    </tr>
+                                    <tr data-search="m10 nominal 1:3:6 pcc leveling course foundation footings">
+                                        <td><strong>M10</strong></td>
+                                        <td>Nominal</td>
+                                        <td>1 : 3 : 6</td>
+                                        <td>10 N/mm²</td>
+                                        <td>PCC leveling course, leveling under footings</td>
+                                    </tr>
+                                    <tr data-search="m15 nominal 1:2:4 pcc flooring foundation shallow walkways">
+                                        <td><strong>M15</strong></td>
+                                        <td>Nominal</td>
+                                        <td>1 : 2 : 4</td>
+                                        <td>15 N/mm²</td>
+                                        <td>PCC flooring, shallow foundation beds, walkways</td>
+                                    </tr>
+                                    <tr data-search="m20 nominal 1:1.5:3 rcc slabs beams columns casting" style="border-left: 3px solid var(--accent);">
+                                        <td><strong>M20</strong></td>
+                                        <td>Nominal</td>
+                                        <td>1 : 1.5 : 3</td>
+                                        <td>20 N/mm²</td>
+                                        <td>Min. grade for RCC (slabs, beams, light columns)</td>
+                                    </tr>
+                                    <tr data-search="m25 nominal 1:1:2 rcc beams columns structural casting foundations footings" style="border-left: 3px solid var(--accent);">
+                                        <td><strong>M25</strong></td>
+                                        <td>Nominal</td>
+                                        <td>1 : 1 : 2</td>
+                                        <td>25 N/mm²</td>
+                                        <td>Heavy RCC beams, columns, foundations, footings</td>
+                                    </tr>
+                                    <tr data-search="m30 design mix high-strength structural columns heavy slabs road construction pavement" style="border-left: 3px solid var(--accent-secondary);">
+                                        <td><strong>M30</strong></td>
+                                        <td>Design Mix</td>
+                                        <td>Design Mix</td>
+                                        <td>30 N/mm²</td>
+                                        <td>High-strength structural columns, heavy slabs, road construction</td>
+                                    </tr>
+                                    <tr data-search="m35 design mix commercial columns bridges marine structures" style="border-left: 3px solid var(--accent-secondary);">
+                                        <td><strong>M35</strong></td>
+                                        <td>Design Mix</td>
+                                        <td>Design Mix</td>
+                                        <td>35 N/mm²</td>
+                                        <td>Commercial columns, bridges, marine structures</td>
+                                    </tr>
+                                    <tr data-search="m40 design mix pre-stressed concrete heavy-duty rigid road pavements road construction highway" style="border-left: 3px solid var(--accent-secondary);">
+                                        <td><strong>M40</strong></td>
+                                        <td>Design Mix</td>
+                                        <td>Design Mix</td>
+                                        <td>40 N/mm²</td>
+                                        <td>Pre-stressed concrete, heavy-duty rigid road pavements</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel" style="border-color: var(--accent-secondary);">
+                            <div class="panel-header" style="margin-bottom: 0.75rem;">
+                                <div class="panel-title" style="color: var(--accent-secondary);">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-secondary); width: 18px; height: 18px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                    Application Standards
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <div class="result-card" style="background: rgba(255, 87, 34, 0.05); border-color: rgba(255, 87, 34, 0.2); flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                                    <h4 style="color: var(--accent-secondary); font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700;">🛣️ Road Construction (Rigid Pavements)</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">
+                                        According to <strong>IRC:15</strong> standards, the minimum grade of concrete for rigid road pavements (concrete roads) is <strong>M30</strong> (for light traffic/rural roads) and <strong>M40</strong> (for state/national highways and heavy traffic).
+                                    </p>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); border-top: 1px dashed var(--panel-border); width: 100%; padding-top: 0.5rem; margin-top: 0.25rem;">
+                                        <strong>Ideal Ratio:</strong> Rich Design Mix (Water-cement ratio ≤ 0.40 for durability).
+                                    </div>
+                                </div>
+
+                                <div class="result-card" style="background: rgba(255, 215, 0, 0.05); border-color: rgba(255, 215, 0, 0.2); flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                                    <h4 style="color: var(--accent); font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700;">🏢 Column Structural Casting</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">
+                                        As per <strong>IS 456:2000</strong>, the minimum concrete grade for structural RCC members is <strong>M20</strong>. However, for columns supporting multi-story buildings, a minimum grade of <strong>M25</strong> or <strong>M30</strong> is highly recommended to withstand high axial stress and ensure structural stability.
+                                    </p>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); border-top: 1px dashed var(--panel-border); width: 100%; padding-top: 0.5rem; margin-top: 0.25rem;">
+                                        <strong>Ideal Ratio:</strong> 1 : 1 : 2 (M25 nominal mix) or rich design mix.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Surveying (Auto Level) Tool Tab -->
+            <section class="tab-content" id="surveying">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/></svg>
+                                Height of Instrument (HI) Calculator
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Benchmark Reduced Level (RL)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="survey-benchmark" value="100.000" step="0.001" min="-9999">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Backsight Reading (BS)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="survey-bs" value="1.250" step="0.001" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sight Reading Type</label>
+                            <div class="button-group-selector" style="margin-bottom: 0.5rem;">
+                                <input type="radio" name="survey-sight-type" id="sight-fs" value="FS" checked>
+                                <label for="sight-fs">Foresight (FS)</label>
+                                <input type="radio" name="survey-sight-type" id="sight-is" value="IS">
+                                <label for="sight-is">Intermediate Sight (IS)</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label id="survey-sight-label">Foresight Reading (FS)</label>
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control" id="survey-sight-val" value="1.450" step="0.001" min="0">
+                                <span class="unit-label">m</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Station Remark / Description</label>
+                            <input type="text" class="form-control" id="survey-remark" value="Stn 1" placeholder="e.g. Stn 1, CP 1, Slab corner">
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-survey">Calculate RL</button>
+                            <button class="btn btn-secondary" id="btn-survey-add-row">Add to Field Book</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Surveying Results</div>
+                            </div>
+
+                            <div class="result-subgrid">
+                                <div class="result-card" style="background: rgba(6, 182, 212, 0.04); border-color: rgba(6, 182, 212, 0.15);">
+                                    <div class="result-info">
+                                        <div class="result-title">Height of Instrument (HI)</div>
+                                        <div class="result-value" id="survey-res-hi">101.250<span class="result-unit">m</span></div>
+                                        <div class="result-secondary-value">Formula: RL + BS</div>
+                                    </div>
+                                </div>
+                                <div class="result-card" style="background: rgba(16, 185, 129, 0.04); border-color: rgba(16, 185, 129, 0.15);">
+                                    <div class="result-info">
+                                        <div class="result-title">New Reduced Level (RL)</div>
+                                        <div class="result-value" id="survey-res-rl" style="color: var(--accent-secondary);">99.800<span class="result-unit">m</span></div>
+                                        <div class="result-secondary-value">Formula: HI - FS/IS</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Field Book Table -->
+                            <div style="margin-top: 1.5rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                    <h4 style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--text-secondary);">Surveying Field Book Table</h4>
+                                    <button class="btn btn-secondary" id="btn-clear-survey-table" style="padding: 0.35rem 0.75rem; font-size: 0.75rem; border-radius: var(--border-radius-sm);">Clear Table</button>
+                                </div>
+                                <div style="overflow-x: auto; max-height: 180px; overflow-y: auto;">
+                                    <table class="boq-table" style="width: 100%; text-align: left; font-size: 0.8rem;">
+                                        <thead>
+                                            <tr>
+                                                <th>Station</th>
+                                                <th>BS (m)</th>
+                                                <th>IS (m)</th>
+                                                <th>FS (m)</th>
+                                                <th>HI (m)</th>
+                                                <th>RL (m)</th>
+                                                <th>Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="survey-table-body">
+                                            <!-- Dynamic Rows -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Water Tank Capacity Calculator Tab -->
+            <section class="tab-content" id="water-tank">
+                <div class="calculator-grid">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+                                Water Tank Specifications
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tank Shape</label>
+                            <select class="form-control" id="tank-shape">
+                                <option value="rect" selected>Rectangular (Overhead/Underground Box)</option>
+                                <option value="circular">Circular (Cylindrical Tank)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group" id="tank-dim-len-group">
+                                <label>Tank Length</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="tank-length" value="4" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group" id="tank-dim-wid-group">
+                                <label>Tank Width</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="tank-width" value="3" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group" id="tank-dim-dia-group" style="display: none;">
+                                <label>Tank Diameter</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="tank-diameter" value="3" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Water Depth</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-control" id="tank-depth" value="2" step="any" min="0">
+                                    <span class="unit-label">m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn" id="btn-calc-tank">Calculate Capacity</button>
+                            <button class="btn btn-secondary btn-accent-sec" id="btn-add-tank-report">Add to BOQ</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">Tank Capacity Summary</div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="result-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title">Total Water Volume</div>
+                                    <div class="result-value" id="tank-res-volume">24.000<span class="result-unit">m³</span></div>
+                                    <div class="result-secondary-value" id="tank-res-cft">~ 847.55 CFT</div>
+                                </div>
+                            </div>
+
+                            <div class="result-card" style="background: var(--accent-glow); border-color: var(--accent);">
+                                <div class="result-icon" style="color: var(--accent); background: rgba(6, 182, 212, 0.15);">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                                </div>
+                                <div class="result-info">
+                                    <div class="result-title" style="color: var(--text-primary);">Total Capacity (Liters)</div>
+                                    <div class="result-value" id="tank-res-liters">24,000<span class="result-unit">Liters</span></div>
+                                    <div class="result-secondary-value" id="tank-res-gallons">~ 5,279 Imperial Gallons / 6,340 US Gallons</div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive SVG for Tank Visualizer -->
+                            <div class="visualizer-container">
+                                <div class="visualizer-title">
+                                    <span>Tank Fluid Level Visualizer</span>
+                                    <span id="tank-visualizer-badge" style="color:var(--accent);">Rectangular</span>
+                                </div>
+                                <svg class="visual-canvas" id="tank-svg"></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Deshuttering & Curing Guide Tab -->
+            <section class="tab-content" id="curing-guide">
+                <div class="calculator-grid" style="grid-template-columns: 1fr 1.2fr;">
+                    <div class="glass-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Stripping & Curing Selector (IS 456)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Structural Element</label>
+                            <select class="form-control" id="curing-element-type">
+                                <option value="wall-column-beam-side" selected>Walls, Columns, & Vertical Faces of Beams</option>
+                                <option value="slab-props-left">Slab Soffits (Props left under slab)</option>
+                                <option value="beam-soffit-props-left">Beam Soffits (Props left under beam)</option>
+                                <option value="slab-props-removal-under-4.5m">Slab Props Removal (Slab span ≤ 4.5m)</option>
+                                <option value="slab-props-removal-over-4.5m">Slab Props Removal (Slab span > 4.5m)</option>
+                                <option value="beam-props-removal-under-6m">Beam/Arch Props Removal (Beam span ≤ 6m)</option>
+                                <option value="beam-props-removal-over-6m">Beam/Arch Props Removal (Beam span > 6m)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label>Cement Type Used</label>
+                                <select class="form-control" id="curing-cement-type">
+                                    <option value="opc" selected>Ordinary Portland Cement (OPC)</option>
+                                    <option value="ppc">PPC / Blended (Fly ash / Slag cement)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Curing Temperature / Weather</label>
+                                <select class="form-control" id="curing-weather">
+                                    <option value="normal" selected>Normal Weather (≥ 15°C)</option>
+                                    <option value="cold">Cold / Dry / Wet Weather (< 15°C)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="result-subgrid" style="margin-top: 1.5rem;">
+                            <div class="result-card" style="background: rgba(6, 182, 212, 0.04); border-color: rgba(6, 182, 212, 0.15); flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                                <div class="result-title" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Removal Time</div>
+                                <div class="result-value" id="curing-guide-res-stripping" style="font-size: 1.25rem; color: var(--accent);">16 - 24 Hours</div>
+                                <div class="result-secondary-value" id="curing-guide-res-stripping-note" style="font-size: 0.7rem; color: var(--text-secondary);">For vertical faces of walls, columns.</div>
+                            </div>
+                            <div class="result-card" style="background: rgba(16, 185, 129, 0.04); border-color: rgba(16, 185, 129, 0.15); flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem;">
+                                <div class="result-title" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Curing Time</div>
+                                <div class="result-value" id="curing-guide-res-curing" style="font-size: 1.25rem; color: var(--accent-secondary);">7 Days</div>
+                                <div class="result-secondary-value" id="curing-guide-res-curing-note" style="font-size: 0.7rem; color: var(--text-secondary);">Keep wet under normal conditions.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="glass-panel">
+                            <div class="panel-header" style="margin-bottom: 1rem;">
+                                <div class="panel-title">IS 456 Reference Table</div>
+                            </div>
+                            <div style="overflow-x: auto;">
+                                <table class="boq-table" style="width: 100%; text-align: left; font-size: 0.75rem;">
+                                    <thead>
+                                        <tr>
+                                            <th>Structural Member</th>
+                                            <th>Min. Shuttering Removal Time (OPC, Temp ≥ 15°C)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Walls, Columns & Vertical faces of Beams</strong></td>
+                                            <td>16 - 24 hours</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Slab Soffits (props left under)</strong></td>
+                                            <td>3 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Beam Soffits (props left under)</strong></td>
+                                            <td>7 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Slab Props: Span ≤ 4.5m</strong></td>
+                                            <td>7 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Slab Props: Span &gt; 4.5m</strong></td>
+                                            <td>14 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Beam/Arch Props: Span ≤ 6.0m</strong></td>
+                                            <td>14 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Beam/Arch Props: Span &gt; 6.0m</strong></td>
+                                            <td>21 days</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(0,0,0,0.15); border-radius: var(--border-radius-sm); font-size: 0.75rem; border-left: 3px solid var(--accent-tertiary); line-height: 1.4;">
+                                <strong>Curing Standard:</strong> Under IS 456 (Clause 13.5), concrete must be cured for a minimum of <strong>7 days</strong> for OPC, and <strong>10 days</strong> for PPC/mineral-admixed cements under normal conditions. Under hot/dry conditions, this extends to <strong>10 days</strong> (OPC) and <strong>14 days</strong> (PPC).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Site Checklist Tab -->
             <section class="tab-content" id="checklist">
                 <!-- Checklist Header & Progress Panel -->
@@ -2547,6 +3273,9 @@
     <!-- Toast container for notifications -->
     <div class="toast-container" id="toast-container"></div>
 
+    <!-- Firebase SDK Compat -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
     <script src="app.js"></script>
     <script src="sw-register.js"></script>
 </body>

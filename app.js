@@ -24,6 +24,166 @@ function sanitizeHTML(str) {
 }
 
 // -------------------------------------------------------------
+// Firebase Configuration & Google Authentication
+// -------------------------------------------------------------
+// Paste your Firebase Web configuration keys here
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+let authInstance = null;
+
+function isFirebaseConfigured() {
+    return firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY";
+}
+
+function initFirebase() {
+    if (isFirebaseConfigured()) {
+        try {
+            if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            if (typeof firebase !== 'undefined') {
+                authInstance = firebase.auth();
+            }
+        } catch (e) {
+            console.error("Firebase Auth Init Failed", e);
+        }
+    }
+}
+
+function checkAuthState() {
+    const isGuest = localStorage.getItem('structo_guest_session') === 'true';
+    const userSession = JSON.parse(localStorage.getItem('structo_user_session'));
+
+    if (isGuest) {
+        showMainApp("Guest");
+    } else if (userSession) {
+        showMainApp(userSession.displayName || userSession.email || "User");
+    } else {
+        // Show Login UI
+        const loginContainer = document.getElementById('login-container');
+        if (loginContainer) loginContainer.style.display = 'flex';
+        
+        const appContainer = document.querySelector('.app-container');
+        if (appContainer) appContainer.style.setProperty('display', 'none', 'important');
+    }
+}
+
+function showMainApp(userName) {
+    const loginContainer = document.getElementById('login-container');
+    if (loginContainer) loginContainer.style.display = 'none';
+
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) {
+        appContainer.style.display = 'flex';
+    }
+    
+    showToast(`Welcome back, ${userName}!`, 'success');
+}
+
+async function loginWithGoogle() {
+    const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
+
+    if (isNative) {
+        try {
+            showToast("Opening Google Sign-In...", "info");
+            
+            if (!window.Capacitor.Plugins || !window.Capacitor.Plugins.FirebaseAuthentication) {
+                throw new Error("FirebaseAuthentication plugin is not available on the Capacitor bridge.");
+            }
+
+            const { FirebaseAuthentication } = window.Capacitor.Plugins;
+            const result = await FirebaseAuthentication.signInWithGoogle();
+            
+            if (result && result.user) {
+                const user = result.user;
+                localStorage.setItem('structo_user_session', JSON.stringify({
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoUrl
+                }));
+                showMainApp(user.displayName || user.email);
+            } else {
+                throw new Error("Sign-in completed but no user profile was returned.");
+            }
+        } catch (e) {
+            console.error("Native Google Login failed", e);
+            showToast(`Native Sign-In failed: ${e.message}`, 'error');
+        }
+    } else {
+        if (!isFirebaseConfigured()) {
+            showToast("Firebase configuration keys are missing. Please configure Firebase to sign in.", "error");
+            return;
+        }
+
+        try {
+            initFirebase();
+            if (!authInstance) {
+                throw new Error("Firebase Auth has not been initialized correctly.");
+            }
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const result = await authInstance.signInWithPopup(provider);
+            
+            if (result && result.user) {
+                const user = result.user;
+                localStorage.setItem('structo_user_session', JSON.stringify({
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL
+                }));
+                showMainApp(user.displayName || user.email);
+            }
+        } catch (e) {
+            console.error("Web Google Login failed", e);
+            showToast(`Web Sign-In failed: ${e.message}`, 'error');
+        }
+    }
+}
+
+function loginAsGuest() {
+    localStorage.setItem('structo_guest_session', 'true');
+    showMainApp("Guest");
+}
+
+async function logout() {
+    const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
+    
+    localStorage.removeItem('structo_guest_session');
+    localStorage.removeItem('structo_user_session');
+
+    try {
+        if (isNative) {
+            if (window.Capacitor.Plugins && window.Capacitor.Plugins.FirebaseAuthentication) {
+                await window.Capacitor.Plugins.FirebaseAuthentication.signOut();
+            }
+        } else {
+            if (authInstance) {
+                await authInstance.signOut();
+            }
+        }
+    } catch (e) {
+        console.error("Sign out error:", e);
+    }
+
+    // Return to Login UI
+    const loginContainer = document.getElementById('login-container');
+    if (loginContainer) loginContainer.style.display = 'flex';
+
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) appContainer.style.setProperty('display', 'none', 'important');
+    
+    showToast("Logged out successfully.", "info");
+}
+
+// -------------------------------------------------------------
 // State Management
 // -------------------------------------------------------------
 let activeTab = 'dashboard';
@@ -131,6 +291,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Setup Initial App State
 function initApp() {
+    initFirebase();
+    checkAuthState();
+
     const savedTheme = localStorage.getItem('civil_calc_theme');
     if (savedTheme) {
         theme = savedTheme;
@@ -528,6 +691,16 @@ function setupEventListeners() {
         const el = document.getElementById(id);
         if (el) el.addEventListener('change', calculateCuringGuide);
     });
+
+    // -- Login Screen Events --
+    const googleLoginBtn = document.getElementById('btn-google-login');
+    if (googleLoginBtn) googleLoginBtn.addEventListener('click', loginWithGoogle);
+
+    const guestLoginBtn = document.getElementById('btn-guest-login');
+    if (guestLoginBtn) guestLoginBtn.addEventListener('click', loginAsGuest);
+
+    const logoutBtn = document.getElementById('btn-logout-trigger');
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
 
     // Run input validations setup
     setupNumberInputValidation();
