@@ -28,12 +28,12 @@ function sanitizeHTML(str) {
 // -------------------------------------------------------------
 // Paste your Firebase Web configuration keys here
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyB3R7YhmG3_uftvFrxz7_BiYXuu3bIWXOc",
+    authDomain: "structo-7a1f2.firebaseapp.com",
+    projectId: "structo-7a1f2",
+    storageBucket: "structo-7a1f2.firebasestorage.app",
+    messagingSenderId: "21349238263",
+    appId: "1:21349238263:web:072248ddd70570042a9af2"
 };
 
 let authInstance = null;
