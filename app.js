@@ -90,6 +90,11 @@ const tabInfo = {
     earthwork: { title: 'Earthwork & Excavation', desc: 'Compute excavation and backfill volumes, swell factors, and dump truck trips' },
     converter: { title: 'Civil Unit Converter', desc: 'Quick unit conversions for length, area, volume, force, stress, and density' },
     beam: { title: 'Beam Structural Analysis', desc: 'Calculate bending moment, shear force, reactions, and deflection diagrams' },
+    shuttering: { title: 'Formwork & Shuttering Calculator', desc: 'Calculate the total surface area and cost of formwork/shuttering required for structural members' },
+    'concrete-guides': { title: 'Concrete Mix Specification Guide', desc: 'Reference guide detailing standard mix ratios, application guidelines, and code specifications' },
+    surveying: { title: 'Surveying Auto Level Calculator', desc: 'Height of Instrument (HI) and Reduced Level (RL) field book calculator' },
+    'water-tank': { title: 'Water Tank Capacity Calculator', desc: 'Calculate volumetric capacity in Liters and Cubic Meters for water storage structures' },
+    'curing-guide': { title: 'Deshuttering & Curing Guide', desc: 'IS 456 guidelines and timelines for concrete curing and shuttering stripping' },
     checklist: { title: 'Site Inspection Checklist', desc: 'Pre-construction inspection checksheets for concrete, slab casting, shuttering, and reinforcement checks' },
     'boq-report': { title: 'BOQ Summary Report', desc: 'Bill of Quantities and cost summary checklist for your project' }
 };
@@ -114,6 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateWaterCement();
     renderChecklist();
     calculateCuringShutteringTime();
+
+    // 5 New Tools Initial Runs
+    toggleShutteringInputs();
+    calculateShuttering();
+    calculateSurveyRL();
+    toggleTankInputs();
+    calculateWaterTank();
+    calculateCuringGuide();
 });
 
 // Setup Initial App State
@@ -445,6 +458,75 @@ function setupEventListeners() {
     estInputs.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('change', calculateCuringShutteringTime);
+    });
+
+    // -- 5 New Civil Engineering Tools Events --
+    
+    // 1. Formwork & Shuttering Events
+    const shutteringLiveInputs = ['shuttering-member-type', 'shuttering-length', 'shuttering-width', 'shuttering-height', 'shuttering-qty', 'shuttering-rate'];
+    shutteringLiveInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => {
+                if (id === 'shuttering-member-type') toggleShutteringInputs();
+                calculateShuttering();
+            });
+        }
+    });
+    const btnCalcShuttering = document.getElementById('btn-calc-shuttering');
+    if (btnCalcShuttering) btnCalcShuttering.addEventListener('click', calculateShuttering);
+    const btnAddShutteringReport = document.getElementById('btn-add-shuttering-report');
+    if (btnAddShutteringReport) btnAddShutteringReport.addEventListener('click', addShutteringToBOQ);
+
+    // 2. Concrete Mix Guides Events
+    const searchConcreteGuides = document.getElementById('search-concrete-guides');
+    if (searchConcreteGuides) {
+        searchConcreteGuides.addEventListener('input', searchConcreteGrades);
+    }
+
+    // 3. Surveying (Auto Level) Events
+    const surveyLiveInputs = ['survey-benchmark', 'survey-bs', 'survey-sight-val'];
+    surveyLiveInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calculateSurveyRL);
+    });
+    document.querySelectorAll('input[name="survey-sight-type"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const label = document.getElementById('survey-sight-label');
+            if (label) {
+                label.innerText = e.target.value === 'FS' ? 'Foresight Reading (FS)' : 'Intermediate Sight (IS)';
+            }
+            calculateSurveyRL();
+        });
+    });
+    const btnCalcSurvey = document.getElementById('btn-calc-survey');
+    if (btnCalcSurvey) btnCalcSurvey.addEventListener('click', calculateSurveyRL);
+    const btnSurveyAddRow = document.getElementById('btn-survey-add-row');
+    if (btnSurveyAddRow) btnSurveyAddRow.addEventListener('click', addSurveyRow);
+    const btnClearSurveyTable = document.getElementById('btn-clear-survey-table');
+    if (btnClearSurveyTable) btnClearSurveyTable.addEventListener('click', clearSurveyTable);
+
+    // 4. Water Tank Events
+    const tankLiveInputs = ['tank-shape', 'tank-length', 'tank-width', 'tank-diameter', 'tank-depth'];
+    tankLiveInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => {
+                if (id === 'tank-shape') toggleTankInputs();
+                calculateWaterTank();
+            });
+        }
+    });
+    const btnCalcTank = document.getElementById('btn-calc-tank');
+    if (btnCalcTank) btnCalcTank.addEventListener('click', calculateWaterTank);
+    const btnAddTankReport = document.getElementById('btn-add-tank-report');
+    if (btnAddTankReport) btnAddTankReport.addEventListener('click', addTankToBOQ);
+
+    // 5. Curing & Stripping Guide Events
+    const curingLiveInputs = ['curing-element-type', 'curing-cement-type', 'curing-weather'];
+    curingLiveInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('change', calculateCuringGuide);
     });
 
     // Run input validations setup
@@ -3894,6 +3976,556 @@ function calculateCuringShutteringTime() {
     if (shutteringRes) shutteringRes.innerText = strippingTime;
     if (shutteringNoteEl) shutteringNoteEl.innerText = strippingNote;
     if (curingRes) curingRes.innerText = curingTime;
+    if (curingNoteEl) curingNoteEl.innerText = curingNote;
+}
+
+// -------------------------------------------------------------
+// 1. Formwork & Shuttering Calculator
+// -------------------------------------------------------------
+
+function toggleShutteringInputs() {
+    const memberType = document.getElementById('shuttering-member-type').value;
+    const lenLabel = document.getElementById('shuttering-len-label');
+    const widLabel = document.getElementById('shuttering-wid-label');
+    const heightLabel = document.getElementById('shuttering-height-label');
+    const widGroup = document.getElementById('shuttering-wid-group');
+
+    if (memberType === 'slab') {
+        lenLabel.innerText = 'Slab Length';
+        widLabel.innerText = 'Slab Width';
+        heightLabel.innerText = 'Slab Thickness';
+        widGroup.style.display = 'block';
+    } else if (memberType === 'beam') {
+        lenLabel.innerText = 'Beam Length';
+        widLabel.innerText = 'Beam Width (Bottom)';
+        heightLabel.innerText = 'Beam Height / Depth';
+        widGroup.style.display = 'block';
+    } else if (memberType === 'column') {
+        lenLabel.innerText = 'Column Width (Side A)';
+        widLabel.innerText = 'Column Depth (Side B)';
+        heightLabel.innerText = 'Column Height';
+        widGroup.style.display = 'block';
+    } else if (memberType === 'footing') {
+        lenLabel.innerText = 'Footing Length';
+        widLabel.innerText = 'Footing Width';
+        heightLabel.innerText = 'Footing Depth / Height';
+        widGroup.style.display = 'block';
+    }
+}
+
+function calculateShuttering() {
+    const memberType = document.getElementById('shuttering-member-type').value;
+    const length = parseFloat(document.getElementById('shuttering-length').value) || 0;
+    const width = parseFloat(document.getElementById('shuttering-width').value) || 0;
+    const height = parseFloat(document.getElementById('shuttering-height').value) || 0;
+    const qty = parseInt(document.getElementById('shuttering-qty').value) || 1;
+    const rate = parseFloat(document.getElementById('shuttering-rate').value) || 0;
+
+    let areaPerMember = 0;
+
+    if (memberType === 'slab') {
+        // Slab: bottom soffit (L*W) + side edges (2 * (L+W) * thickness)
+        areaPerMember = (length * width) + 2 * (length + width) * height;
+    } else if (memberType === 'beam') {
+        // Beam: bottom soffit (L*W) + 2 vertical sides (2 * L * depth)
+        areaPerMember = (length * width) + 2 * length * height;
+    } else if (memberType === 'column') {
+        // Column: 4 vertical sides (2 * H * (A + B))
+        areaPerMember = 2 * height * (length + width);
+    } else if (memberType === 'footing') {
+        // Footing: 4 vertical sides (2 * Depth * (L + W))
+        areaPerMember = 2 * height * (length + width);
+    }
+
+    const totalArea = areaPerMember * qty;
+    const totalAreaSqft = totalArea * 10.7639;
+    const totalCost = totalArea * rate;
+
+    const areaRes = document.getElementById('shuttering-res-area');
+    const areaSqftRes = document.getElementById('shuttering-res-area-sqft');
+    const costRes = document.getElementById('shuttering-res-cost');
+    const rateInfoRes = document.getElementById('shuttering-res-rate-info');
+
+    if (areaRes) areaRes.innerHTML = `${totalArea.toFixed(2)}<span class="result-unit">m²</span>`;
+    if (areaSqftRes) areaSqftRes.innerText = `~ ${totalAreaSqft.toFixed(2)} sq.ft (Per member: ${areaPerMember.toFixed(2)} m²)`;
+    if (costRes) costRes.innerText = `₹${Math.round(totalCost).toLocaleString('en-IN')}`;
+    if (rateInfoRes) rateInfoRes.innerText = `Based on rate: ₹${rate.toFixed(2)} per m²`;
+}
+
+function addShutteringToBOQ() {
+    const memberType = document.getElementById('shuttering-member-type').value;
+    const length = parseFloat(document.getElementById('shuttering-length').value) || 0;
+    const width = parseFloat(document.getElementById('shuttering-width').value) || 0;
+    const height = parseFloat(document.getElementById('shuttering-height').value) || 0;
+    const qty = parseInt(document.getElementById('shuttering-qty').value) || 1;
+    const rate = parseFloat(document.getElementById('shuttering-rate').value) || 0;
+    
+    const areaRes = document.getElementById('shuttering-res-area');
+    const costRes = document.getElementById('shuttering-res-cost');
+    const areaText = areaRes ? areaRes.innerText : '0 m²';
+    const costText = costRes ? costRes.innerText : '₹0';
+
+    const typeStr = `Formwork & Shuttering (${memberType.toUpperCase()})`;
+    const dimsStr = `${length}m x ${width}m x ${height}m (Qty: ${qty})`;
+    const detailsStr = `Total Area: ${areaText}, Rate: ₹${rate}/m²`;
+
+    const item = {
+        id: Date.now(),
+        type: typeStr,
+        dims: dimsStr,
+        details: detailsStr,
+        cost: costText.replace('₹', '').replace(/,/g, '')
+    };
+
+    boqReport.push(item);
+    saveBOQReport();
+    showToast('Formwork shuttering added to BOQ successfully!');
+}
+
+// -------------------------------------------------------------
+// 2. Concrete Mix Specifications Guide Search
+// -------------------------------------------------------------
+
+function searchConcreteGrades() {
+    const searchVal = document.getElementById('search-concrete-guides');
+    if (!searchVal) return;
+    const query = searchVal.value.toLowerCase().trim();
+    const rows = document.querySelectorAll('#concrete-guides-table-body tr');
+
+    rows.forEach(row => {
+        const searchData = row.getAttribute('data-search') || '';
+        if (searchData.includes(query)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+// -------------------------------------------------------------
+// 3. Surveying (Auto Level) Tool
+// -------------------------------------------------------------
+
+function calculateSurveyRL() {
+    const benchmark = parseFloat(document.getElementById('survey-benchmark').value) || 0;
+    const bs = parseFloat(document.getElementById('survey-bs').value) || 0;
+    const sightVal = parseFloat(document.getElementById('survey-sight-val').value) || 0;
+
+    const hi = benchmark + bs;
+    const rl = hi - sightVal;
+
+    const hiRes = document.getElementById('survey-res-hi');
+    const rlRes = document.getElementById('survey-res-rl');
+
+    if (hiRes) hiRes.innerHTML = `${hi.toFixed(3)}<span class="result-unit">m</span>`;
+    if (rlRes) rlRes.innerHTML = `${rl.toFixed(3)}<span class="result-unit">m</span>`;
+}
+
+let surveyStations = [];
+
+function addSurveyRow() {
+    const benchmark = parseFloat(document.getElementById('survey-benchmark').value) || 0;
+    const bs = parseFloat(document.getElementById('survey-bs').value) || 0;
+    const sightTypeRadio = document.querySelector('input[name="survey-sight-type"]:checked');
+    const sightType = sightTypeRadio ? sightTypeRadio.value : 'FS';
+    const sightVal = parseFloat(document.getElementById('survey-sight-val').value) || 0;
+    const remarkVal = document.getElementById('survey-remark');
+    const remark = remarkVal && remarkVal.value.trim() !== '' ? remarkVal.value.trim() : '-';
+
+    const hi = benchmark + bs;
+    const rl = hi - sightVal;
+
+    const stationNum = surveyStations.length + 1;
+    const stationName = remark !== '-' ? remark : `Station ${stationNum}`;
+
+    const newRow = {
+        station: stationName,
+        bs: bs.toFixed(3),
+        is: sightType === 'IS' ? sightVal.toFixed(3) : '-',
+        fs: sightType === 'FS' ? sightVal.toFixed(3) : '-',
+        hi: hi.toFixed(3),
+        rl: rl.toFixed(3),
+        remark: remark
+    };
+
+    surveyStations.push(newRow);
+    renderSurveyTable();
+
+    // Set benchmark to current RL if shifting level (CP / Change Point)
+    if (sightType === 'FS') {
+        document.getElementById('survey-benchmark').value = rl.toFixed(3);
+        document.getElementById('survey-bs').value = '0.000'; // Reset BS for next setup
+        showToast('Foresight Change Point. Benchmark RL updated to ' + rl.toFixed(3) + 'm');
+    }
+
+    calculateSurveyRL();
+}
+
+function renderSurveyTable() {
+    const tbody = document.getElementById('survey-table-body');
+    if (!tbody) return;
+
+    tbody.innerHTML = '';
+    surveyStations.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${sanitizeHTML(row.station)}</strong></td>
+            <td>${row.bs}</td>
+            <td>${row.is}</td>
+            <td>${row.fs}</td>
+            <td>${row.hi}</td>
+            <td><strong>${row.rl}</strong></td>
+            <td><span style="color: var(--text-muted); font-size: 0.75rem;">${sanitizeHTML(row.remark)}</span></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function clearSurveyTable() {
+    surveyStations = [];
+    renderSurveyTable();
+    showToast('Survey field book table cleared!');
+}
+
+// -------------------------------------------------------------
+// 4. Water Tank Capacity Calculator
+// -------------------------------------------------------------
+
+function toggleTankInputs() {
+    const shape = document.getElementById('tank-shape').value;
+    const lenGroup = document.getElementById('tank-dim-len-group');
+    const widGroup = document.getElementById('tank-dim-wid-group');
+    const diaGroup = document.getElementById('tank-dim-dia-group');
+    const badge = document.getElementById('tank-visualizer-badge');
+
+    if (shape === 'rect') {
+        if (lenGroup) lenGroup.style.display = 'block';
+        if (widGroup) widGroup.style.display = 'block';
+        if (diaGroup) diaGroup.style.display = 'none';
+        if (badge) badge.innerText = 'Rectangular';
+    } else {
+        if (lenGroup) lenGroup.style.display = 'none';
+        if (widGroup) widGroup.style.display = 'none';
+        if (diaGroup) diaGroup.style.display = 'block';
+        if (badge) badge.innerText = 'Circular';
+    }
+    calculateWaterTank();
+}
+
+function calculateWaterTank() {
+    const shape = document.getElementById('tank-shape').value;
+    const depth = parseFloat(document.getElementById('tank-depth').value) || 0;
+
+    let volume = 0; // m³
+
+    if (shape === 'rect') {
+        const length = parseFloat(document.getElementById('tank-length').value) || 0;
+        const width = parseFloat(document.getElementById('tank-width').value) || 0;
+        volume = length * width * depth;
+    } else {
+        const diameter = parseFloat(document.getElementById('tank-diameter').value) || 0;
+        volume = Math.PI * Math.pow(diameter / 2, 2) * depth;
+    }
+
+    const liters = volume * 1000;
+    const cft = volume * 35.3147;
+    const impGallons = liters * 0.219969;
+    const usGallons = liters * 0.264172;
+
+    const volRes = document.getElementById('tank-res-volume');
+    const cftRes = document.getElementById('tank-res-cft');
+    const litRes = document.getElementById('tank-res-liters');
+    const galRes = document.getElementById('tank-res-gallons');
+
+    if (volRes) volRes.innerHTML = `${volume.toFixed(3)}<span class="result-unit">m³</span>`;
+    if (cftRes) cftRes.innerText = `~ ${cft.toFixed(2)} CFT`;
+    if (litRes) litRes.innerHTML = `${Math.round(litRes ? liters : 0).toLocaleString('en-IN')}<span class="result-unit">Liters</span>`;
+    if (galRes) galRes.innerText = `~ ${Math.round(impGallons).toLocaleString('en-IN')} Imperial Gal / ${Math.round(usGallons).toLocaleString('en-IN')} US Gal`;
+
+    // Render interactive SVG
+    drawWaterTankSVG(shape, depth);
+}
+
+function drawWaterTankSVG(shape, depth) {
+    const svg = document.getElementById('tank-svg');
+    if (!svg) return;
+
+    svg.innerHTML = '';
+    
+    // Set SVG size
+    svg.setAttribute('viewBox', '0 0 400 200');
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+
+    // Fill percent (max out at 85% for visual margin)
+    let fillPercent = Math.min((depth / 3) * 80, 80); // assume max nominal depth is 3m for drawing
+    if (depth > 0 && fillPercent < 15) fillPercent = 15; // min visible level
+    if (depth === 0) fillPercent = 0;
+
+    const fillY = 160 - (fillPercent * 120 / 100);
+    const fillHeight = fillPercent * 120 / 100;
+
+    // Water Gradient Definition
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    grad.setAttribute('id', 'waterGradient');
+    grad.setAttribute('x1', '0%');
+    grad.setAttribute('y1', '0%');
+    grad.setAttribute('x2', '0%');
+    grad.setAttribute('y2', '100%');
+
+    const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', 'rgba(6, 182, 212, 0.4)');
+    
+    const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop2.setAttribute('offset', '100%');
+    stop2.setAttribute('stop-color', 'rgba(6, 182, 212, 0.85)');
+
+    grad.appendChild(stop1);
+    grad.appendChild(stop2);
+    defs.appendChild(grad);
+    svg.appendChild(defs);
+
+    if (shape === 'rect') {
+        // Draw 3D-like tank box outline
+        const backWall = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        backWall.setAttribute('x', '100');
+        backWall.setAttribute('y', '40');
+        backWall.setAttribute('width', '200');
+        backWall.setAttribute('height', '120');
+        backWall.setAttribute('fill', 'rgba(255,255,255,0.03)');
+        backWall.setAttribute('stroke', 'rgba(255,255,255,0.1)');
+        backWall.setAttribute('stroke-width', '1');
+        svg.appendChild(backWall);
+
+        if (fillHeight > 0) {
+            // Draw Water fill
+            const water = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            water.setAttribute('x', '101');
+            water.setAttribute('y', fillY.toString());
+            water.setAttribute('width', '198');
+            water.setAttribute('height', fillHeight.toString());
+            water.setAttribute('fill', 'url(#waterGradient)');
+            svg.appendChild(water);
+        }
+
+        const frontWall = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        frontWall.setAttribute('x', '100');
+        frontWall.setAttribute('y', '40');
+        frontWall.setAttribute('width', '200');
+        frontWall.setAttribute('height', '120');
+        frontWall.setAttribute('fill', 'none');
+        frontWall.setAttribute('stroke', 'var(--accent)');
+        frontWall.setAttribute('stroke-width', '2');
+        svg.appendChild(frontWall);
+
+        // Add 3D perspective lines
+        const lines = [
+            [100, 40, 80, 20],
+            [300, 40, 320, 20],
+            [80, 20, 320, 20],
+            [80, 20, 80, 140],
+            [100, 160, 80, 140],
+            [300, 160, 320, 140],
+            [320, 20, 320, 140],
+            [80, 140, 320, 140]
+        ];
+
+        lines.forEach(pts => {
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', pts[0].toString());
+            line.setAttribute('y1', pts[1].toString());
+            line.setAttribute('x2', pts[2].toString());
+            line.setAttribute('y2', pts[3].toString());
+            line.setAttribute('stroke', 'rgba(255,255,255,0.2)');
+            line.setAttribute('stroke-width', '1.5');
+            line.setAttribute('stroke-dasharray', '2,2');
+            svg.appendChild(line);
+        });
+
+    } else {
+        // Draw cylindrical tank outline
+        const cylinderBack = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        cylinderBack.setAttribute('d', 'M 140,40 A 60,15 0 0,0 260,40 v 120 a 60,15 0 0,1 -120,0 Z');
+        cylinderBack.setAttribute('fill', 'rgba(255,255,255,0.03)');
+        cylinderBack.setAttribute('stroke', 'rgba(255,255,255,0.1)');
+        cylinderBack.setAttribute('stroke-width', '1');
+        svg.appendChild(cylinderBack);
+
+        if (fillHeight > 0) {
+            // Draw Water cylindrical fill
+            const waterCylinder = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            waterCylinder.setAttribute('d', `M 141,${fillY} A 59,14 0 0,0 259,${fillY} v ${fillHeight} a 59,14 0 0,1 -118,0 Z`);
+            waterCylinder.setAttribute('fill', 'url(#waterGradient)');
+            svg.appendChild(waterCylinder);
+        }
+
+        const cylinderFront = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        cylinderFront.setAttribute('d', 'M 140,40 A 60,15 0 0,0 260,40 v 120 a 60,15 0 0,0 -120,0 Z');
+        cylinderFront.setAttribute('fill', 'none');
+        cylinderFront.setAttribute('stroke', 'var(--accent)');
+        cylinderFront.setAttribute('stroke-width', '2');
+        svg.appendChild(cylinderFront);
+
+        // Cylinder top ellipse
+        const topEllipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+        topEllipse.setAttribute('cx', '200');
+        topEllipse.setAttribute('cy', '40');
+        topEllipse.setAttribute('rx', '60');
+        topEllipse.setAttribute('ry', '15');
+        topEllipse.setAttribute('fill', 'rgba(255,255,255,0.05)');
+        topEllipse.setAttribute('stroke', 'var(--accent)');
+        topEllipse.setAttribute('stroke-width', '2');
+        svg.appendChild(topEllipse);
+    }
+
+    // Add depth percentage text
+    const textVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    textVal.setAttribute('x', '200');
+    textVal.setAttribute('y', '190');
+    textVal.setAttribute('text-anchor', 'middle');
+    textVal.setAttribute('fill', 'var(--text-secondary)');
+    textVal.setAttribute('font-size', '11px');
+    textVal.setAttribute('font-weight', '600');
+    textVal.textContent = `Water Level: ${depth.toFixed(2)}m (Max Nominal: 3.0m)`;
+    svg.appendChild(textVal);
+}
+
+function addTankToBOQ() {
+    const shape = document.getElementById('tank-shape').value;
+    const depth = parseFloat(document.getElementById('tank-depth').value) || 0;
+    const volRes = document.getElementById('tank-res-volume');
+    const litRes = document.getElementById('tank-res-liters');
+    const volumeText = volRes ? volRes.innerText : '0 m³';
+    const capacityText = litRes ? litRes.innerText : '0 Liters';
+
+    let dimsStr = '';
+
+    if (shape === 'rect') {
+        const length = parseFloat(document.getElementById('tank-length').value) || 0;
+        const width = parseFloat(document.getElementById('tank-width').value) || 0;
+        dimsStr = `Rectangular: ${length}m x ${width}m x ${depth}m (Depth)`;
+    } else {
+        const diameter = parseFloat(document.getElementById('tank-diameter').value) || 0;
+        dimsStr = `Circular: Dia: ${diameter}m, Depth: ${depth}m`;
+    }
+
+    const item = {
+        id: Date.now(),
+        type: `Water Tank Storage (${shape.toUpperCase()})`,
+        dims: dimsStr,
+        details: `Volume: ${volumeText}, Total Capacity: ${capacityText}`,
+        cost: '0'
+    };
+
+    boqReport.push(item);
+    saveBOQReport();
+    showToast('Water tank volume added to BOQ successfully!');
+}
+
+// -------------------------------------------------------------
+// 5. Curing & Stripping Guide (IS 456 Calculator)
+// -------------------------------------------------------------
+
+function calculateCuringGuide() {
+    const elementType = document.getElementById('curing-element-type').value;
+    const cementType = document.getElementById('curing-cement-type').value;
+    const weather = document.getElementById('curing-weather').value;
+
+    let strippingTime = '';
+    let strippingNote = '';
+    let curingTime = '';
+    let curingNote = '';
+
+    // Stripping time calculations based on IS 456 Clauses
+    if (elementType === 'wall-column-beam-side') {
+        if (weather === 'normal') {
+            strippingTime = '16 - 24 Hours';
+            strippingNote = 'For walls, columns, and vertical faces of beams (temp ≥ 15°C).';
+        } else {
+            strippingTime = '24 - 36 Hours';
+            strippingNote = 'Vertical formwork removal in cold/wet weather (temp < 15°C).';
+        }
+    } else if (elementType === 'slab-props-left') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '3 Days';
+            strippingNote = 'Slab soffit formwork (props left under slab).';
+        } else {
+            strippingTime = '4 - 5 Days';
+            strippingNote = 'Extended for blended cement or colder weather.';
+        }
+    } else if (elementType === 'beam-soffit-props-left') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '7 Days';
+            strippingNote = 'Beam soffit formwork (props left under beam).';
+        } else {
+            strippingTime = '10 Days';
+            strippingNote = 'Extended for blended cement or colder weather.';
+        }
+    } else if (elementType === 'slab-props-removal-under-4.5m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '7 Days';
+            strippingNote = 'Props left under slab can be removed since span ≤ 4.5m.';
+        } else {
+            strippingTime = '10 Days';
+            strippingNote = 'Extended for blended cement or colder weather (span ≤ 4.5m).';
+        }
+    } else if (elementType === 'slab-props-removal-over-4.5m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '14 Days';
+            strippingNote = 'Props left under slab can be removed since span > 4.5m.';
+        } else {
+            strippingTime = '14 - 18 Days';
+            strippingNote = 'Extended duration for blended cement or colder weather (span > 4.5m).';
+        }
+    } else if (elementType === 'beam-props-removal-under-6m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '14 Days';
+            strippingNote = 'Props under beams & arches can be removed since span ≤ 6m.';
+        } else {
+            strippingTime = '18 - 21 Days';
+            strippingNote = 'Extended for blended cement or colder weather (span ≤ 6m).';
+        }
+    } else if (elementType === 'beam-props-removal-over-6m') {
+        if (cementType === 'opc' && weather === 'normal') {
+            strippingTime = '21 Days';
+            strippingNote = 'Props under beams & arches can be removed since span > 6m.';
+        } else {
+            strippingTime = '21 - 28 Days';
+            strippingNote = 'Extended for blended cement or colder weather (span > 6m).';
+        }
+    }
+
+    // Curing duration calculations based on IS 456 Clause 13.5
+    if (cementType === 'opc') {
+        if (weather === 'normal') {
+            curingTime = '7 Days';
+            curingNote = 'Minimum curing period for OPC under normal weather conditions.';
+        } else {
+            curingTime = '10 Days';
+            curingNote = 'Extended curing for OPC under hot/dry weather or severe exposure.';
+        }
+    } else {
+        // Blended/PPC cement
+        if (weather === 'normal') {
+            curingTime = '10 Days';
+            curingNote = 'Minimum curing period for PPC/blended cements under normal conditions.';
+        } else {
+            curingTime = '14 Days';
+            curingNote = 'Extended curing for PPC/blended cements under hot/dry or severe exposure.';
+        }
+    }
+
+    // Update UI elements
+    const strippingEl = document.getElementById('curing-guide-res-stripping');
+    const strippingNoteEl = document.getElementById('curing-guide-res-stripping-note');
+    const curingEl = document.getElementById('curing-guide-res-curing');
+    const curingNoteEl = document.getElementById('curing-guide-res-curing-note');
+
+    if (strippingEl) strippingEl.innerText = strippingTime;
+    if (strippingNoteEl) strippingNoteEl.innerText = strippingNote;
+    if (curingEl) curingEl.innerText = curingTime;
     if (curingNoteEl) curingNoteEl.innerText = curingNote;
 }
 
