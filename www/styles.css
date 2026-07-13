@@ -176,12 +176,15 @@ body {
     transition: all 0.2s ease;
 }
 
-.nav-item button svg {
+.nav-item button svg,
+.nav-item button img,
+.nav-item button .nav-icon {
     width: 20px;
     height: 20px;
     stroke: currentColor;
     stroke-width: 2;
     fill: none;
+    object-fit: contain;
     transition: transform 0.2s ease;
 }
 
@@ -196,7 +199,9 @@ body {
     color: var(--text-primary);
 }
 
-.nav-item button:hover svg {
+.nav-item button:hover svg,
+.nav-item button:hover img,
+.nav-item button:hover .nav-icon {
     transform: translateX(3px);
 }
 
@@ -1732,4 +1737,3 @@ body.no-scroll {
     overflow: hidden !important;
     height: 100vh !important;
 }
-
