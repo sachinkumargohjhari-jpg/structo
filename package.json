@@ -7,6 +7,7 @@
     "build": "mkdir -p www && cp index.html styles.css manifest.json service-worker.js sw-register.js icon.svg *.png www/ && npx javascript-obfuscator app.js --output www/app.js",
     "add-android": "npx cap add android",
     "sync": "npx cap sync",
+    "generate-icons": "npx @capacitor/assets generate --android --iconBackgroundColor '#121212'",
     "build-apk": "cd android && ./gradlew assembleDebug"
   },
   "dependencies": {
