@@ -1,0 +1,11 @@
+{
+	"appId": "com.civilcalc.pro",
+	"appName": "Structo",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"cordova": {
+		"preferences": {
+			"Orientation": "portrait"
+		}
+	}
+}
