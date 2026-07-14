@@ -2119,4 +2119,38 @@ body.no-scroll {
     color: var(--accent);
 }
 
+/* Responsive Table Container */
+.responsive-table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-top: 1rem;
+    position: relative;
+    box-sizing: border-box !important;
+}
+
+/* Global Text Wrapping & Overflow Prevention */
+h1, h2, h3, h4, h5, h6, .panel-title, .result-card, .result-card h4, .result-card p, .result-card div, .result-info, .result-title, .result-value {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+/* Ensure flex containers wrap their children if needed to prevent spillover */
+.panel-title, .result-card, .results-panel, .panel-header {
+    flex-wrap: wrap !important;
+}
+
+/* Global Box-Sizing and Overflow Constraint */
+*, *::before, *::after {
+    box-sizing: border-box !important;
+}
+
+.glass-panel, .result-card, .results-panel, .calculator-grid, .form-control, .button-group-selector, .input-with-unit {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+
 
