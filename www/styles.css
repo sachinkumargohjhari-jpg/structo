@@ -2026,3 +2026,18 @@ body.no-scroll {
     border-color: #ef4444;
 }
 
+/* Professional Profile Styling */
+.profile-pic-container {
+    transition: all 0.3s ease;
+}
+
+.profile-pic-container:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-secondary) !important;
+    box-shadow: 0 0 25px var(--accent-secondary-glow) !important;
+}
+
+.profile-pic-container:hover #profile-placeholder-icon svg {
+    color: var(--accent-secondary) !important;
+}
+

@@ -194,6 +194,12 @@
                         BOQ Summary
                     </button>
                 </li>
+                <li class="nav-item" data-tab="profile">
+                    <button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Professional Profile
+                    </button>
+                </li>
             </nav>
 
             <div class="sidebar-footer">
@@ -444,6 +450,19 @@
                         </div>
                         <div class="dashboard-card-footer">
                             Open BOQ &rarr;
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card" data-card-tab="profile">
+                        <div class="dashboard-card-icon image-icon">
+                            <img src="./structo_logo.png" class="card-img" alt="Professional Profile">
+                        </div>
+                        <div class="dashboard-card-info">
+                            <h3>Professional Profile</h3>
+                            <p>Manage your civil engineering identity, role, institute, and profile picture securely.</p>
+                        </div>
+                        <div class="dashboard-card-footer">
+                            Open Profile &rarr;
                         </div>
                     </div>
                 </div>
@@ -3216,6 +3235,62 @@
                                     <!-- JS populated rows -->
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Professional Profile Tab -->
+            <section class="tab-content" id="profile">
+                <div class="calculator-grid" style="grid-template-columns: 1fr;">
+                    <div class="glass-panel" style="max-width: 600px; margin: 0 auto; width: 100%;">
+                        <div class="panel-header" style="justify-content: center; text-align: center; flex-direction: column; gap: 0.5rem;">
+                            <div class="panel-title" style="justify-content: center; font-size: 1.25rem;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                Civil Engineer Profile
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem;">Manage your professional civil engineering identity</p>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
+                            <!-- Profile Picture Placeholder -->
+                            <div class="profile-pic-container" style="position: relative; width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); background: var(--input-bg); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; box-shadow: 0 0 15px var(--accent-glow);">
+                                <img id="profile-preview" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;" alt="Profile Picture">
+                                <div id="profile-placeholder-icon" style="display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 0.75rem; text-align: center; padding: 0.5rem;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; margin-bottom: 4px; color: var(--text-secondary);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                                    <span>Upload Photo</span>
+                                </div>
+                                <input type="file" id="profile-image-input" accept="image/*" style="display: none;">
+                            </div>
+
+                            <!-- Form Fields -->
+                            <div style="width: 100%; display: flex; flex-direction: column; gap: 1.25rem;">
+                                <div class="form-group" style="width: 100%;">
+                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full Name</label>
+                                    <input type="text" class="form-control" id="profile-name" placeholder="Enter your full name" style="width: 100%;">
+                                </div>
+
+                                <div class="form-group" style="width: 100%;">
+                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Professional Role</label>
+                                    <select class="form-control" id="profile-role" style="width: 100%;">
+                                        <option value="" selected>Select Role...</option>
+                                        <option value="Engineering Student (Diploma / B.Tech)">Engineering Student (Diploma / B.Tech)</option>
+                                        <option value="Site Engineer">Site Engineer</option>
+                                        <option value="Contractor">Contractor</option>
+                                        <option value="Project Manager">Project Manager</option>
+                                        <option value="Architect">Architect</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="width: 100%;">
+                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Institute / Company Name</label>
+                                    <input type="text" class="form-control" id="profile-institute" placeholder="Enter college or company name" style="width: 100%;">
+                                </div>
+
+                                <div style="margin-top: 0.5rem;">
+                                    <button class="btn btn-accent-sec" id="btn-save-profile" style="width: 100%; padding: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Save Profile Details</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

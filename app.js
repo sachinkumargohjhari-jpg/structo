@@ -256,7 +256,8 @@ const tabInfo = {
     'water-tank': { title: 'Water Tank Capacity Calculator', desc: 'Calculate volumetric capacity in Liters and Cubic Meters for water storage structures' },
     'curing-guide': { title: 'Deshuttering & Curing Guide', desc: 'IS 456 guidelines and timelines for concrete curing and shuttering stripping' },
     checklist: { title: 'Site Inspection Checklist', desc: 'Pre-construction inspection checksheets for concrete, slab casting, shuttering, and reinforcement checks' },
-    'boq-report': { title: 'BOQ Summary Report', desc: 'Bill of Quantities and cost summary checklist for your project' }
+    'boq-report': { title: 'BOQ Summary Report', desc: 'Bill of Quantities and cost summary checklist for your project' },
+    profile: { title: 'Professional Profile', desc: 'Manage your civil engineering professional identity and profile details' }
 };
 
 // -------------------------------------------------------------
@@ -287,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleTankInputs();
     calculateWaterTank();
     calculateCuringGuide();
+    initProfile();
 });
 
 // Setup Initial App State
@@ -4700,6 +4702,102 @@ function calculateCuringGuide() {
     if (strippingNoteEl) strippingNoteEl.innerText = strippingNote;
     if (curingEl) curingEl.innerText = curingTime;
     if (curingNoteEl) curingNoteEl.innerText = curingNote;
+}
+
+// -------------------------------------------------------------
+// Professional Profile Functionality
+// -------------------------------------------------------------
+function initProfile() {
+    const profilePicContainer = document.querySelector('.profile-pic-container');
+    const profileImageInput = document.getElementById('profile-image-input');
+    const profilePreview = document.getElementById('profile-preview');
+    const profilePlaceholderIcon = document.getElementById('profile-placeholder-icon');
+    const btnSaveProfile = document.getElementById('btn-save-profile');
+
+    if (profilePicContainer && profileImageInput) {
+        profilePicContainer.addEventListener('click', () => {
+            profileImageInput.click();
+        });
+    }
+
+    if (profileImageInput) {
+        profileImageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Keep image files reasonable (e.g. limit to 1.5MB to prevent localstorage quota errors)
+                if (file.size > 1.5 * 1024 * 1024) {
+                    showToast("Please choose an image under 1.5MB to save storage space.", "error");
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    profilePreview.src = event.target.result;
+                    profilePreview.style.display = 'block';
+                    profilePlaceholderIcon.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    if (btnSaveProfile) {
+        btnSaveProfile.addEventListener('click', saveProfile);
+    }
+
+    loadProfile();
+}
+
+function saveProfile() {
+    const name = document.getElementById('profile-name').value.trim();
+    const role = document.getElementById('profile-role').value;
+    const institute = document.getElementById('profile-institute').value.trim();
+    const preview = document.getElementById('profile-preview');
+    
+    let base64Image = '';
+    if (preview && preview.src && preview.src.startsWith('data:image/')) {
+        base64Image = preview.src;
+    }
+
+    const profileData = {
+        name: name,
+        role: role,
+        institute: institute,
+        image: base64Image
+    };
+
+    try {
+        localStorage.setItem('structo_prof_profile', JSON.stringify(profileData));
+        showToast("Profile details saved successfully!", "success");
+    } catch (e) {
+        console.error("Local storage save failed", e);
+        showToast("Failed to save profile. Image might be too large.", "error");
+    }
+}
+
+function loadProfile() {
+    const nameInput = document.getElementById('profile-name');
+    const roleSelect = document.getElementById('profile-role');
+    const instituteInput = document.getElementById('profile-institute');
+    const preview = document.getElementById('profile-preview');
+    const icon = document.getElementById('profile-placeholder-icon');
+
+    const profileDataStr = localStorage.getItem('structo_prof_profile');
+    if (profileDataStr) {
+        try {
+            const profileData = JSON.parse(profileDataStr);
+            if (nameInput) nameInput.value = profileData.name || '';
+            if (roleSelect) roleSelect.value = profileData.role || '';
+            if (instituteInput) instituteInput.value = profileData.institute || '';
+            
+            if (profileData.image && preview && icon) {
+                preview.src = profileData.image;
+                preview.style.display = 'block';
+                icon.style.display = 'none';
+            }
+        } catch (e) {
+            console.error("Error parsing saved profile", e);
+        }
+    }
 }
 
 
