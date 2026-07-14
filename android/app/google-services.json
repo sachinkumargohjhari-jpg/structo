@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "21349238263",
+    "project_id": "structo-7a1f2",
+    "storage_bucket": "structo-7a1f2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21349238263:android:0133538e16d30c422a9af2",
+        "android_client_info": {
+          "package_name": "com.civilcalc.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21349238263-g6qsoejqs9t2dhgkea0olfrb5m3hthim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuNdJADcl-YsBloCgD08AYcrQLmO76_As"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21349238263-g6qsoejqs9t2dhgkea0olfrb5m3hthim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
