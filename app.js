@@ -83,8 +83,6 @@ function showMainApp(userName) {
     if (appContainer) {
         appContainer.style.display = 'flex';
     }
-    
-    showToast(`Welcome back, ${userName}!`, 'success');
 }
 
 async function loginWithGoogle() {
@@ -782,7 +780,7 @@ function updateThemeUI() {
 function showToast(message, type = 'success') {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
-    toast.className = 'toast';
+    toast.className = `toast toast-${type}`;
     if (type === 'error') toast.style.borderLeftColor = 'var(--danger)';
     else if (type === 'info') toast.style.borderLeftColor = 'var(--accent)';
 
@@ -796,7 +794,7 @@ function showToast(message, type = 'success') {
     container.appendChild(toast);
     setTimeout(() => {
         toast.classList.add('fade-out');
-        setTimeout(() => toast.remove(), 400);
+        setTimeout(() => toast.remove(), 350);
     }, 3000);
 }
 
