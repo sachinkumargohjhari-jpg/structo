@@ -58,21 +58,8 @@ function initFirebase() {
 }
 
 function checkAuthState() {
-    const isGuest = localStorage.getItem('structo_guest_session') === 'true';
-    const userSession = JSON.parse(localStorage.getItem('structo_user_session'));
-
-    if (isGuest) {
-        showMainApp("Guest");
-    } else if (userSession) {
-        showMainApp(userSession.displayName || userSession.email || "User");
-    } else {
-        // Show Login UI
-        const loginContainer = document.getElementById('login-container');
-        if (loginContainer) loginContainer.style.display = 'flex';
-        
-        const appContainer = document.querySelector('.app-container');
-        if (appContainer) appContainer.style.setProperty('display', 'none', 'important');
-    }
+    // Bypass login UI and show the main dashboard directly
+    showMainApp("Guest");
 }
 
 function showMainApp(userName) {
@@ -171,14 +158,8 @@ async function logout() {
         console.error("Sign out error:", e);
     }
 
-    // Return to Login UI
-    const loginContainer = document.getElementById('login-container');
-    if (loginContainer) loginContainer.style.display = 'flex';
-
-    const appContainer = document.querySelector('.app-container');
-    if (appContainer) appContainer.style.setProperty('display', 'none', 'important');
-    
     showToast("Logged out successfully.", "info");
+    location.reload();
 }
 
 // -------------------------------------------------------------
