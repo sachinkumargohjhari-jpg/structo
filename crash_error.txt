@@ -1,0 +1,451 @@
+--------- beginning of main
+07-14 14:20:08.846 15818 15818 E cmd     : BBinder_init Processname  cmd  
+07-14 14:20:08.847 15818 15818 E cmd     : BBinder_init hasGetProcessName  cmd
+07-14 14:20:31.603 24680 24680 E NetworkErrorMessage: (REDACTED) Invalid connectivity state: %s
+07-14 14:20:31.634 15932 15932 E nthropic.claude: BBinder_init Processname  com.anthropic.claude  
+07-14 14:20:31.634 15932 15932 E nthropic.claude: BBinder_init hasGetProcessName  com.anthropic.claude
+07-14 14:20:31.686 12721 12721 E cmd     : BBinder_init Processname  cmd  
+07-14 14:20:31.686 12721 12721 E cmd     : BBinder_init hasGetProcessName  cmd
+07-14 14:20:31.749 15972 15972 E cmd     : BBinder_init Processname  cmd  
+07-14 14:20:31.749 15972 15972 E cmd     : BBinder_init hasGetProcessName  cmd
+07-14 14:20:31.847 15932 15993 E nthropic.claude: No package ID 6a found for resource ID 0x6a0b0013.
+07-14 14:20:31.860 15932 15993 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+07-14 14:20:31.903 16024 16024 E android.vending: BBinder_init Processname  com.android.vending  
+07-14 14:20:31.903 16024 16024 E android.vending: BBinder_init hasGetProcessName  com.android.vending
+07-14 14:20:32.092 16024 16071 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+07-14 14:20:32.178 16060 16060 E cmd     : BBinder_init Processname  cmd  
+07-14 14:20:32.182 16060 16060 E cmd     : BBinder_init hasGetProcessName  cmd
+07-14 14:20:32.526 16120 16120 E cmd     : BBinder_init Processname  cmd  
+07-14 14:20:32.527 16120 16120 E cmd     : BBinder_init hasGetProcessName  cmd
+07-14 14:20:33.047 16171 16171 E cmd     : BBinder_init Processname  cmd  
+07-14 14:20:33.048 16171 16171 E cmd     : BBinder_init hasGetProcessName  cmd
+07-14 14:20:33.361 16197 16197 E cmd     : BBinder_init Processname  cmd  
+07-14 14:20:33.372 16197 16197 E cmd     : BBinder_init hasGetProcessName  cmd
+07-14 14:20:34.179 16246 16246 E m.civilcalc.pro: BBinder_init Processname  com.civilcalc.pro  
+07-14 14:20:34.179 16246 16246 E m.civilcalc.pro: BBinder_init hasGetProcessName  com.civilcalc.pro
+07-14 14:20:34.413 16246 16246 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+--------- beginning of crash
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: FATAL EXCEPTION: main
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: Process: com.civilcalc.pro, PID: 16246
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Lcom/google/android/gms/auth/api/signin/GoogleSignIn;
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:123)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:107)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.<init>(GoogleAuthProviderHandler.java:36)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.initAuthProviderHandlers(FirebaseAuthentication.java:935)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.<init>(FirebaseAuthentication.java:68)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthenticationPlugin.load(FirebaseAuthenticationPlugin.java:71)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.loadInstance(PluginHandle.java:115)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.load(PluginHandle.java:105)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.<init>(PluginHandle.java:65)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerPlugin(Bridge.java:685)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerAllPlugins(Bridge.java:641)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Bridge.java:226)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Bridge.java:0)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.Bridge$Builder.create(Bridge.java:1560)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.load(BridgeActivity.java:48)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.onCreate(BridgeActivity.java:42)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9692)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9627)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1535)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4960)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:5192)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:222)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:133)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:103)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:80)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:3326)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:114)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:266)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:361)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:10357)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:675)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1002)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.auth.api.signin.GoogleSignIn" on path: DexPathList[[zip file "/data/app/~~sCirF-KHwR7CK8JGQN3mbA==/com.civilcalc.pro-NTu0-aMSna_UxBumu-Pkmg==/base.apk"],nativeLibraryDirectories=[/data/app/~~sCirF-KHwR7CK8JGQN3mbA==/com.civilcalc.pro-NTu0-aMSna_UxBumu-Pkmg==/lib/arm64, /system/lib64, /system_ext/lib64]]
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:259)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:644)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:580)
+07-14 14:20:34.658 16246 16246 E AndroidRuntime: 	... 33 more
+07-14 14:20:36.728 16372 16372 E m.civilcalc.pro: BBinder_init Processname  com.civilcalc.pro  
+07-14 14:20:36.728 16372 16372 E m.civilcalc.pro: BBinder_init hasGetProcessName  com.civilcalc.pro
+07-14 14:20:36.915 16372 16372 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: FATAL EXCEPTION: main
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: Process: com.civilcalc.pro, PID: 16372
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Lcom/google/android/gms/auth/api/signin/GoogleSignIn;
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:123)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:107)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.<init>(GoogleAuthProviderHandler.java:36)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.initAuthProviderHandlers(FirebaseAuthentication.java:935)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.<init>(FirebaseAuthentication.java:68)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthenticationPlugin.load(FirebaseAuthenticationPlugin.java:71)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.loadInstance(PluginHandle.java:115)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.load(PluginHandle.java:105)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.<init>(PluginHandle.java:65)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerPlugin(Bridge.java:685)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerAllPlugins(Bridge.java:641)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Bridge.java:226)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Bridge.java:0)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.Bridge$Builder.create(Bridge.java:1560)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.load(BridgeActivity.java:48)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.onCreate(BridgeActivity.java:42)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9692)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9627)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1535)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4960)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:5192)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:222)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:133)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:103)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:80)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:3326)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:114)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:266)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:361)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:10357)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:675)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1002)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.auth.api.signin.GoogleSignIn" on path: DexPathList[[zip file "/data/app/~~sCirF-KHwR7CK8JGQN3mbA==/com.civilcalc.pro-NTu0-aMSna_UxBumu-Pkmg==/base.apk"],nativeLibraryDirectories=[/data/app/~~sCirF-KHwR7CK8JGQN3mbA==/com.civilcalc.pro-NTu0-aMSna_UxBumu-Pkmg==/lib/arm64, /system/lib64, /system_ext/lib64]]
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:259)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:644)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:580)
+07-14 14:20:37.082 16372 16372 E AndroidRuntime: 	... 33 more
+07-14 14:20:37.208 32223 32280 E AuthPII : [RequestTokenManager] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/plus.me
+07-14 14:20:37.208 32223 32280 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at ahrl.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):82)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):313)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:20:37.208 32223 32280 E AuthPII : Message is Long live credential not available.
+07-14 14:20:37.208 32223 32280 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at ahrl.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):82)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):313)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:20:37.208 32223 32280 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:20:37.210 32223 32280 E AuthPII : [RequestTokenManager] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/account.capabilities https://www.googleapis.com/auth/account.service_flags
+07-14 14:20:37.210 32223 32280 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):55)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.h(:com.google.android.gms@262434035@26.24.34 (260400-938041327):108)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):817)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):5)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):459)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:20:37.210 32223 32280 E AuthPII : Message is Long live credential not available.
+07-14 14:20:37.210 32223 32280 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):55)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.h(:com.google.android.gms@262434035@26.24.34 (260400-938041327):108)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):817)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at ahrr.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):5)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):459)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:20:37.210 32223 32280 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:20:37.214 32223 32262 E AuthPII : [RequestTokenManager] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/emeraldsea.mobileapps.doritos.cookie
+07-14 14:20:37.214 32223 32262 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aihs.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):151)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at ahwd.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):328)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at ahrc.f(:com.google.android.gms@262434035@26.24.34 (260400-938041327):24)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at dbhz.fF(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at dbik.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):121)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at hgwo.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at blmv.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):50)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at blmv.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):66)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at blsn.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):8)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at java.lang.Thread.run(Thread.java:1572)
+07-14 14:20:37.214 32223 32262 E AuthPII : Message is Long live credential not available.
+07-14 14:20:37.214 32223 32262 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at aihs.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):151)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at ahwd.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):328)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at ahrc.f(:com.google.android.gms@262434035@26.24.34 (260400-938041327):24)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at dbhz.fF(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at dbik.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):121)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at hgwo.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at blmv.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):50)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at blmv.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):66)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at blsn.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):8)
+07-14 14:20:37.214 32223 32262 E AuthPII : 	at java.lang.Thread.run(Thread.java:1572)
+07-14 14:20:37.916 15932 16010 E AndroidLog: message=Unable to resolve host "a-api.anthropic.com": No address associated with hostname
+07-14 14:20:37.916 15932 16010 E AndroidLog: message= Error uploading events from batch file
+07-14 14:20:37.916 15932 16010 E AndroidLog:  fileUrl="/data/user/0/com.anthropic.claude/app_segment-disk-queue/LKJN8LsLERHEOXkw487o7qCTFOrGPimI-296"
+07-14 14:20:37.916 15932 16010 E AndroidLog:  msg=Unable to resolve host "a-api.anthropic.com": No address associated with hostname
+07-14 14:20:38.251 16523 16523 E m.civilcalc.pro: BBinder_init Processname  com.civilcalc.pro  
+07-14 14:20:38.251 16523 16523 E m.civilcalc.pro: BBinder_init hasGetProcessName  com.civilcalc.pro
+07-14 14:20:38.430 16523 16523 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: FATAL EXCEPTION: main
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: Process: com.civilcalc.pro, PID: 16523
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Lcom/google/android/gms/auth/api/signin/GoogleSignIn;
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:123)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:107)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.<init>(GoogleAuthProviderHandler.java:36)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.initAuthProviderHandlers(FirebaseAuthentication.java:935)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.<init>(FirebaseAuthentication.java:68)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthenticationPlugin.load(FirebaseAuthenticationPlugin.java:71)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.loadInstance(PluginHandle.java:115)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.load(PluginHandle.java:105)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.<init>(PluginHandle.java:65)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerPlugin(Bridge.java:685)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerAllPlugins(Bridge.java:641)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Bridge.java:226)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Bridge.java:0)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.Bridge$Builder.create(Bridge.java:1560)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.load(BridgeActivity.java:48)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.onCreate(BridgeActivity.java:42)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9692)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9627)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1535)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4960)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:5192)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:222)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:133)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:103)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:80)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:3326)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:114)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:266)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:361)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:10357)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:675)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1002)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.auth.api.signin.GoogleSignIn" on path: DexPathList[[zip file "/data/app/~~sCirF-KHwR7CK8JGQN3mbA==/com.civilcalc.pro-NTu0-aMSna_UxBumu-Pkmg==/base.apk"],nativeLibraryDirectories=[/data/app/~~sCirF-KHwR7CK8JGQN3mbA==/com.civilcalc.pro-NTu0-aMSna_UxBumu-Pkmg==/lib/arm64, /system/lib64, /system_ext/lib64]]
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:259)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:644)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:580)
+07-14 14:20:38.600 16523 16523 E AndroidRuntime: 	... 33 more
+07-14 14:20:41.867 15932 16010 E AndroidLog: message=Unable to resolve host "a-api.anthropic.com": No address associated with hostname
+07-14 14:20:41.867 15932 16010 E AndroidLog: message= Error uploading events from batch file
+07-14 14:20:41.867 15932 16010 E AndroidLog:  fileUrl="/data/user/0/com.anthropic.claude/app_segment-disk-queue/LKJN8LsLERHEOXkw487o7qCTFOrGPimI-296"
+07-14 14:20:41.867 15932 16010 E AndroidLog:  msg=Unable to resolve host "a-api.anthropic.com": No address associated with hostname
+07-14 14:20:42.376 32223 32232 E AuthPII : [RequestTokenManager] getToken() -> BAD_AUTHENTICATION. App: com.android.vending, Service: oauth2:https://www.googleapis.com/auth/experimentsandconfigs
+07-14 14:20:42.376 32223 32232 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aihs.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):151)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):829)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aibf.getAuthToken(:com.google.android.gms@262434035@26.24.34 (260400-938041327):411)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.getAuthToken(AbstractAccountAuthenticator.java:251)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:254)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1441)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:20:42.376 32223 32232 E AuthPII : Message is Long live credential not available.
+07-14 14:20:42.376 32223 32232 E AuthPII : bkfz: Long live credential not available.
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aihs.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):151)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):829)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at aibf.getAuthToken(:com.google.android.gms@262434035@26.24.34 (260400-938041327):411)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.getAuthToken(AbstractAccountAuthenticator.java:251)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:254)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1441)
+07-14 14:20:42.376 32223 32232 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:20:42.392 16024 16640 E Finsky  : [394] Failed to get auth token
+07-14 14:20:42.392 16024 16640 E Finsky  : com.android.volley.AuthFailureError: User needs to (re)enter credentials.
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at nme.a(PG:56)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at abwb.a(PG:52)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at blgu.f(PG:7)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bhqn.s(PG:7)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bhqn.m(PG:20)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bhpz.a(PG:185)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at blgi.call(PG:265)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bpou.call(PG:21)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bprd.a(PG:3)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bpqi.run(PG:19)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bpre.run(PG:5)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at bqor.run(PG:57)
+07-14 14:20:42.392 16024 16640 E Finsky  : 	at java.lang.Thread.run(Thread.java:1572)
+07-14 14:20:42.411 16024 16074 E Finsky  : [343] Failed to register with Phenotype for experiment package com.google.android.finsky.regular.
+07-14 14:20:42.411 16024 16074 E Finsky  : java.util.concurrent.ExecutionException: com.google.android.libraries.phenotype.client.api.PhenotypeRuntimeException: 29504: 29504: Could not find valid auth token for all requested accounts
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpnx.h(PG:21)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpof.s(PG:73)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at alkd.doInBackground(PG:126)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at alkf.f(PG:4)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at alkg.call(PG:3)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bprd.a(PG:3)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpqi.run(PG:19)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpre.run(PG:5)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpqw.run(PG:64)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bqor.run(PG:57)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at java.lang.Thread.run(Thread.java:1572)
+07-14 14:20:42.411 16024 16074 E Finsky  : Caused by: com.google.android.libraries.phenotype.client.api.PhenotypeRuntimeException: 29504: 29504: Could not find valid auth token for all requested accounts
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at blgi.call(PG:285)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpou.call(PG:21)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bprd.a(PG:3)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpqi.run(PG:19)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bpre.run(PG:5)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	... 4 more
+07-14 14:20:42.411 16024 16074 E Finsky  : Caused by: com.google.android.gms.phenotype.core.common.PhenotypeRuntimeException: 29504: Could not find valid auth token for all requested accounts
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bhqn.m(PG:140)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at bhpz.a(PG:185)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	at blgi.call(PG:265)
+07-14 14:20:42.411 16024 16074 E Finsky  : 	... 8 more
+07-14 14:20:42.514 16651 16651 E ding:background: BBinder_init Processname  com.android.vending:background  
+07-14 14:20:42.514 16651 16651 E ding:background: BBinder_init hasGetProcessName  com.android.vending:background
+07-14 14:20:42.597 16651 16651 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+07-14 14:21:02.752 32223 32281 E AuthPII : [RequestTokenManager] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/plus.me
+07-14 14:21:02.752 32223 32281 E AuthPII : bkfz: Long live credential not available.
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at ahrl.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):82)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):313)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:21:02.752 32223 32281 E AuthPII : Message is Long live credential not available.
+07-14 14:21:02.752 32223 32281 E AuthPII : bkfz: Long live credential not available.
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at ahrl.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):82)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):313)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:21:02.752 32223 32281 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:21:02.756 32223 32281 E AuthPII : [RequestTokenManager] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/account.capabilities https://www.googleapis.com/auth/account.service_flags
+07-14 14:21:02.756 32223 32281 E AuthPII : bkfz: Long live credential not available.
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at ahrr.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):55)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at ahrr.h(:com.google.android.gms@262434035@26.24.34 (260400-938041327):108)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at ahrr.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):817)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at ahrr.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):5)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):459)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:21:02.756 32223 32281 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:21:02.757 32223 32281 E AuthPII : Message is Long live credential not available.
+07-14 14:21:02.757 32223 32281 E AuthPII : bkfz: Long live credential not available.
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at ahrr.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):55)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at ahrr.h(:com.google.android.gms@262434035@26.24.34 (260400-938041327):108)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at ahrr.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):817)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at ahrr.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):5)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at abbt.d(:com.google.android.gms@262434035@26.24.34 (260400-938041327):459)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at abbt.dispatchTransaction(:com.google.android.gms@262434035@26.24.34 (260400-938041327):153)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at cdmv.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):64)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at aafx.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at csax.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):12)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at android.os.Binder.transact(Binder.java:1288)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at cdnj.onTransact(:com.google.android.gms@262434035@26.24.34 (260400-938041327):169)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1436)
+07-14 14:21:02.757 32223 32281 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1380)
+07-14 14:21:02.766 32223 32262 E AuthPII : [RequestTokenManager] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/gcm
+07-14 14:21:02.766 32223 32262 E AuthPII : bkfz: Long live credential not available.
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aihs.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):151)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at ahwd.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):328)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at ahrc.f(:com.google.android.gms@262434035@26.24.34 (260400-938041327):24)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at dbhz.fF(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at dbik.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):121)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at hgwo.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at blmv.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):50)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at blmv.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):66)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at blsn.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):8)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at java.lang.Thread.run(Thread.java:1572)
+07-14 14:21:02.766 32223 32262 E AuthPII : Message is Long live credential not available.
+07-14 14:21:02.766 32223 32262 E AuthPII : bkfz: Long live credential not available.
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aiho.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1347)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aihv.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):26)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aiht.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):745)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at aihs.b(:com.google.android.gms@262434035@26.24.34 (260400-938041327):151)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at ahwd.a(:com.google.android.gms@262434035@26.24.34 (260400-938041327):328)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at ahrc.f(:com.google.android.gms@262434035@26.24.34 (260400-938041327):24)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at dbhz.fF(:com.google.android.gms@262434035@26.24.34 (260400-938041327):1)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at dbik.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):121)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at hgwo.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):23)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at blmv.c(:com.google.android.gms@262434035@26.24.34 (260400-938041327):50)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at blmv.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):66)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at blsn.run(:com.google.android.gms@262434035@26.24.34 (260400-938041327):8)
+07-14 14:21:02.766 32223 32262 E AuthPII : 	at java.lang.Thread.run(Thread.java:1572)
