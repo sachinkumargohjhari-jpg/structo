@@ -2538,7 +2538,7 @@
 
             <!-- Concrete Grades & Standards Guide Tab -->
             <section class="tab-content" id="concrete-guides">
-                <div class="calculator-grid" style="grid-template-columns: 1.4fr 1fr;">
+                <div class="calculator-grid concrete-guides-grid">
                     <div class="glass-panel">
                         <div class="panel-header">
                             <div class="panel-title">
@@ -2552,8 +2552,8 @@
                             <input type="text" class="search-input" id="search-concrete-guides" placeholder="Search grades (e.g. M20, road, pavement, column)..." style="width: 100%; border-radius: var(--border-radius-sm); padding-left: 2.75rem;">
                         </div>
 
-                        <div style="overflow-x: auto;">
-                            <table class="boq-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <div style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                            <table class="boq-table" style="width: 100%; min-width: 600px; text-align: left; border-collapse: collapse;">
                                 <thead>
                                     <tr>
                                         <th>Grade</th>
@@ -2753,8 +2753,8 @@
                                     <h4 style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--text-secondary);">Surveying Field Book Table</h4>
                                     <button class="btn btn-secondary" id="btn-clear-survey-table" style="padding: 0.35rem 0.75rem; font-size: 0.75rem; border-radius: var(--border-radius-sm);">Clear Table</button>
                                 </div>
-                                <div style="overflow-x: auto; max-height: 180px; overflow-y: auto;">
-                                    <table class="boq-table" style="width: 100%; text-align: left; font-size: 0.8rem;">
+                                <div style="width: 100%; overflow-x: auto; max-height: 180px; overflow-y: auto; -webkit-overflow-scrolling: touch;">
+                                    <table class="boq-table" style="width: 100%; min-width: 650px; text-align: left; font-size: 0.8rem;">
                                         <thead>
                                             <tr>
                                                 <th>Station</th>

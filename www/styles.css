@@ -392,8 +392,16 @@ header.content-header {
     align-items: start;
 }
 
+.concrete-guides-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
 @media (max-width: 1100px) {
-    .calculator-grid {
+    .calculator-grid,
+    .concrete-guides-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -1500,6 +1508,51 @@ select.form-control {
         text-align: center !important;
         white-space: normal !important;
         word-wrap: break-word !important;
+    }
+
+    /* Stack grid for concrete guides on mobile */
+    .concrete-guides-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* Wrap button/action groups so buttons stack neatly */
+    .form-actions {
+        flex-wrap: wrap !important;
+        gap: 0.75rem !important;
+    }
+    
+    .form-actions .btn {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+    }
+
+    /* Force text wrapping inside results and info cards to prevent horizontal stretch */
+    .result-card,
+    .result-card h4,
+    .result-card p,
+    .result-card div,
+    .panel-title {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Box sizing and max-width safety constraints */
+    #concrete-guides, #surveying {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    #concrete-guides *, #surveying * {
+        box-sizing: border-box !important;
+    }
+
+    #concrete-guides .glass-panel, #surveying .glass-panel,
+    #concrete-guides .result-card, #surveying .result-card,
+    #concrete-guides input, #surveying input,
+    #concrete-guides select, #surveying select {
+        max-width: 100% !important;
     }
 }
 
