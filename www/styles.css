@@ -2070,3 +2070,53 @@ body.no-scroll {
     color: var(--accent-secondary) !important;
 }
 
+/* Header Profile Avatar Styling */
+.header-avatar-container {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--input-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.header-avatar-container:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-hover);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+#header-avatar-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+#header-avatar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    width: 100%;
+    height: 100%;
+    transition: color 0.2s ease;
+}
+
+#header-avatar-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.header-avatar-container:hover #header-avatar-icon {
+    color: var(--accent);
+}
+
+
