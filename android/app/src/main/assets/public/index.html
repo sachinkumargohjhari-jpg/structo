@@ -248,6 +248,12 @@
                             </svg>
                         </button>
                         <h2 id="current-tab-title">Structo</h2>
+                        <button class="header-settings-btn" id="header-settings-btn" aria-label="Settings">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </button>
                     </div>
                     <p id="current-tab-desc">All-in-one suite of smart tools for civil calculations</p>
                 </div>
@@ -3419,6 +3425,35 @@
                 </div>
                 <div id="search-modal-results" class="search-results-list">
                     <!-- Results will be dynamically populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Drawer Overlay -->
+    <div class="settings-drawer-overlay" id="settings-drawer-overlay">
+        <div class="settings-drawer" id="settings-drawer">
+            <div class="settings-drawer-header">
+                <h3>Settings</h3>
+                <button class="settings-drawer-close" id="settings-drawer-close">&times;</button>
+            </div>
+            <div class="settings-drawer-body">
+                <div class="settings-group">
+                    <h4>Appearance</h4>
+                    <div class="settings-option">
+                        <span>Dark Theme</span>
+                        <label class="switch">
+                            <input type="checkbox" id="settings-toggle-theme">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-group" style="margin-top: 2.5rem;">
+                    <h4>App Information</h4>
+                    <div class="settings-option" style="border: none;">
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Version</span>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">v2.1.0</span>
+                    </div>
                 </div>
             </div>
         </div>
