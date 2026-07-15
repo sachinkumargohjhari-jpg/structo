@@ -253,10 +253,6 @@
                 </div>
 
                 <div class="header-actions">
-                    <div class="search-container">
-                        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        <input type="text" class="search-input" id="search-calculators" placeholder="Search tools...">
-                    </div>
                     <button class="report-badge-btn" id="header-report-btn">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                         <span>BOQ</span>
@@ -3338,6 +3334,30 @@
                 </div>
             </section>
         </main>
+        <!-- Bottom Navigation Bar for Mobile -->
+        <div class="bottom-nav-bar" id="bottom-nav-bar">
+            <button class="bottom-nav-item active" id="bottom-nav-home" aria-label="Home">
+                <svg viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </button>
+            <button class="bottom-nav-item" id="bottom-nav-search" aria-label="Search">
+                <svg viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Search</span>
+            </button>
+            <button class="bottom-nav-item" id="bottom-nav-profile" aria-label="Profile">
+                <svg viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Profile</span>
+            </button>
+        </div>
     </div>
 
     <!-- Help Modal Overlay -->
@@ -3383,6 +3403,23 @@
                     <li>Average cohesive loam soil: 1:1 (45° angle)</li>
                     <li>Dry Sandy/Loose soil: 1.5:1 to 2:1</li>
                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal Overlay -->
+    <div class="modal-overlay" id="search-modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="modal-close-btn" id="search-modal-close">&times;</button>
+            <div class="modal-title">Search Civil Tools</div>
+            <div class="modal-body" style="padding-top: 1rem;">
+                <div class="search-container" style="width: 100%; margin-bottom: 1.5rem; position: relative;">
+                    <svg class="search-icon" viewBox="0 0 24 24" style="left: 15px; position: absolute; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--text-muted); fill: none;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" class="search-input" id="search-modal-input" placeholder="Type to search tools..." style="width: 100%; border-radius: var(--border-radius-sm); padding-left: 2.75rem;">
+                </div>
+                <div id="search-modal-results" class="search-results-list">
+                    <!-- Results will be dynamically populated here -->
+                </div>
             </div>
         </div>
     </div>

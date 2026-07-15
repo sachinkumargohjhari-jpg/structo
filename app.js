@@ -372,7 +372,63 @@ function setupEventListeners() {
     });
 
     // Search Box Listener
-    document.getElementById('search-calculators').addEventListener('input', handleSearch);
+    const searchCalculators = document.getElementById('search-calculators');
+    if (searchCalculators) {
+        searchCalculators.addEventListener('input', handleSearch);
+    }
+
+    // Bottom Navigation Bar Listeners
+    const btnBottomHome = document.getElementById('bottom-nav-home');
+    if (btnBottomHome) {
+        btnBottomHome.addEventListener('click', () => {
+            switchTab('dashboard');
+        });
+    }
+
+    const btnBottomSearch = document.getElementById('bottom-nav-search');
+    if (btnBottomSearch) {
+        btnBottomSearch.addEventListener('click', () => {
+            const modal = document.getElementById('search-modal');
+            if (modal) {
+                modal.classList.add('active');
+                const input = document.getElementById('search-modal-input');
+                if (input) {
+                    input.value = '';
+                    input.focus();
+                }
+                updateSearchModalResults();
+            }
+        });
+    }
+
+    const btnBottomProfile = document.getElementById('bottom-nav-profile');
+    if (btnBottomProfile) {
+        btnBottomProfile.addEventListener('click', () => {
+            switchTab('profile');
+        });
+    }
+
+    // Search Modal Listeners
+    const searchModalInput = document.getElementById('search-modal-input');
+    if (searchModalInput) {
+        searchModalInput.addEventListener('input', updateSearchModalResults);
+    }
+
+    const searchModalClose = document.getElementById('search-modal-close');
+    if (searchModalClose) {
+        searchModalClose.addEventListener('click', () => {
+            document.getElementById('search-modal').classList.remove('active');
+        });
+    }
+
+    const searchModal = document.getElementById('search-modal');
+    if (searchModal) {
+        searchModal.addEventListener('click', (e) => {
+            if (e.target.id === 'search-modal') {
+                searchModal.classList.remove('active');
+            }
+        });
+    }
 
     // Header Report Button
     document.getElementById('header-report-btn').addEventListener('click', () => {
@@ -705,6 +761,16 @@ function switchTab(tabId) {
         item.classList.toggle('active', item.getAttribute('data-tab') === tabId);
     });
 
+    // Update bottom navigation bar active states
+    const bottomHome = document.getElementById('bottom-nav-home');
+    const bottomSearch = document.getElementById('bottom-nav-search');
+    const bottomProfile = document.getElementById('bottom-nav-profile');
+    if (bottomHome && bottomProfile) {
+        bottomHome.classList.toggle('active', tabId === 'dashboard');
+        bottomProfile.classList.toggle('active', tabId === 'profile');
+        if (bottomSearch) bottomSearch.classList.remove('active');
+    }
+
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.toggle('active', tab.id === tabId);
     });
@@ -756,6 +822,50 @@ function handleSearch(e) {
         const desc = card.querySelector('p').innerText.toLowerCase();
         card.style.display = (title.includes(query) || desc.includes(query)) ? 'flex' : 'none';
     });
+}
+
+function updateSearchModalResults() {
+    const query = document.getElementById('search-modal-input').value.toLowerCase().trim();
+    const resultsContainer = document.getElementById('search-modal-results');
+    if (!resultsContainer) return;
+    resultsContainer.innerHTML = '';
+    
+    let count = 0;
+    document.querySelectorAll('.dashboard-card').forEach(card => {
+        const titleEl = card.querySelector('h3');
+        const descEl = card.querySelector('p');
+        const tabId = card.getAttribute('data-card-tab');
+        const imgEl = card.querySelector('img');
+        
+        if (titleEl && descEl && tabId && imgEl) {
+            const title = titleEl.innerText;
+            const desc = descEl.innerText;
+            const imgSrc = imgEl.getAttribute('src');
+            
+            if (title.toLowerCase().includes(query) || desc.toLowerCase().includes(query)) {
+                count++;
+                const item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.innerHTML = `
+                    <img src="${imgSrc}" class="search-result-img" alt="${title}">
+                    <div class="search-result-info">
+                        <div class="search-result-title">${title}</div>
+                        <div class="search-result-desc">${desc}</div>
+                    </div>
+                `;
+                item.addEventListener('click', () => {
+                    switchTab(tabId);
+                    const modal = document.getElementById('search-modal');
+                    if (modal) modal.classList.remove('active');
+                });
+                resultsContainer.appendChild(item);
+            }
+        }
+    });
+    
+    if (count === 0) {
+        resultsContainer.innerHTML = '<div class="no-search-results">No tools found matching your query.</div>';
+    }
 }
 
 function toggleTheme() {
