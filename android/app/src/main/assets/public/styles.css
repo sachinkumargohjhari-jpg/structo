@@ -1272,9 +1272,13 @@ select.form-control {
 
 /* Header Title Main layout */
 .header-title-main {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+#current-tab-title {
+    white-space: nowrap !important;
 }
 
 /* Premium Back Button style */
@@ -1451,13 +1455,24 @@ select.form-control {
     
     /* Navigation modal/drawer trigger */
     .mobile-menu-btn {
-        display: block;
-        background: var(--input-bg);
-        border: 1px solid var(--input-border);
-        color: var(--text-primary);
-        padding: 0.5rem;
-        border-radius: var(--border-radius-sm);
-        cursor: pointer;
+        display: flex !important;
+        background: transparent !important;
+        border: none !important;
+        color: var(--text-primary) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 24px !important;
+        height: 24px !important;
+        max-width: 24px !important;
+        cursor: pointer !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .mobile-menu-btn svg {
+        width: 24px !important;
+        height: 24px !important;
     }
 
     /* Panel Header Responsiveness */
@@ -1644,7 +1659,7 @@ select.form-control {
 
 @media (min-width: 769px) {
     .mobile-menu-btn {
-        display: none;
+        display: none !important;
     }
 }
 
