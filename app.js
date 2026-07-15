@@ -435,6 +435,46 @@ function setupEventListeners() {
         switchTab('boq-report');
     });
 
+    // Settings Drawer Listeners
+    const btnSettings = document.getElementById('header-settings-btn');
+    if (btnSettings) {
+        btnSettings.addEventListener('click', () => {
+            const overlay = document.getElementById('settings-drawer-overlay');
+            if (overlay) {
+                overlay.classList.add('active');
+                // Sync theme checkbox state
+                const themeCheckbox = document.getElementById('settings-toggle-theme');
+                if (themeCheckbox) {
+                    themeCheckbox.checked = (theme === 'dark');
+                }
+            }
+        });
+    }
+
+    const btnSettingsClose = document.getElementById('settings-drawer-close');
+    if (btnSettingsClose) {
+        btnSettingsClose.addEventListener('click', () => {
+            const overlay = document.getElementById('settings-drawer-overlay');
+            if (overlay) overlay.classList.remove('active');
+        });
+    }
+
+    const settingsOverlay = document.getElementById('settings-drawer-overlay');
+    if (settingsOverlay) {
+        settingsOverlay.addEventListener('click', (e) => {
+            if (e.target.id === 'settings-drawer-overlay') {
+                settingsOverlay.classList.remove('active');
+            }
+        });
+    }
+
+    const toggleThemeCheckbox = document.getElementById('settings-toggle-theme');
+    if (toggleThemeCheckbox) {
+        toggleThemeCheckbox.addEventListener('change', () => {
+            toggleTheme();
+        });
+    }
+
     // -- Concrete Events --
     document.getElementById('concrete-type').addEventListener('change', () => {
         toggleConcreteInputs();
@@ -878,7 +918,13 @@ function toggleTheme() {
 
 function updateThemeUI() {
     const btnSpan = document.querySelector('#theme-toggle-btn span');
-    btnSpan.innerText = theme === 'dark' ? 'Toggle Light Mode' : 'Toggle Dark Mode';
+    if (btnSpan) {
+        btnSpan.innerText = theme === 'dark' ? 'Toggle Light Mode' : 'Toggle Dark Mode';
+    }
+    const themeCheckbox = document.getElementById('settings-toggle-theme');
+    if (themeCheckbox) {
+        themeCheckbox.checked = (theme === 'dark');
+    }
 }
 
 // -------------------------------------------------------------
