@@ -166,6 +166,7 @@ async function logout() {
 // State Management
 // -------------------------------------------------------------
 let activeTab = 'dashboard';
+let dashboardScrollPos = 0;
 let theme = 'dark';
 let boqReport = JSON.parse(localStorage.getItem('civil_calc_boq')) || [];
 let bbsList = JSON.parse(localStorage.getItem('civil_calc_bbs')) || [];
@@ -692,6 +693,12 @@ function setupEventListeners() {
 // -------------------------------------------------------------
 function switchTab(tabId) {
     if (!tabInfo[tabId]) return;
+
+    // Save scroll position of the dashboard before leaving it
+    if (activeTab === 'dashboard') {
+        dashboardScrollPos = window.scrollY;
+    }
+
     activeTab = tabId;
 
     document.querySelectorAll('.nav-menu .nav-item').forEach(item => {
@@ -728,7 +735,16 @@ function switchTab(tabId) {
     } else if (tabId === 'checklist') {
         renderChecklist();
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (tabId === 'dashboard') {
+        // Restore scroll position with auto behavior so it doesn't animate jarringly
+        // Use setTimeout to ensure DOM changes are completed and layouts are updated
+        setTimeout(() => {
+            window.scrollTo({ top: dashboardScrollPos, behavior: 'auto' });
+        }, 30);
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
 function handleSearch(e) {

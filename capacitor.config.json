@@ -12,6 +12,10 @@
     "FirebaseAuthentication": {
       "skipNativeAuth": false,
       "providers": ["google.com"]
+    },
+    "SplashScreen": {
+      "launchShowDuration": 0,
+      "launchAutoHide": true
     }
   }
 }

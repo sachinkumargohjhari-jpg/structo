@@ -36,9 +36,9 @@
 
     /* Sidebar variables */
     --sidebar-bg: var(--panel-bg);
-    --sidebar-active-text: var(--accent);
-    --sidebar-active-bg: linear-gradient(90deg, var(--accent-glow) 0%, rgba(255, 255, 255, 0.01) 100%);
-    --sidebar-active-border: var(--accent);
+    --sidebar-active-text: #FFFFFF;
+    --sidebar-active-bg: linear-gradient(90deg, rgba(255, 87, 34, 0.15) 0%, rgba(255, 255, 255, 0.01) 100%);
+    --sidebar-active-border: var(--accent-secondary);
 }
 
 [data-theme="light"] {
@@ -118,36 +118,75 @@ body {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
     margin-bottom: 2.5rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-container:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
 }
 
 .logo-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--accent);
-    border-radius: var(--border-radius-sm);
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    box-shadow: 0 0 15px var(--accent-glow);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] .logo-icon {
+    background: #FFFFFF;
+    border: 1.5px solid var(--accent-secondary);
+    color: var(--accent-secondary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.logo-container:hover .logo-icon {
+    transform: rotate(5deg) scale(1.05);
+    border-color: var(--accent-secondary);
+    color: var(--accent-secondary);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-secondary-glow);
 }
 
 .logo-text h1 {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #FFFFFF !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: currentColor !important;
+    line-height: 1.1;
+    margin: 0;
+}
+
+[data-theme="light"] .logo-text h1 {
+    color: #111827 !important;
 }
 
 .logo-text p {
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     color: var(--text-muted);
-    font-weight: 500;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 2px;
+    opacity: 0.85;
 }
 
 .nav-menu {
@@ -326,7 +365,9 @@ header.content-header {
     background: var(--accent-secondary-glow);
     border: 1px solid var(--accent-secondary);
     color: var(--accent-secondary);
-    padding: 0.6rem 1.2rem;
+    padding: 0 1.2rem;
+    height: 50px;
+    box-sizing: border-box;
     border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 600;
@@ -1332,22 +1373,32 @@ select.form-control {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--input-bg);
-        border: 1px solid var(--input-border);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         color: var(--text-secondary);
-        padding: 0.4rem;
-        border-radius: var(--border-radius-sm);
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
         cursor: pointer;
         position: absolute;
         top: 1.25rem;
         right: 1.25rem;
-        transition: all 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1001;
+    }
+    
+    [data-theme="light"] .sidebar-close-btn {
+        background: rgba(0, 0, 0, 0.04);
+        border-color: rgba(0, 0, 0, 0.08);
     }
     
     .sidebar-close-btn:hover {
-        color: var(--danger);
-        border-color: rgba(239, 68, 68, 0.4);
-        background: rgba(239, 68, 68, 0.1);
+        color: #ffffff;
+        border-color: var(--danger);
+        background: var(--danger);
+        transform: rotate(90deg) scale(1.05);
+        box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
     }
     
     .logo-container {
@@ -1873,18 +1924,6 @@ body.no-scroll {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    animation: loginCardAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes loginCardAppear {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
 }
 
 .login-brand {
@@ -2069,4 +2108,361 @@ body.no-scroll {
 .profile-pic-container:hover #profile-placeholder-icon svg {
     color: var(--accent-secondary) !important;
 }
+
+/* Header Profile Avatar Styling */
+.header-avatar-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--input-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.header-avatar-container:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-hover);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+#header-avatar-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+#header-avatar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    width: 100%;
+    height: 100%;
+    transition: color 0.2s ease;
+}
+
+#header-avatar-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.header-avatar-container:hover #header-avatar-icon {
+    color: var(--accent);
+}
+
+/* ==========================================================================
+   Premium Profile Redesign & Inner Input Icons
+   ========================================================================== */
+
+/* Theme-dependent variables for Profile inputs */
+.profile-input-wrapper {
+    --profile-input-bg: rgba(255, 255, 255, 0.05);
+    --profile-input-bg-focus: rgba(255, 255, 255, 0.08);
+}
+[data-theme="light"] .profile-input-wrapper {
+    --profile-input-bg: rgba(0, 0, 0, 0.04);
+    --profile-input-bg-focus: rgba(0, 0, 0, 0.06);
+}
+
+.profile-card {
+    position: relative;
+    padding: 0 !important;
+    overflow: hidden;
+    border: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+}
+
+/* 2. Top Blueprint/Geometric Banner */
+.profile-banner {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: center;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* CSS Engineering blueprint shapes inside the banner */
+.profile-banner::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -30px;
+    width: 200px;
+    height: 200px;
+    border: 1px dashed rgba(255, 215, 0, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.profile-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 40px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(255, 87, 34, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.profile-banner-accent-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    opacity: 0.8;
+}
+
+/* 3. Content and Overlap Positioning */
+.profile-card-content {
+    padding: 2.5rem 2rem 2rem 2rem;
+    position: relative;
+}
+
+.profile-pic-outer-wrapper {
+    position: absolute;
+    top: -65px; /* Overlaps exactly half of the 130px height */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* Thick white border and drop shadow */
+.profile-card-content .profile-pic-container {
+    width: 130px !important;
+    height: 130px !important;
+    border-radius: 50% !important;
+    border: 4px solid #ffffff !important;
+    background: var(--panel-bg) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 215, 0, 0.1);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-card-content .profile-pic-container:hover {
+    transform: scale(1.04);
+    border-color: var(--accent) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 0 20px var(--accent-glow) !important;
+}
+
+/* 4. Upgrade all Input Fields with Left Icons */
+.profile-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.profile-input-wrapper svg.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color 0.25s ease;
+    z-index: 2;
+}
+
+.profile-input-wrapper .form-control {
+    padding-left: 46px !important;
+    background: var(--profile-input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    border-radius: 10px !important;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.profile-input-wrapper select.form-control {
+    padding-left: 46px !important;
+    padding-right: 2.5rem !important;
+    background-position: right 14px center, left 14px center !important;
+}
+
+/* Focus and hover states */
+.profile-input-wrapper .form-control:hover {
+    border-color: rgba(255, 215, 0, 0.25) !important;
+}
+
+.profile-input-wrapper .form-control:focus {
+    border-color: var(--input-focus-border) !important;
+    box-shadow: 0 0 12px var(--accent-glow) !important;
+    background: var(--profile-input-bg-focus) !important;
+}
+
+.profile-input-wrapper .form-control:focus + svg.input-icon {
+    color: var(--accent) !important;
+}
+
+/* 5. Premium "Save Profile Details" Button Styling */
+#btn-save-profile {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    color: #121212 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 800 !important;
+    font-family: var(--font-heading) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    padding: 1rem 2rem !important;
+    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#btn-save-profile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    transition: 0.75s;
+    opacity: 0;
+}
+
+#btn-save-profile:hover::after {
+    left: 125%;
+    opacity: 1;
+}
+
+#btn-save-profile:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 10px 25px rgba(255, 87, 34, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.1) !important;
+    filter: brightness(1.08);
+}
+
+#btn-save-profile:active {
+    transform: translateY(1px) scale(0.98) !important;
+    box-shadow: 0 3px 10px rgba(255, 87, 34, 0.2) !important;
+}
+
+/* Responsive Table Container */
+.responsive-table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-top: 1rem;
+    position: relative;
+    box-sizing: border-box !important;
+}
+
+/* Global Text Wrapping & Overflow Prevention */
+h1, h2, h3, h4, h5, h6, .panel-title, .result-card, .result-card h4, .result-card p, .result-card div, .result-info, .result-title, .result-value {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+/* Ensure flex containers wrap their children if needed to prevent spillover */
+.panel-title, .result-card, .results-panel, .panel-header {
+    flex-wrap: wrap !important;
+}
+
+/* 1. Global Box-Sizing */
+*, *::before, *::after {
+    box-sizing: border-box !important;
+}
+
+/* 2. Prevent Horizontal Body Scrolling & Constrain Wrappers */
+body, 
+.app-container, 
+.main-content, 
+.tab-content,
+.calculator-grid,
+.concrete-guides-grid,
+.glass-panel,
+.results-panel,
+.profile-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+body,
+.app-container,
+.main-content,
+.tab-content {
+    overflow-x: hidden !important;
+}
+
+/* 3. Wrap ALL tables in responsive container */
+.responsive-table-container,
+.boq-table-container,
+.mix-ratios-legend {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+}
+
+.responsive-table-container table,
+.boq-table-container table,
+.mix-ratios-legend table {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+/* 4. Fix button and input field widths */
+input, 
+select, 
+textarea, 
+button, 
+.btn, 
+.form-control,
+.button-group-selector,
+.input-with-unit {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Override inline button containers or flex actions if they prevent 100% wrap on mobile */
+@media (max-width: 768px) {
+    .form-actions {
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        gap: 0.75rem !important;
+    }
+    
+    .form-actions .btn {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+
 
