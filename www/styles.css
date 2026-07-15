@@ -1040,9 +1040,10 @@ select.form-control {
     background: var(--input-bg);
     border: 1px solid var(--input-border);
     color: var(--text-primary);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1055,12 +1056,12 @@ select.form-control {
     background: var(--accent);
     color: white;
     border-color: var(--accent);
-    transform: rotate(180deg);
+    transform: rotate(180deg) !important;
 }
 
 .swap-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
 }
 
 @media (max-width: 600px) {
@@ -1068,11 +1069,11 @@ select.form-control {
         grid-template-columns: 1fr;
     }
     .swap-btn {
-        margin: 0.5rem auto 0;
-        transform: rotate(90deg);
+        margin: 10px auto !important;
+        transform: rotate(90deg) !important;
     }
     .swap-btn:hover {
-        transform: rotate(270deg);
+        transform: rotate(270deg) !important;
     }
 }
 
@@ -1276,35 +1277,34 @@ select.form-control {
 
 /* Premium Back Button style */
 .back-btn {
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
+    background: transparent !important;
+    border: none !important;
     color: var(--text-primary);
-    padding: 0.5rem;
-    border-radius: var(--border-radius-sm);
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 24px !important;
+    height: 24px !important;
+    max-width: 24px !important;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05),
-                inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: none !important;
     position: relative;
 }
 
 .back-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: scale(1.05) translateY(-1px);
-    box-shadow: 0 6px 16px var(--accent-glow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    background: transparent !important;
+    border-color: transparent !important;
+    color: var(--accent) !important;
+    transform: scale(1.1) translateY(0) !important;
+    box-shadow: none !important;
 }
 
 .back-btn:active {
-    transform: scale(0.95) translateY(2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
-                inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9) translateY(0) !important;
+    box-shadow: none !important;
 }
 
 .back-btn svg {
@@ -1428,6 +1428,10 @@ select.form-control {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
+    }
+    
+    .header-title h2 {
+        font-size: 1.35rem !important;
     }
     
     .header-actions {
