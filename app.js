@@ -381,6 +381,20 @@ function setupEventListeners() {
     const btnBottomHome = document.getElementById('bottom-nav-home');
     if (btnBottomHome) {
         btnBottomHome.addEventListener('click', () => {
+            // Close any open modals
+            const searchModal = document.getElementById('search-modal');
+            if (searchModal) searchModal.classList.remove('active');
+            
+            const helpModal = document.getElementById('help-modal');
+            if (helpModal) helpModal.classList.remove('active');
+            
+            const settingsDrawer = document.getElementById('settings-drawer-overlay');
+            if (settingsDrawer) settingsDrawer.classList.remove('active');
+            
+            // Close sidebar
+            closeMobileSidebar();
+            
+            // Route to dashboard
             switchTab('dashboard');
         });
     }
@@ -407,6 +421,29 @@ function setupEventListeners() {
             switchTab('profile');
         });
     }
+
+    // Keyboard Overlap Fix: hide bottom navigation bar when inputs/selects/textareas are focused
+    document.addEventListener('focusin', (e) => {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) {
+            const bottomNav = document.getElementById('bottom-nav-bar');
+            if (bottomNav) {
+                bottomNav.style.display = 'none';
+            }
+        }
+    });
+    document.addEventListener('focusout', (e) => {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) {
+            const bottomNav = document.getElementById('bottom-nav-bar');
+            if (bottomNav) {
+                setTimeout(() => {
+                    const activeEl = document.activeElement;
+                    if (!activeEl || (activeEl.tagName !== 'INPUT' && activeEl.tagName !== 'SELECT' && activeEl.tagName !== 'TEXTAREA')) {
+                        bottomNav.style.display = '';
+                    }
+                }, 50);
+            }
+        }
+    });
 
     // Search Modal Listeners
     const searchModalInput = document.getElementById('search-modal-input');
@@ -4864,7 +4901,6 @@ function initProfile() {
     const profilePreview = document.getElementById('profile-preview');
     const profilePlaceholderIcon = document.getElementById('profile-placeholder-icon');
     const btnSaveProfile = document.getElementById('btn-save-profile');
-    const headerAvatarTrigger = document.getElementById('header-avatar-trigger');
 
     if (profilePicContainer && profileImageInput) {
         profilePicContainer.addEventListener('click', () => {
@@ -4896,27 +4932,21 @@ function initProfile() {
         btnSaveProfile.addEventListener('click', saveProfile);
     }
 
-    if (headerAvatarTrigger) {
-        headerAvatarTrigger.addEventListener('click', () => {
-            switchTab('profile');
-        });
-    }
-
     loadProfile();
 }
 
-function updateHeaderAvatar(imageSrc) {
-    const headerPreview = document.getElementById('header-avatar-preview');
-    const headerIcon = document.getElementById('header-avatar-icon');
-    if (headerPreview && headerIcon) {
+function updateProfileAvatarUI(imageSrc) {
+    const bottomPreview = document.getElementById('bottom-nav-avatar-preview');
+    const bottomIcon = document.getElementById('bottom-nav-avatar-icon');
+    if (bottomPreview && bottomIcon) {
         if (imageSrc) {
-            headerPreview.src = imageSrc;
-            headerPreview.style.display = 'block';
-            headerIcon.style.display = 'none';
+            bottomPreview.src = imageSrc;
+            bottomPreview.style.display = 'block';
+            bottomIcon.style.display = 'none';
         } else {
-            headerPreview.src = '';
-            headerPreview.style.display = 'none';
-            headerIcon.style.display = 'flex';
+            bottomPreview.src = '';
+            bottomPreview.style.display = 'none';
+            bottomIcon.style.display = 'flex';
         }
     }
 }
@@ -4941,7 +4971,7 @@ function saveProfile() {
 
     try {
         localStorage.setItem('structo_prof_profile', JSON.stringify(profileData));
-        updateHeaderAvatar(base64Image);
+        updateProfileAvatarUI(base64Image);
         showToast("Profile details saved successfully!", "success");
     } catch (e) {
         console.error("Local storage save failed", e);
@@ -4969,13 +4999,13 @@ function loadProfile() {
                 preview.style.display = 'block';
                 icon.style.display = 'none';
             }
-            updateHeaderAvatar(profileData.image || '');
+            updateProfileAvatarUI(profileData.image || '');
         } catch (e) {
             console.error("Error parsing saved profile", e);
-            updateHeaderAvatar('');
+            updateProfileAvatarUI('');
         }
     } else {
-        updateHeaderAvatar('');
+        updateProfileAvatarUI('');
     }
 }
 
