@@ -58,8 +58,31 @@ function initFirebase() {
 }
 
 function checkAuthState() {
-    // Bypass login UI and show the main dashboard directly
-    showMainApp("Guest");
+    const userSession = localStorage.getItem('structo_user_session');
+    const guestSession = localStorage.getItem('structo_guest_session');
+
+    if (userSession) {
+        try {
+            const user = JSON.parse(userSession);
+            showMainApp(user.displayName || user.email || "User");
+        } catch (e) {
+            showLoginScreen();
+        }
+    } else if (guestSession === 'true') {
+        showMainApp("Guest");
+    } else {
+        showLoginScreen();
+    }
+}
+
+function showLoginScreen() {
+    const loginContainer = document.getElementById('login-container');
+    if (loginContainer) loginContainer.style.display = 'flex';
+
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) {
+        appContainer.style.display = 'none';
+    }
 }
 
 function showMainApp(userName) {
@@ -159,7 +182,7 @@ async function logout() {
     }
 
     showToast("Logged out successfully.", "info");
-    location.reload();
+    showLoginScreen();
 }
 
 // -------------------------------------------------------------
@@ -356,12 +379,20 @@ function setupEventListeners() {
     }
 
     // Theme Toggle
-    document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
 
-    // Help Modal Trigger
-    document.getElementById('help-modal-trigger').addEventListener('click', () => {
-        document.getElementById('help-modal').classList.add('active');
-    });
+    // Help Modal Trigger (from Settings Drawer)
+    const settingsFormulasTrigger = document.getElementById('settings-formulas-trigger');
+    if (settingsFormulasTrigger) {
+        settingsFormulasTrigger.addEventListener('click', () => {
+            const overlay = document.getElementById('settings-drawer-overlay');
+            if (overlay) overlay.classList.remove('active');
+            document.getElementById('help-modal').classList.add('active');
+        });
+    }
     document.getElementById('help-modal-close').addEventListener('click', () => {
         document.getElementById('help-modal').classList.remove('active');
     });
@@ -826,6 +857,10 @@ function setupEventListeners() {
 // -------------------------------------------------------------
 function switchTab(tabId) {
     if (!tabInfo[tabId]) return;
+
+    // Update body classes for tab styling
+    document.body.className = document.body.className.replace(/\btab-\S+/g, '');
+    document.body.classList.add('tab-' + tabId);
 
     // Save scroll position of the dashboard before leaving it
     if (activeTab === 'dashboard') {

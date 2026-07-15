@@ -306,11 +306,12 @@ header.content-header {
     align-items: center;
     border-bottom: 1px solid var(--panel-border);
     padding-bottom: 1.5rem;
+    position: relative !important;
 }
 
 .header-title h2 {
     font-family: var(--font-heading);
-    font-size: 1.75rem;
+    font-size: 2.2rem;
     font-weight: 700;
 }
 
@@ -381,6 +382,9 @@ header.content-header {
                 inset 0 1px 0 rgba(255, 255, 255, 0.1),
                 inset 0 -2px 0 rgba(0, 0, 0, 0.15);
     position: relative;
+    max-width: 120px !important;
+    width: auto !important;
+    flex-shrink: 0 !important;
 }
 
 .report-badge-btn:hover {
@@ -1275,10 +1279,21 @@ select.form-control {
     display: flex !important;
     align-items: center !important;
     gap: 10px !important;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 #current-tab-title {
     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: calc(100% - 40px) !important;
+    min-width: 0;
+}
+
+body:not(.tab-dashboard) #current-tab-title {
+    margin-left: 36px !important;
 }
 
 /* Premium Back Button style */
@@ -1297,7 +1312,10 @@ select.form-control {
     justify-content: center;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: none !important;
-    position: relative;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 10;
 }
 
 .back-btn:hover {
@@ -1437,7 +1455,7 @@ select.form-control {
     }
     
     .header-title h2 {
-        font-size: 1.35rem !important;
+        font-size: 1.8rem !important;
     }
     
     .header-actions {
@@ -1455,15 +1473,15 @@ select.form-control {
     
     /* Navigation modal/drawer trigger */
     .mobile-menu-btn {
-        display: flex !important;
+        display: flex;
         background: transparent !important;
         border: none !important;
         color: var(--text-primary) !important;
         padding: 0 !important;
         margin: 0 !important;
-        width: 24px !important;
-        height: 24px !important;
-        max-width: 24px !important;
+        width: 32px !important;
+        height: 32px !important;
+        max-width: 32px !important;
         cursor: pointer !important;
         box-shadow: none !important;
         border-radius: 0 !important;
@@ -1471,8 +1489,8 @@ select.form-control {
         justify-content: center !important;
     }
     .mobile-menu-btn svg {
-        width: 24px !important;
-        height: 24px !important;
+        width: 32px !important;
+        height: 32px !important;
     }
 
     /* Panel Header Responsiveness */
@@ -2133,8 +2151,8 @@ body.no-scroll {
 /* Header Profile Avatar Styling */
 /* Bottom Nav Avatar Styling */
 .bottom-nav-avatar-container {
-    width: 24px;
-    height: 24px;
+    width: 30px !important;
+    height: 30px !important;
     border-radius: 50%;
     border: 1.5px solid currentColor;
     background: transparent;
@@ -2161,8 +2179,8 @@ body.no-scroll {
 }
 
 #bottom-nav-avatar-icon svg {
-    width: 16px !important;
-    height: 16px !important;
+    width: 20px !important;
+    height: 20px !important;
     stroke-width: 2.2;
 }
 
@@ -2504,18 +2522,18 @@ button,
         background: none;
         border: none;
         color: #ffffff; /* Premium white in dark mode */
-        padding: 8px 16px;
+        padding: 0 !important;
         cursor: pointer;
-        display: flex;
+        display: flex !important;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
+        align-items: center !important;
+        justify-content: center !important;
         transition: all 0.2s ease;
         border-radius: 12px;
         width: auto !important; /* Override general 100% button width */
         max-width: none !important;
         flex: 1;
+        height: 100% !important;
     }
     
     [data-theme="light"] .bottom-nav-item {
@@ -2523,8 +2541,8 @@ button,
     }
     
     .bottom-nav-item svg {
-        width: 24px;
-        height: 24px;
+        width: 30px !important;
+        height: 30px !important;
         stroke: currentColor;
         stroke-width: 2.2;
         fill: none;
@@ -2540,11 +2558,7 @@ button,
     }
     
     .bottom-nav-item span {
-        font-size: 0.65rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-top: 2px;
+        display: none !important;
     }
     
     /* Safe Content Area for main app content */
@@ -2630,18 +2644,17 @@ button,
 
 /* Settings Button & Sliding Drawer Styles */
 .header-settings-btn {
-    width: 50px !important;
-    height: 50px !important;
-    max-width: 50px !important;
-    border-radius: 50% !important;
-    border: 2px solid var(--accent) !important;
-    background: var(--input-bg) !important;
+    width: 44px !important;
+    height: 44px !important;
+    max-width: 44px !important;
+    border: none !important;
+    background: transparent !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: none !important;
     flex-shrink: 0 !important;
     color: var(--text-secondary) !important;
     padding: 0 !important;
@@ -2651,8 +2664,8 @@ button,
 
 .header-settings-btn:hover {
     transform: scale(1.05) rotate(45deg) !important;
-    border-color: var(--accent-hover) !important;
-    box-shadow: 0 0 12px var(--accent-glow) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
     color: var(--accent) !important;
 }
 
